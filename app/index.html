@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fontman</title>
+
+    <link rel="stylesheet" href="css/photon.min.css">
+    <script src="js/menu.js" charset="utf-8"></script>
+
+  </head>
+  <body ng-app="ng_app">
+    <div class="window">
+      <header class="toolbar toolbar-header" ng-controller="navigation as nav">
+        <h1 class="title">Fontman</h1>
+
+        <div class="toolbar-actions">
+
+          <div class="btn-group">
+            <a href="#/all">
+              <button class="btn btn-default" ng-class="{active:nav.tab('all')}">
+                <span class="icon icon-newspaper"></span>
+              </button>
+            </a>
+            <a href="#/install">
+              <button class="btn btn-default" ng-class="{active:nav.tab('install')}">
+                <span class="icon icon-install"></span>
+              </button>
+            </a>
+            <a href="#/installed">
+              <button class="btn btn-default" ng-class="{active:nav.tab('installed')}">
+                <span class="icon icon-check"></span>
+              </button>
+            </a>
+            <a href="#/update">
+              <button class="btn btn-default" ng-class="{active:nav.tab('update')}">
+                <span class="icon icon-alert"></span>
+              </button>
+            </a>
+          </div>
+
+          <div class="btn-group pull-right">
+            <a href="#/repositories">
+              <button class="btn btn-default" ng-class="{active:nav.tab('repositories')}">
+                <span class="icon icon-cloud"></span>
+              </button>
+            </a>
+            <a href="#/languages">
+              <button class="btn btn-default" ng-class="{active:nav.tab('languages')}">
+                <span class="icon icon-globe"></span>
+              </button>
+            </a>
+            <a href="#/refresh">
+              <button class="btn btn-default" ng-class="{active:nav.tab('refresh')}">
+                <span class="icon icon-arrows-ccw"></span>
+              </button>
+            </a>
+            <a href="#/settings">
+              <button class="btn btn-default" ng-class="{active:nav.tab('settings')}">
+                <span class="icon icon-cog"></span>
+              </button>
+            </a>
+          </div>
+
+        </div>
+
+      </header>
+
+      <div class="window-content">
+        <div ng-view></div>
+      </div>
+
+
+
+      <footer class="toolbar toolbar-footer">
+        <h1 class="title">(c) 2016</h1>
+      </footer>
+    </div>
+
+    <script src="bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="bower_components/angular/angular.min.js" type="text/javascript"></script>
+    <script src="bower_components/angular-route/angular-route.min.js" type="text/javascript"></script>
+
+    <script src="ng_app.js" type="text/javascript"></script>
+    <script src="scripts/all.js" type="text/javascript"></script>
+    <script src="scripts/install.js" type="text/javascript"></script>
+    <script src="scripts/installed.js" type="text/javascript"></script>
+    <script src="scripts/languages.js" type="text/javascript"></script>
+    <script src="scripts/navigation.js" type="text/javascript"></script>
+    <script src="scripts/repositories.js" type="text/javascript"></script>
+    <script src="scripts/refresh.js" type="text/javascript"></script>
+    <script src="scripts/settings.js" type="text/javascript"></script>
+    <script src="scripts/update.js" type="text/javascript"></script>
+  </body>
+</html>

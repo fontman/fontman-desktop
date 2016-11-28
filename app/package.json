@@ -1,0 +1,12 @@
+{
+  "name": "fontman-gui",
+  "version": "1.0.0",
+  "description": "Most elegant font manager",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^1.4.1"
+  }
+}
