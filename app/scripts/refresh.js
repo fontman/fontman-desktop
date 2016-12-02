@@ -4,6 +4,7 @@
 
 angular
     .module('refresh', [])
-    .controller('refresh', function () {
-    
+    .controller('refresh', function ($scope) {
+
+        $scope.pageClass = 'animate';
 });

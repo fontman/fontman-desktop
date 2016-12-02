@@ -4,6 +4,7 @@
 
 angular
     .module('update', [])
-    .controller('update', function () {
+    .controller('update', function ($scope) {
 
+        $scope.pageClass = 'animate';
 });

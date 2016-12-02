@@ -4,6 +4,7 @@
 
 angular
     .module('languages', [])
-    .controller('languages', function () {
-
+    .controller('languages', function ($scope) {
+            
+        $scope.pageClass = 'animate';
 });

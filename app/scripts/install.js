@@ -4,6 +4,7 @@
 
 angular
     .module('install', [])
-    .controller('install', function () {
+    .controller('install', function ($scope) {
 
+        $scope.pageClass = 'animate';
 });

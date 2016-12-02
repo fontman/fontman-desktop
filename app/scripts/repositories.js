@@ -4,6 +4,7 @@
 
 angular
     .module('repositories', [])
-    .controller('repositories', function () {
+    .controller('repositories', function ($scope) {
 
+        $scope.pageClass = 'animate';
 });

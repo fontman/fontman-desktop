@@ -1,1 +1,30 @@
-all
+<div class="side-list">
+    <h5 class="nav-group-title">
+        <strong>
+            <span class="icon icon-newspaper"></span>&nbsp;&nbsp;All Fonts
+        </strong>
+    </h5>
+
+    <br>
+
+    <div>
+        <div>
+            <input class="form-control" type="text" placeholder="Search" ng-model="searchFont">
+        </div>
+    </div>
+
+    <br>
+
+    <table class="table-striped">
+        <tbody>
+            <tr ng-repeat="font in font_list | filter:searchFont">
+                <td>
+                    <div ng-init="status_color(font)"></div>
+                    <span class="icon icon-record" ng-style="font.status_color"></span>&nbsp;&nbsp;
+                    {{font.name}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

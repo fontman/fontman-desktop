@@ -1,0 +1,64 @@
+.page.ng-leave {
+    z-index:9999;
+}
+
+.page.ng-enter {
+    z-index:8888;
+}
+
+
+/* page enter transition */
+.animate.ng-enter {
+    -webkit-animation:scaleUp 0.5s both ease-in;
+    -moz-animation:scaleUp 0.5s both ease-in;
+    animation:scaleUp 0.5s both ease-in;
+}
+
+/* page leave transition */
+.animate.ng-leave        {
+    -webkit-animation:slideOutLeft 0.5s both ease-in;
+    -moz-animation:slideOutLeft 0.5s both ease-in;
+    animation:slideOutLeft 0.5s both ease-in;
+}
+
+
+/* scale up */
+@keyframes scaleUp {
+    from {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+}
+
+@-moz-keyframes scaleUp {
+    from {
+        opacity: 0.3;
+        -moz-transform: scale(0.8);
+    }
+}
+
+@-webkit-keyframes scaleUp {
+    from {
+        opacity: 0.3;
+        -webkit-transform: scale(0.8);
+    }
+}
+
+/* slide in from the bottom */
+@keyframes slideOutLeft {
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@-moz-keyframes slideOutLeft {
+    to {
+        -moz-transform: translateX(-100%);
+    }
+}
+
+@-webkit-keyframes slideOutLeft {
+    to {
+        -webkit-transform: translateX(-100%);
+    }
+}

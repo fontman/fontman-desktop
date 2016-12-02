@@ -4,6 +4,7 @@
 
 angular
     .module('settings', [])
-    .controller('settings', function () {
+    .controller('settings', function ($scope) {
 
+        $scope.pageClass = 'animate';
 });

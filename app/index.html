@@ -4,6 +4,9 @@
     <title>Fontman</title>
 
     <link rel="stylesheet" href="css/photon.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/views.css">
+
     <script src="js/menu.js" charset="utf-8"></script>
 
   </head>
@@ -65,10 +68,8 @@
       </header>
 
       <div class="window-content">
-        <div ng-view></div>
+        <div class="page {{pageClass}}" ng-view></div>
       </div>
-
-
 
       <footer class="toolbar toolbar-footer">
         <h1 class="title">(c) 2016</h1>
@@ -78,6 +79,7 @@
     <script src="bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="bower_components/angular/angular.min.js" type="text/javascript"></script>
     <script src="bower_components/angular-route/angular-route.min.js" type="text/javascript"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js" type="text/javascript"></script>
 
     <script src="ng_app.js" type="text/javascript"></script>
     <script src="scripts/all.js" type="text/javascript"></script>

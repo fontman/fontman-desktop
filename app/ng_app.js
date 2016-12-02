@@ -5,10 +5,14 @@
  * Created by Lahiru Pathirage @Mooniak <lpsandaruwan@gmail.com> on 11/28/16.
  */
 
-angular
-    .module('ng_app', ['all', 'install', 'installed', 'languages', 'navigation', 'ngRoute', 'repositories', 'refresh', 'settings', 'update'])
+var ng_app = angular.module(
+    'ng_app',
+    ['all', 'install', 'installed', 'languages', 'navigation', 'ngAnimate', 'ngRoute', 'repositories', 'refresh', 'settings', 'update']
+);
+
+
+ng_app
     .config( function ($routeProvider, $httpProvider, $locationProvider) {
-        
 
        $routeProvider.when('/all', {
            templateUrl: 'views/all.html',
@@ -35,4 +39,10 @@ angular
            templateUrl: 'views/update.html',
            controller: 'update'
        }).otherwise('/all');
+    });
+
+
+ng_app
+    .controller('ng_app', function ($scope) {
+        $scope.pageClass = 'all';
     });
