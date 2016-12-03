@@ -9,16 +9,16 @@
 
 /* page enter transition */
 .animate.ng-enter {
-    -webkit-animation:scaleUp 0.5s both ease-in;
-    -moz-animation:scaleUp 0.5s both ease-in;
-    animation:scaleUp 0.5s both ease-in;
+    -webkit-animation:fadein 0.4s both ease-in;
+    -moz-animation:fadein 0.4s both ease-in;
+    animation:fadein 0.4s both ease-in;
 }
 
 /* page leave transition */
 .animate.ng-leave        {
-    -webkit-animation:slideOutLeft 0.5s both ease-in;
-    -moz-animation:slideOutLeft 0.5s both ease-in;
-    animation:slideOutLeft 0.5s both ease-in;
+    -webkit-animation:slideOutLeft 0.1s both ease-in;
+    -moz-animation:slideOutLeft 0.1s both ease-in;
+    animation:slideOutLeft 0.1s both ease-in;
 }
 
 
@@ -60,5 +60,42 @@
 @-webkit-keyframes slideOutLeft {
     to {
         -webkit-transform: translateX(-100%);
+    }
+}
+
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
     }
 }

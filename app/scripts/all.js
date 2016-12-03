@@ -10,6 +10,7 @@ angular
 
         $scope.font_list = null;
         
+        /* get all fonts list */
         $http.get('http://0.0.0.0:5000/font/all')
             .then(function (responce) {
                 $scope.font_list = responce.data;
@@ -18,13 +19,13 @@ angular
         /* set font status color */
         var get_status_color = function (font) {
 
-            $http.get('http://0.0.0.0:5000/font/check/update/' + font.id)
+            $http.get('http://0.0.0.0:5000/font/check/upgradable/' + font.font_id)
                 .then(function (responce) {
                     if(responce.data) {
                         font.status_color = {color: "#fdbc40"};
                     }
                     else {
-                        $http.get('http://0.0.0.0:5000/font/check/install/' + font.id)
+                        $http.get('http://0.0.0.0:5000/font/check/installed/' + font.font_id)
                             .then(function (responce) {
                                 if(responce.data) {
                                     font.status_color = {color: "#34c84a"};
@@ -35,8 +36,6 @@ angular
                             });
                     }
                 });
-
-
         };
         
         $scope.status_color = function (font) {

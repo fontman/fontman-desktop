@@ -1,1 +1,29 @@
-install
+<div class="side-list">
+    <h5 class="nav-group-title">
+        <strong>
+            <span class="icon icon-install"></span>&nbsp;&nbsp;Install
+        </strong>
+    </h5>
+
+    <br>
+
+    <div>
+        <div>
+            <input class="form-control" type="text" placeholder="Search" ng-model="searchFont">
+        </div>
+    </div>
+
+    <br>
+
+    <table class="table-striped">
+        <tbody>
+        <tr ng-repeat="font in font_list | filter:searchFont">
+            <td>
+                <span class="icon icon-record" ng-style="{color: '#57acf5'}"></span>&nbsp;&nbsp;
+                {{font.name}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
