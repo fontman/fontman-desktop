@@ -5,3 +5,22 @@
     padding: 10px 10px 10px 10px;
 
 }
+
+.font-body {
+    transition: opacity 250ms linear;
+}
+
+.font-body.changing {
+    opacity: 0;
+}
+
+.font {
+    cursor: pointer;
+    transition: all 250ms linear;
+}
+
+.font.selected {
+    cursor: default;
+    background-color: #296bdd;
+    color: white;
+}

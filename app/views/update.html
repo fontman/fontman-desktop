@@ -1,29 +1,38 @@
-<div class="side-list">
-    <h5 class="nav-group-title">
-        <strong>
-            <span class="icon icon-alert"></span>&nbsp;&nbsp;Update
-        </strong>
-    </h5>
+<div class="pane-group">
 
-    <br>
+    <div class="pane side-list">
 
-    <div>
+        <h5 class="nav-group-title">
+            <strong>
+                <span class="icon icon-alert"></span>&nbsp;&nbsp;Update
+            </strong>
+        </h5>
+
+        <br>
+
         <div>
-            <input class="form-control" type="text" placeholder="Search" ng-model="searchFont">
+            <div>
+                <input class="form-control" type="text" placeholder="Search" ng-model="searchFont">
+            </div>
         </div>
+
+        <br>
+
+        <table class="table">
+            <tbody>
+            <tr class="font" ng-repeat="font in font_list | filter:searchFont" ng-click="select_font(font)" ng-class="{'selected': selected_font === font}">
+                    <td>
+                        <span class="icon icon-record" ng-style="{color: '#fdbc40'}"></span>&nbsp;&nbsp;
+                        {{font.name}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 
-    <br>
-
-    <table class="table-striped">
-        <tbody>
-        <tr ng-repeat="font in font_list | filter:searchFont">
-            <td>
-                <span class="icon icon-record" ng-style="{color: '#fdbc40'}"></span>&nbsp;&nbsp;
-                {{font.name}}
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="font-body pane" ng-class="{ 'changing': change_is_on }">
+        <h3 class="header">{{selected_font.name}}</h3>
+    </div>
 
 </div>

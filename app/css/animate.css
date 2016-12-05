@@ -1,11 +1,10 @@
 .page.ng-leave {
-    z-index:9999;
+    z-index:0;
 }
 
 .page.ng-enter {
-    z-index:8888;
+    z-index:1000;
 }
-
 
 /* page enter transition */
 .animate.ng-enter {
@@ -16,11 +15,10 @@
 
 /* page leave transition */
 .animate.ng-leave        {
-    -webkit-animation:slideOutLeft 0.1s both ease-in;
-    -moz-animation:slideOutLeft 0.1s both ease-in;
-    animation:slideOutLeft 0.1s both ease-in;
+    -webkit-animation:fadeout 0.4s both ease-in;
+    -moz-animation:fadeout 0.4s both ease-in;
+    animation:fadeout 0.4s both ease-in;
 }
-
 
 /* scale up */
 @keyframes scaleUp {
@@ -97,5 +95,41 @@
     }
     to {
         opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity:1;
+    }
+    to {
+        opacity:0;
+    }
+}
+
+@-moz-keyframes fadeout { /* Firefox */
+    from {
+        opacity:1;
+    }
+    to {
+        opacity:0;
+    }
+}
+
+@-webkit-keyframes fadeout { /* Safari and Chrome */
+    from {
+        opacity:1;
+    }
+    to {
+        opacity:0;
+    }
+}
+
+@-o-keyframes fadeout { /* Opera */
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
     }
 }
