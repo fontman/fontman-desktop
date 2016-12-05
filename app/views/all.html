@@ -31,7 +31,16 @@
 
 
     <div class="font-body pane" ng-class="{ 'changing': change_is_on }">
-        <h3 class="header">{{selected_font.name}}</h3>
+        <h3 class="header">
+            {{font_sample}}
+        </h3>
+
+        <div ng-repeat="element in font_files">
+            <span style=""></span>
+            <div>
+                {{font_sample}}
+            </div>
+        </div>
     </div>
 
 </div>
