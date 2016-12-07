@@ -1,0 +1,56 @@
+<div class="search-bar">
+    <md-input-container md-no-float class="md-accent" flex="80" style="padding-bottom:0px;margin-left:15px">
+        <md-icon style="color:green" class="material-icons">search</md-icon>
+        <input ng-model="searchInput" placeholder="Search here" style="color:brown;padding-left:10px;margin-left:5px">
+    </md-input-container>
+</div>
+
+
+<ul class="card-list">
+
+    <li class="list-styler" ng-repeat="font in font_list | filter:searchInput">
+
+        <style scoped>
+            @font-face {
+            font-family: {{font.font_id}};
+            src: url({{font.web_link}});
+            }
+        </style>
+
+        <md-card style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); height: 150px; width: 350px;">
+
+            <md-card-title>
+
+                <md-card-title-text>
+                    <span class="md-headline" style="font-family:{{font.font_id}}">
+                        <md-icon style="color:{{font.status_color}}" class="material-icons">fiber_manual_record</md-icon> &nbsp;
+                        {{font.name}}
+                    </span>
+                    <span class="md-subhead">version: {{font.version}}</span>
+                </md-card-title-text>
+
+            </md-card-title>
+
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-raised md-warn">MORE</md-button> &nbsp;&nbsp;
+
+                <span ng-if="!font.installed">
+                    <md-button style="background-color: #34c84a; color: white" class="md-raised">INSTALL</md-button>
+                </span>
+
+                <span ng-if="font.installed">
+                    <md-button style="background-color: #cd2b00; color: white" class="md-raised">REMOVE</md-button>
+                </span>
+
+                <span ng-if="font.upgradable">
+                    <md-button style="background-color: #fdbc40; color: white" class="md-raised">UPDATE</md-button>
+                </span>
+
+            </md-card-actions>
+
+        </md-card>
+
+    </li>
+
+</ul>
+

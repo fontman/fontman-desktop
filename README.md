@@ -1,3 +1,3 @@
 # fontman-gui
 
-Fontman GUI using electron, photon and angularjs.
+Fontman GUI using electron, angularjs and angular material.

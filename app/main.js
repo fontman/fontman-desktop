@@ -13,7 +13,7 @@ let mainWindow;
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({frame: false, width: 1400, height: 600, webPreferences: {"nodeIntegration": false}});
+  mainWindow = new BrowserWindow({titleBarStyle: 'hidden', width: 1300, height: 600, webPreferences: {"nodeIntegration": false}});
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -21,6 +21,9 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }));
+
+  // remove default main menu
+  mainWindow.setMenu(null);
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
@@ -54,6 +57,7 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow()
   }
+
 });
 
 // In this file you can include the rest of your app's specific main process
