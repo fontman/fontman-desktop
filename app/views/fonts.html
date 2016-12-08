@@ -32,7 +32,7 @@
             </md-card-title>
 
             <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-raised md-warn">MORE</md-button> &nbsp;&nbsp;
+                <md-button class="md-raised md-warn" ng-click="show_font_dialog($event, font)">MORE</md-button> &nbsp;&nbsp;
 
                 <span ng-if="!font.installed">
                     <md-button style="background-color: #34c84a; color: white" class="md-raised">INSTALL</md-button>
@@ -54,3 +54,93 @@
 
 </ul>
 
+
+<script type="text/ng-template" id="font_dialog.html">
+
+    <md-dialog aria-label="{{selected_font.name}}">
+
+        <form ng-cloak>
+
+            <md-toolbar>
+
+                <div class="md-toolbar-tools">
+
+                    <style scoped>
+                        @font-face {
+                        font-family: {{selected_font.font_id}};
+                        src: url({{selected_font.web_link}});
+                        }
+                    </style>
+
+                    <h2 style="font-family: {{selected_font.font_id}}">{{selected_font.name}}</h2>
+                    <span flex></span>
+
+                    <md-button class="md-icon-button" ng-click="cancel()">
+                        <md-icon aria-label="Close dialog">close</md-icon>
+                    </md-button>
+
+                </div>
+
+    </md-toolbar>
+
+            <md-dialog-content>
+
+                <div class="md-dialog-content">
+
+                    <div>
+                        <ul class="font-style-list">
+                            <li class="element" ng-repeat="font_style in font_styles">
+
+                                <style scoped>
+                                    @font-face {
+                                    font-family: {{font_style.style}};
+                                    src: url({{font_style.web_link}});
+                                    }
+                                </style>
+
+                                <span class="topic">
+                                    {{font_style.style}}
+                                </span>
+
+                                <br>
+
+                                <span class="sample" style="font-family: {{font_style.style}}">
+                                    {{selected_font.name}}
+                                </span>
+
+                                <br>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </md-dialog-content>
+
+
+            <md-dialog-actions layout="row">
+
+                <md-card-actions layout="row" layout-align="end center">
+
+                    <span ng-if="!selected_font.installed">
+                        <md-button style="background-color: #34c84a; color: white" class="md-raised">INSTALL</md-button>
+                    </span>
+
+                    <span ng-if="selected_font.installed">
+                        <md-button style="background-color: #cd2b00; color: white" class="md-raised">REMOVE</md-button>
+                    </span>
+
+                    <span ng-if="selected_font.upgradable">
+                        <md-button style="background-color: #fdbc40; color: white" class="md-raised">UPDATE</md-button>
+                    </span>
+
+                </md-card-actions>
+
+            </md-dialog-actions>
+
+        </form>
+
+    </md-dialog>
+
+</script>

@@ -1,16 +1,31 @@
-ul.card-list {
-    list-style-type: none;
-    padding: 40px 30px 30px 30px;
-}
-
-li.list-styler {
-    float:left;
-    padding-bottom: 15px;
-}
-
 .content{
     flex: 1 1 auto;
     overflow-y: auto;
+}
+
+.font-style-list {
+    list-style-type: none;
+    min-width: 280px;
+}
+
+.font-style-list .element {
+    padding: 10px 10px 10px 10px;
+}
+
+.font-style-list .sample {
+    font-size: 22px;
+}
+
+.font-style-list .topic {
+    margin: 1em 0 0.75em;
+    padding: 0 0 5px 0;
+    color: #6B5344;
+    font-weight: normal;
+    font-family: 'Scada', sans-serif;
+    position: relative;
+    text-shadow: 0 2px 0 rgba(255,255,255,0.5);
+    font-size: 12px;
+    line-height: 20px;
 }
 
 .footer{
@@ -23,11 +38,21 @@ li.list-styler {
     -webkit-overflow-scrolling: auto;
 }
 
+li.list-styler {
+    float:left;
+    padding-bottom: 15px;
+}
+
 .search-bar{
     flex: 0 0 auto;
     position: absolute;
     right: 10px;
     top: 60px;
+}
+
+ul.card-list {
+    list-style-type: none;
+    padding: 40px 30px 30px 30px;
 }
 
 .wrapper{
