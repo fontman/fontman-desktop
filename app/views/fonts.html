@@ -1,111 +1,95 @@
-<div class="search-bar">
-    <md-input-container md-no-float class="md-accent" flex="80" style="padding-bottom:0px;margin-left:15px">
-        <md-icon style="color:green" class="material-icons">search</md-icon>
-        <input ng-model="searchInput" placeholder="Search here" style="color:brown;padding-left:10px;margin-left:5px">
-    </md-input-container>
-</div>
+<div>
+
+    <div class="search-bar">
+        <md-input-container md-no-float class="md-accent" flex="80">
+            <md-icon style="color:green" class="material-icons">search</md-icon>
+            <input ng-model="searchInput" placeholder="Search here" style="color:brown;padding-left:10px;">
+        </md-input-container>
+    </div>
 
 
-<ul class="card-list">
+    <ul class="card-list">
+        <li class="list-styler" ng-repeat="font in font_list | filter:searchInput">
 
-    <li class="list-styler" ng-repeat="font in font_list | filter:searchInput">
+            <style scoped>
+                @font-face {
+                font-family: {{font.font_id}};
+                src: url({{font.web_link}});
+                }
+            </style>
 
-        <style scoped>
-            @font-face {
-            font-family: {{font.font_id}};
-            src: url({{font.web_link}});
-            }
-        </style>
+            <md-card style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); height: 150px; width: 350px;">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline" style="font-family:{{font.font_id}}">
+                            <md-icon style="color:{{font.status_color}}" class="material-icons">fiber_manual_record</md-icon> &nbsp;
+                            {{font.name}}
+                        </span>
+                        <span class="md-subhead">version: {{font.version}}</span>
+                    </md-card-title-text>
+                </md-card-title>
 
-        <md-card style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); height: 150px; width: 350px;">
-
-            <md-card-title>
-
-                <md-card-title-text>
-                    <span class="md-headline" style="font-family:{{font.font_id}}">
-                        <md-icon style="color:{{font.status_color}}" class="material-icons">fiber_manual_record</md-icon> &nbsp;
-                        {{font.name}}
+                <md-card-actions layout="row" layout-align="end center">
+                    <span ng-if="font.in_progress">
+                        <md-progress-circular ng-disabled="vm.activated" class="md-accent" md-diameter="40"></md-progress-circular>
                     </span>
-                    <span class="md-subhead">version: {{font.version}}</span>
-                </md-card-title-text>
-
-            </md-card-title>
-
-            <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-raised md-warn" ng-click="show_font_dialog($event, font)">MORE</md-button> &nbsp;&nbsp;
-
-                <span ng-if="!font.installed">
-                    <md-button style="background-color: #34c84a; color: white" class="md-raised">INSTALL</md-button>
-                </span>
-
-                <span ng-if="font.installed">
-                    <md-button style="background-color: #cd2b00; color: white" class="md-raised">REMOVE</md-button>
-                </span>
-
-                <span ng-if="font.upgradable">
-                    <md-button style="background-color: #fdbc40; color: white" class="md-raised">UPDATE</md-button>
-                </span>
-
-            </md-card-actions>
-
-        </md-card>
-
-    </li>
-
-</ul>
-
-
-<script type="text/ng-template" id="font_dialog.html">
-
-    <md-dialog aria-label="{{selected_font.name}}">
-
-        <form ng-cloak>
-
-            <md-toolbar>
-
-                <div class="md-toolbar-tools">
-
-                    <style scoped>
-                        @font-face {
-                        font-family: {{selected_font.font_id}};
-                        src: url({{selected_font.web_link}});
-                        }
-                    </style>
-
-                    <h2 style="font-family: {{selected_font.font_id}}">{{selected_font.name}}</h2>
                     <span flex></span>
+                    <md-button class="md-raised md-warn" ng-click="show_font_dialog($event, font)">MORE</md-button> &nbsp;&nbsp;
+                    <span ng-if="!font.installed">
+                        <md-button style="background-color: #34c84a; color: white" class="md-raised" ng-click="install_font(font)">INSTALL</md-button>
+                    </span>
+                    <span ng-if="font.installed">
+                        <md-button style="background-color: #cd2b00; color: white" class="md-raised" ng-click="remove_font(font)">REMOVE</md-button>
+                    </span>
 
-                    <md-button class="md-icon-button" ng-click="cancel()">
-                        <md-icon aria-label="Close dialog">close</md-icon>
-                    </md-button>
+                    <span ng-if="font.upgradable">
+                        <md-button style="background-color: #fdbc40; color: white" class="md-raised">UPDATE</md-button>
+                    </span>
+                </md-card-actions>
+            </md-card>
+        </li>
+    </ul>
 
-                </div>
+    <script type="text/ng-template" id="font_dialog.html">
+        <md-dialog aria-label="{{selected_font.name}}">
+            <form ng-cloak>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
 
-    </md-toolbar>
+                        <style scoped>
+                            @font-face {
+                            font-family: {{selected_font.font_id}};
+                            src: url({{selected_font.web_link}});
+                            }
+                        </style>
 
-            <md-dialog-content>
+                        <h2 style="font-family: {{selected_font.font_id}}">{{selected_font.name}}</h2>
+                        <span flex></span>
+                        <md-button class="md-icon-button" ng-click="cancel()">
+                            <md-icon aria-label="Close dialog">close</md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-dialog-content>
+                    <div class="md-dialog-content">
+                        <div>
+                            <ul class="font-style-list">
+                                <li class="element" ng-repeat="font_style in font_styles">
 
-                <div class="md-dialog-content">
-
-                    <div>
-                        <ul class="font-style-list">
-                            <li class="element" ng-repeat="font_style in font_styles">
-
-                                <style scoped>
-                                    @font-face {
-                                    font-family: {{font_style.style}};
-                                    src: url({{font_style.web_link}});
-                                    }
-                                </style>
-
-                                <span class="topic">
-                                    {{font_style.style}}
+                                    <style scoped>
+                                        @font-face {
+                                        font-family: {{font_style.style}};
+                                        src: url({{font_style.web_link}});
+                                        }
+                                    </style>
+                                        <span class="topic">
+                                        {{font_style.style}}
                                 </span>
 
                                 <br>
 
                                 <span class="sample" style="font-family: {{font_style.style}}">
-                                    {{selected_font.name}}
+                                    {{selected_font.sample}}
                                 </span>
 
                                 <br>
@@ -144,3 +128,6 @@
     </md-dialog>
 
 </script>
+
+
+</div>

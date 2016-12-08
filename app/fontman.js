@@ -7,7 +7,7 @@
 
 var fontman = angular.module(
     "fontman",
-    ["about", "fonts", "ngAnimate", "ngMaterial", "ngMdIcons", "ngMessages", "ngRoute", "channels", "preferences", "updates"]
+    ["about", "fonts", "ngAnimate", "ngMaterial", "ngMdIcons", "ngMessages", "ngRoute", "channels", "preferences"]
 );
 
 
@@ -34,11 +34,6 @@ fontman
             .when("/preferences", {
                 templateUrl: "views/preferences.html", 
                 controller: "preferences"
-            })
-            
-            .when("/updates", {
-                templateUrl: "views/updates.html", 
-                controller: "updates"
             })
             
             .otherwise("/fonts");

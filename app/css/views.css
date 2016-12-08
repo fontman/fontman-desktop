@@ -28,12 +28,6 @@
     line-height: 20px;
 }
 
-.footer{
-    flex: 0 0 auto;
-    position: absolute;
-    bottom: 0px;
-}
-
 .header{
     -webkit-overflow-scrolling: auto;
 }
@@ -43,16 +37,17 @@ li.list-styler {
     padding-bottom: 15px;
 }
 
-.search-bar{
-    flex: 0 0 auto;
+
+.search-bar {
+    background-color: transparent;
     position: absolute;
-    right: 10px;
+    right: 0px;
     top: 60px;
 }
 
 ul.card-list {
     list-style-type: none;
-    padding: 40px 30px 30px 30px;
+    padding-top: 60px;
 }
 
 .wrapper{
