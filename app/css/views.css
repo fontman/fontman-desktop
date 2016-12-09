@@ -37,6 +37,28 @@ li.list-styler {
     padding-bottom: 15px;
 }
 
+.preferences{
+    padding-left: 40px;
+}
+
+.preferences .buttons {
+    position: absolute;
+    right:50px;
+}
+
+.preferences .checkbox {
+    float: left;
+    width: 180px;
+}
+
+.preferences .languages-box {
+    padding-top: 10px;
+    padding-bottom: 50px;
+}
+
+.preferences .refresh_rate {
+    padding-bottom: 20px;
+}
 
 .search-bar {
     background-color: transparent;

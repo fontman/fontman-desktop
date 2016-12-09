@@ -113,13 +113,11 @@ angular
                 fullscreen: $scope.customFullscreen, // Only for -xs, -sm breakpoints.
 
                 locals : {
-                    font_data: [font, $scope.font_styles]
+                    font_data: [font, $scope.font_styles, $scope.install_font, $scope.remove_font]
                 }
-
             })
-                
                 .then(function() {
-                   $location.path("/fonts")
+                   update_fonts_list();
                 });
         };
         
@@ -127,7 +125,10 @@ angular
         var dialog_controller = function ($scope, $mdDialog, font_data) {
 
             $scope.font_styles = font_data[1];
+            $scope.install_font = font_data[2];
+            $scope.remove_font = font_data[3];
             $scope.selected_font = font_data[0];
+            $scope.selected_font.in_progress = false;
 
             $scope.cancel = function() {
                 $mdDialog.cancel();

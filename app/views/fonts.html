@@ -31,7 +31,7 @@
 
                 <md-card-actions layout="row" layout-align="end center">
                     <span ng-if="font.in_progress">
-                        <md-progress-circular ng-disabled="vm.activated" class="md-accent" md-diameter="40"></md-progress-circular>
+                        <md-progress-circular class="md-accent" md-diameter="40"></md-progress-circular>
                     </span>
                     <span flex></span>
                     <md-button class="md-raised md-warn" ng-click="show_font_dialog($event, font)">MORE</md-button> &nbsp;&nbsp;
@@ -41,7 +41,6 @@
                     <span ng-if="font.installed">
                         <md-button style="background-color: #cd2b00; color: white" class="md-raised" ng-click="remove_font(font)">REMOVE</md-button>
                     </span>
-
                     <span ng-if="font.upgradable">
                         <md-button style="background-color: #fdbc40; color: white" class="md-raised">UPDATE</md-button>
                     </span>
@@ -87,47 +86,36 @@
                                 </span>
 
                                 <br>
-
                                 <span class="sample" style="font-family: {{font_style.style}}">
                                     {{selected_font.sample}}
                                 </span>
-
                                 <br>
-
                             </li>
                         </ul>
                     </div>
-
                 </div>
 
             </md-dialog-content>
-
-
             <md-dialog-actions layout="row">
-
                 <md-card-actions layout="row" layout-align="end center">
-
+                    <span ng-if="selected_font.in_progress">
+                        <md-progress-circular class="md-accent" md-diameter="40"></md-progress-circular>
+                    </span>
+                    <span flex></span>
                     <span ng-if="!selected_font.installed">
-                        <md-button style="background-color: #34c84a; color: white" class="md-raised">INSTALL</md-button>
+                        <md-button ng-click="install_font(selected_font)" style="background-color: #34c84a; color: white" class="md-raised">INSTALL</md-button>
                     </span>
-
                     <span ng-if="selected_font.installed">
-                        <md-button style="background-color: #cd2b00; color: white" class="md-raised">REMOVE</md-button>
+                        <md-button ng-click="remove_font(selected_font)" style="background-color: #cd2b00; color: white" class="md-raised">REMOVE</md-button>
                     </span>
-
                     <span ng-if="selected_font.upgradable">
                         <md-button style="background-color: #fdbc40; color: white" class="md-raised">UPDATE</md-button>
                     </span>
-
                 </md-card-actions>
-
             </md-dialog-actions>
+            </form>
+        </md-dialog>
 
-        </form>
-
-    </md-dialog>
-
-</script>
-
+    </script>
 
 </div>

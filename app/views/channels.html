@@ -1,1 +1,34 @@
-repositories
+<div class="search-bar">
+    <md-input-container md-no-float class="md-accent" flex="80">
+        <md-icon style="color:green" class="material-icons">search</md-icon>
+        <input ng-model="searchInput" placeholder="Search here" style="color:brown;padding-left:10px;">
+    </md-input-container>
+</div>
+
+<ul class="card-list">
+    <li class="list-styler" ng-repeat="channel in channels_list | filter:searchInput">
+
+        <md-card style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); height: 150px; width: 350px;">
+            <md-card-title>
+                <md-card-title-text>
+                        <span class="md-headline">
+                            <md-icon class="material-icons">fiber_manual_record</md-icon> &nbsp;
+                            {{channel.channel_id}}
+                        </span>
+                    <span class="md-subhead">type: {{channel.type}}</span>
+                </md-card-title-text>
+            </md-card-title>
+
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-raised md-warn" >MORE</md-button>&nbsp;&nbsp;
+
+                <span ng-if="channel.is_active">
+                    <md-button style="background-color: #cd2b00; color: white" class="md-primary md-raised">Disable</md-button>
+                </span>
+                <span ng-if="!channel.is_active">
+                    <md-button class="md-primary md-raised">Enable</md-button>
+                </span>
+            </md-card-actions>
+        </md-card>
+    </li>
+</ul>

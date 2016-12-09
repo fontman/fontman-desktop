@@ -4,6 +4,17 @@
 
 angular
     .module("about", [])
-    .controller("about", function ($scope) {
+    .controller("about", function ($http, $scope) {
+        
+        $scope.about = null;
+        
+        /* get system information */
+        var get_system_infromation = function () {
+            $http.get("http://0.0.0.0:5000/about")
+                .success(function (data, status, headers, config) {
+                    $scope.about = data;
+                })
+        };
 
+        get_system_infromation();
     });

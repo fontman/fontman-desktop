@@ -1,1 +1,45 @@
-settings
+<div>
+
+
+
+</div>
+
+<div class="search-bar">
+    <md-input-container md-no-float class="md-accent" flex="80">
+        <md-icon style="color:green" class="material-icons">search</md-icon>
+        <input ng-model="searchInput" placeholder="Search here" style="color:brown;padding-left:10px;">
+    </md-input-container>
+</div>
+
+
+<div class="preferences">
+    <div class="languages-box">
+        <md-content>
+            <md-subheader>Languages</md-subheader>
+        </md-content>
+        <md-content class="checkbox" ng-repeat="language in languages_list">
+            <md-checkbox md-no-ink="" aria-label="Checkbox No Ink" ng-model="language.is_enabled" class="md-primary">
+                {{language.value}}
+            </md-checkbox>
+        </md-content>
+    </div>
+
+    <div class="refresh_rate">
+        <md-input-container flex="100">
+            <label>update every </label>
+            <md-select ng-model="refresh_rate">
+                <md-option ng-repeat="rate in refresh_rates" ng-value="rate.value">{{rate.text}}</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+
+    <div class="buttons" layout="row">
+        <md-progress-circular class="md-accent" md-diameter="35" ng-if="pref_in_progress"></md-progress-circular>
+        <md-button class="md-primary md-raised" ng-click="save_preferences()">Save</md-button>
+    </div>
+
+</div>
+
+
+
+
