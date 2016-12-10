@@ -7,7 +7,7 @@ Fontman GUI using electron, angularjs and angular material.
 
 #####Requirements
 
-Make sure you have install npm. cd into app directory,
+Make sure you have installed npm. cd into app directory,
 
 ```bash
 npm install bower -g
@@ -15,7 +15,7 @@ bower install jquery
 bower install angularjs angular-route 
 bower install angular-animate angular-aria angular-material angular-messages angular-material-icons
 
-npm install
+npm install electron
 ```
 
 #####Run application

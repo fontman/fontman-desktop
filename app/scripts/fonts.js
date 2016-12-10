@@ -16,7 +16,6 @@ angular
             $http.get("http://0.0.0.0:5000/font/all")
                 .then(function (responce) {
                     $scope.font_list = responce.data;
-                    update_font_styles_list($scope.font_list[0])
                 });
         };
 
@@ -28,21 +27,12 @@ angular
                     font.status_color = data.status_color;
                 })
         };
-
-        /* update font styles list */
-        var update_font_styles_list = function (font) {
-            $http.get("http://0.0.0.0:5000/font/web_link/" + font.font_id)
-                .then(function (responce) {
-                    $scope.font_styles = responce.data;
-                });
-        };
         
         /* update installable list */
         var update_installable_list = function () {
             $http.get("http://0.0.0.0:5000/font/installable")
                 .then(function (responce) {
                     $scope.font_list = responce.data;
-                    update_font_styles_list($scope.font_list[0])
                 });
         };
         
@@ -51,7 +41,6 @@ angular
             $http.get("http://0.0.0.0:5000/font/installed")
                 .then(function (responce) {
                     $scope.font_list = responce.data;
-                    update_font_styles_list($scope.font_list[0])
                 });
         };
 
@@ -60,7 +49,6 @@ angular
             $http.get("http://0.0.0.0:5000/font/upgradable")
                 .then(function (responce) {
                     $scope.font_list = responce.data;
-                    update_font_styles_list($scope.font_list[0])
                 });
         };
 
@@ -74,7 +62,6 @@ angular
                         font.in_progress = false;
                         update_font_data(font);
                     }
-
                 })
 
                 .error(function (data, status, headers, config) {
@@ -99,10 +86,6 @@ angular
 
         /* font dialog box */
         $scope.show_font_dialog = function(ev, font) {
-
-            /* update font styles list */
-            update_font_styles_list(font);
-            
             $mdDialog.show({
 
                 controller: dialog_controller,
@@ -123,19 +106,27 @@ angular
         
 
         var dialog_controller = function ($scope, $mdDialog, font_data) {
-
-            $scope.font_styles = font_data[1];
+            
+            $scope.font_styles = null;
             $scope.install_font = font_data[2];
             $scope.remove_font = font_data[3];
             $scope.selected_font = font_data[0];
             $scope.selected_font.in_progress = false;
 
+            /* update font styles list */
+            var update_font_styles_list = function (font) {
+                $http.get("http://0.0.0.0:5000/font/web_link/" + font.font_id)
+                    .then(function (responce) {
+                        $scope.font_styles = responce.data;
+                    });
+            };
+
             $scope.cancel = function() {
                 $mdDialog.cancel();
             };
 
+            update_font_styles_list($scope.selected_font);
         };
-
+        
         update_fonts_list();
-
     });
