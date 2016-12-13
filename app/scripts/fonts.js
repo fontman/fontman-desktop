@@ -87,7 +87,6 @@ angular
         /* font dialog box */
         $scope.show_font_dialog = function(ev, font) {
             $mdDialog.show({
-
                 controller: dialog_controller,
                 templateUrl: 'font_dialog.html',
                 parent: angular.element(document.body),
@@ -95,7 +94,7 @@ angular
                 clickOutsideToClose:true,
                 fullscreen: $scope.customFullscreen, // Only for -xs, -sm breakpoints.
 
-                locals : {
+                locals: {
                     font_data: [font, $scope.font_styles, $scope.install_font, $scope.remove_font]
                 }
             })

@@ -37,6 +37,10 @@ li.list-styler {
     padding-bottom: 15px;
 }
 
+.new-channel {
+    width: 100%;
+}
+
 .preferences{
     padding-left: 40px;
 }
