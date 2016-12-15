@@ -24,10 +24,10 @@ angular
                 $scope.in_progress = true;
                 
                 $http.post("http://127.0.0.1:5000/channel/save", $scope.channel)
-                    .success(function (data, status, header, config) {
+                    .then(function onSuccess(response) {
                         $scope.in_progress = false;
                     })
-                    .error(function (data, status, header, config) {
+                    .catch(function onError(response) {
 
                     });
 
@@ -46,10 +46,10 @@ angular
             $scope.channel_id = channel_id;
 
             $http.get("http://127.0.0.1:5000/channel/info/" + $scope.channel_id)
-                .success(function (data, status, header, config) {
-                    $scope.channel = data;
+                .then(function onSuccess(response) {
+                    $scope.channel = response.data;
                 })
-                .error(function (data, status, header, config) {
+                .catch(function onError(response) {
 
                 });
 
@@ -61,10 +61,10 @@ angular
                 $scope.in_progress = true;
 
                 $http.get("http://127.0.0.1:5000/channel/refresh/" + $scope.channel_id)
-                    .success(function (data, status, header, config) {
+                    .then(function onSuccess(response) {
                         $scope.in_progress = false;
                     })
-                    .error(function (data, status, header, config) {
+                    .catch(function onError(response) {
 
                     })
             };
@@ -73,10 +73,10 @@ angular
                 $scope.in_progress = true;
 
                 $http.get("http://127.0.0.1:5000/channel/remove/" + channel_id)
-                    .success(function (data, status, header, config) {
+                    .then(function onSuccess(response) {
                         $scope.in_progress = false;
                     })
-                    .error(function (data, status, header, config) {
+                    .catch(function onError(response) {
                     });
 
                 $mdDialog.hide();
@@ -86,10 +86,10 @@ angular
         /* update all channels list */
         var update_channel_list = function () {
             $http.get("http://127.0.0.1:5000/channel/all")
-                .success(function (data, status, header, config) {
-                    $scope.channels_list = data;
+                .then(function onSuccess(response) {
+                    $scope.channels_list = response.data;
                 })
-                .error(function (data, status, header, config) {
+                .catch(function onError(response) {
 
                 })
         };
@@ -109,10 +109,10 @@ angular
                     "is_active": is_active
                 }
             )
-                .success(function (data, status, headers, config) {
+                .then(function onSuccess(response) {
                     channel.is_active = is_active;
                 })
-                .error(function (data, status, headers, config) {
+                .catch(function onError(response) {
                     
                 })
         };

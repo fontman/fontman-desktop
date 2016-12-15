@@ -6,8 +6,8 @@ angular
     .module("fonts", ['ngMaterial', 'ngMessages'])
     .controller("fonts", function ($filter, $http, $location, $mdDialog, $scope, $timeout) {
 
-        $scope.error_message = "";
-        $scope.error_occurs = false;
+        $scope.catch_message = "";
+        $scope.catch_occurs = false;
         $scope.font_list = null;
         $scope.font_styles = null;
 
@@ -22,9 +22,9 @@ angular
         /* update a font data */
         var update_font_data = function (font) {
             $http.get("http://127.0.0.1:5000/font/one/" + font.font_id)
-                .success(function (data, status, header, config) {
-                    font.installed = data.installed;
-                    font.status_color = data.status_color;
+                .then(function onSuccess(response) {
+                    font.installed = response.data.installed;
+                    font.status_color = response.data.status_color;
                 })
         };
         
@@ -57,13 +57,13 @@ angular
             font.in_progress = true;
 
             $http.get("http://127.0.0.1:5000/operation/install/" + font.font_id)
-                .success(function (data, status, headers, config) {
-                    if (data.version === font.version) {
+                .then(function onSuccess(response) {
+                    if (response.data.version === font.version) {
                         font.in_progress = false;
                         update_font_data(font);
                     }
                 })
-                .error(function (data, status, headers, config) {
+                .catch(function onError(response) {
                     font.in_progress = false;
                 });
         };
@@ -73,11 +73,11 @@ angular
             font.in_progress = true;
 
             $http.get("http://127.0.0.1:5000/operation/remove/" + font.font_id)
-                .success(function (data, status, headers, config) {
+                .then(function onSuccess(response) {
                     font.in_progress = false;
                     update_font_data(font);
                 })
-                .error(function (data, status, headers, config) {
+                .catch(function onError(response) {
                     font.in_progress = false;
                 });
         };
@@ -113,7 +113,7 @@ angular
             /* update font styles list */
             var update_font_styles_list = function (font) {
                 $http.get("http://127.0.0.1:5000/font/web_link/" + font.font_id)
-                    .then(function (responce) {
+                    .then(function onSuccess(responce) {
                         $scope.font_styles = responce.data;
                     });
             };

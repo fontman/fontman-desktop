@@ -11,8 +11,8 @@ angular
         /* get system information */
         var get_system_infromation = function () {
             $http.get("http://127.0.0.1:5000/about")
-                .success(function (data, status, headers, config) {
-                    $scope.about = data;
+                .then(function onSuccess(response) {
+                    $scope.about = response.data;
                 })
         };
 

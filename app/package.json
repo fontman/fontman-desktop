@@ -1,10 +1,20 @@
 {
   "name": "fontman-gui",
-  "version": "1.0.0",
+  "version": "0.1.0-SNAPSHOT",
   "description": "Most elegant font manager",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
+  },
+  "dependencies": {
+    "angular": "1.5.9",
+    "angular-animate": "1.5.9",
+    "angular-aria": "1.5.9",
+    "angular-material": "1.1.1",
+    "angular-material-icons": "0.7.1",
+    "angular-messages": "1.5.9",
+    "angular-route": "1.5.9",
+    "jquery": "3.1.1"
   },
   "devDependencies": {
     "electron": "^1.4.1"

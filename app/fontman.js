@@ -35,11 +35,10 @@ fontman
                 templateUrl: "views/preferences.html", 
                 controller: "preferences"
             })
-            
+
             .otherwise("/fonts");
     
     });
-
 
 fontman
     .controller("fontman-navigation", function () {
