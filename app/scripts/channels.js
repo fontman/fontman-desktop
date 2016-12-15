@@ -23,7 +23,7 @@ angular
             $scope.save_channel = function () {
                 $scope.in_progress = true;
                 
-                $http.post("http://0.0.0.0:5000/channel/save", $scope.channel)
+                $http.post("http://127.0.0.1:5000/channel/save", $scope.channel)
                     .success(function (data, status, header, config) {
                         $scope.in_progress = false;
                     })
@@ -45,7 +45,7 @@ angular
             $scope.channel = null;
             $scope.channel_id = channel_id;
 
-            $http.get("http://0.0.0.0:5000/channel/info/" + $scope.channel_id)
+            $http.get("http://127.0.0.1:5000/channel/info/" + $scope.channel_id)
                 .success(function (data, status, header, config) {
                     $scope.channel = data;
                 })
@@ -60,7 +60,7 @@ angular
             $scope.refresh_cache = function (channel_id) {
                 $scope.in_progress = true;
 
-                $http.get("http://0.0.0.0:5000/channel/refresh/" + $scope.channel_id)
+                $http.get("http://127.0.0.1:5000/channel/refresh/" + $scope.channel_id)
                     .success(function (data, status, header, config) {
                         $scope.in_progress = false;
                     })
@@ -72,7 +72,7 @@ angular
             $scope.remove_channel = function (channel_id) {
                 $scope.in_progress = true;
 
-                $http.get("http://0.0.0.0:5000/channel/remove/" + channel_id)
+                $http.get("http://127.0.0.1:5000/channel/remove/" + channel_id)
                     .success(function (data, status, header, config) {
                         $scope.in_progress = false;
                     })
@@ -85,7 +85,7 @@ angular
 
         /* update all channels list */
         var update_channel_list = function () {
-            $http.get("http://0.0.0.0:5000/channel/all")
+            $http.get("http://127.0.0.1:5000/channel/all")
                 .success(function (data, status, header, config) {
                     $scope.channels_list = data;
                 })
@@ -103,7 +103,7 @@ angular
             }
 
             $http.post(
-                "http://0.0.0.0:5000/channel/status",
+                "http://127.0.0.1:5000/channel/status",
                 {
                     "channel_id": channel.channel_id,
                     "is_active": is_active

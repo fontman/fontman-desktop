@@ -22,14 +22,14 @@ angular
 
         /* send languages list changes */
         var save_languages_settings = function () {
-            $http.post("http://0.0.0.0:5000/preferences/languages", $scope.languages_list)
+            $http.post("http://127.0.0.1:5000/preferences/languages", $scope.languages_list)
                 .success(function (data, status, headers, config) {
 
                 })
         };
 
         var save_refresh_rate = function () {
-            $http.get("http://0.0.0.0:5000/preferences/refresh_rate/" + $scope.refresh_rate)
+            $http.get("http://127.0.0.1:5000/preferences/refresh_rate/" + $scope.refresh_rate)
                 .success(function (data, status, headers, config) {
                     $scope.pref_in_progress = false;
                 })
@@ -37,7 +37,7 @@ angular
 
         /* update languages list */
         var update_languages_list = function () {
-            $http.get("http://0.0.0.0:5000/preferences/languages/all")
+            $http.get("http://127.0.0.1:5000/preferences/languages/all")
                 .success(function (data, status, headers, config) {
                     $scope.languages_list = data;
                 })
@@ -49,7 +49,7 @@ angular
 
         /* get refresh rate value */
         var update_refresh_rate = function () {
-            $http.get("http://0.0.0.0:5000/preferences/refresh_rate")
+            $http.get("http://127.0.0.1:5000/preferences/refresh_rate")
                 .success(function (data, status, headers, config) {
                     $scope.refresh_rate = data;
                 })

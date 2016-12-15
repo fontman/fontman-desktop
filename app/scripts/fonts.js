@@ -13,7 +13,7 @@ angular
 
         /* get all fonts list */
         var update_fonts_list = function () {
-            $http.get("http://0.0.0.0:5000/font/all")
+            $http.get("http://127.0.0.1:5000/font/all")
                 .then(function (responce) {
                     $scope.font_list = responce.data;
                 });
@@ -21,7 +21,7 @@ angular
 
         /* update a font data */
         var update_font_data = function (font) {
-            $http.get("http://0.0.0.0:5000/font/one/" + font.font_id)
+            $http.get("http://127.0.0.1:5000/font/one/" + font.font_id)
                 .success(function (data, status, header, config) {
                     font.installed = data.installed;
                     font.status_color = data.status_color;
@@ -30,7 +30,7 @@ angular
         
         /* update installable list */
         var update_installable_list = function () {
-            $http.get("http://0.0.0.0:5000/font/installable")
+            $http.get("http://127.0.0.1:5000/font/installable")
                 .then(function (responce) {
                     $scope.font_list = responce.data;
                 });
@@ -38,7 +38,7 @@ angular
         
         /* update installed fonts list */
         var update_installed_list = function () {
-            $http.get("http://0.0.0.0:5000/font/installed")
+            $http.get("http://127.0.0.1:5000/font/installed")
                 .then(function (responce) {
                     $scope.font_list = responce.data;
                 });
@@ -46,7 +46,7 @@ angular
 
         /* update upgradable fonts list */
         var update_upgradable_list = function () {
-            $http.get("http://0.0.0.0:5000/font/upgradable")
+            $http.get("http://127.0.0.1:5000/font/upgradable")
                 .then(function (responce) {
                     $scope.font_list = responce.data;
                 });
@@ -56,14 +56,13 @@ angular
         $scope.install_font = function (font) {
             font.in_progress = true;
 
-            $http.get("http://0.0.0.0:5000/operation/install/" + font.font_id)
+            $http.get("http://127.0.0.1:5000/operation/install/" + font.font_id)
                 .success(function (data, status, headers, config) {
                     if (data.version === font.version) {
                         font.in_progress = false;
                         update_font_data(font);
                     }
                 })
-
                 .error(function (data, status, headers, config) {
                     font.in_progress = false;
                 });
@@ -73,12 +72,11 @@ angular
         $scope.remove_font = function (font) {
             font.in_progress = true;
 
-            $http.get("http://0.0.0.0:5000/operation/remove/" + font.font_id)
+            $http.get("http://127.0.0.1:5000/operation/remove/" + font.font_id)
                 .success(function (data, status, headers, config) {
                     font.in_progress = false;
                     update_font_data(font);
                 })
-
                 .error(function (data, status, headers, config) {
                     font.in_progress = false;
                 });
@@ -114,7 +112,7 @@ angular
 
             /* update font styles list */
             var update_font_styles_list = function (font) {
-                $http.get("http://0.0.0.0:5000/font/web_link/" + font.font_id)
+                $http.get("http://127.0.0.1:5000/font/web_link/" + font.font_id)
                     .then(function (responce) {
                         $scope.font_styles = responce.data;
                     });
