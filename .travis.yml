@@ -1,7 +1,7 @@
 sudo: required
 language: node_js
 node_js:
-- '7'
+- '4'
 before_install:
 - sudo add-apt-repository -y ppa:wine/wine-builds && sudo apt-get update && sudo apt-get install -y --install-recommends winehq-devel
 - cd app && npm install
@@ -10,17 +10,26 @@ before_install:
 - electron-packager app/ --platform=linux --arch=x64
 - electron-packager app/ --platform=linux --arch=ia32
 - electron-packager app/ --platform=darwin --arch=x64
-- electron-packager app/ --platform=darwin --arch=ia32
 - electron-packager app/ --platform=win32 --arch=x64
 - electron-packager app/ --platform=win32 --arch=ia32
 - ls
 - tar -zcvf fontman-gui-linux-x64.tar.gz fontman-gui-linux-x64
+- tar -zcvf fontman-gui-linux-ia32.tar.gz fontman-gui-linux-ia32
+- tar -zcvf fontman-gui-darwin-x64.tar.gz fontman-gui-darwin-x64
+- zip -r fontman-gui-win32-ia32.zip fontman-gui-win32-ia32
+- zip -r fontman-gui-win32-x64.zip fontman-gui-win32-x64
+- ls
+script: echo "done"
 deploy:
   overwrite: true
   provider: releases
   skip_cleanup: true
   file:
+  - fontman-gui-darwin-x64.tar.gz
   - fontman-gui-linux-x64.tar.gz
+  - fontman-gui-linux-ia32.tar.gz
+  - fontman-gui-win32-ia32.zip
+  - fontman-gui-win32-x64.zip
   on:
     tags: true
     all_branches: true
