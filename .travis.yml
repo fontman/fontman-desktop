@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- '4'
+before_install:
+- cd app && npm install
+- cd .. && electron-packager app/ --all
+- ls
+install: true
+deploy:
+  overwrite: true
+  provider: releases
+  skip_cleanup: true
+  file:
+  - dist/fms.dmg
+  on:
+    tags: true
+    all_branches: true
+    repo: fontman/fms
