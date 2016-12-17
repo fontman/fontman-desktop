@@ -1,11 +1,15 @@
 sudo: required
+os:
+- linux
+- osx
 language: node_js
 node_js:
-- '4'
+- '7'
 before_install:
 - cd app && npm install
 - npm install electron-packager -g
-- cd .. && electron-packager app/ --all
+- cd .. && electron-packager app/ --platform=linux --arch=x64
+- tar -zcvf fontman-gui-linux-x64.tar.gz fontman-gui-linux-x64
 - ls
 install: true
 deploy:
@@ -13,8 +17,15 @@ deploy:
   provider: releases
   skip_cleanup: true
   file:
-  - dist/fms.dmg
+  - fontman-gui-linux-x64.tar.gz
   on:
     tags: true
     all_branches: true
-    repo: fontman/fms
+    repo: fontman/fontman-gui
+  api-key:
+    secure: N9IU2xYJQBMuf9Ay828WCGs/zZJgRwcd+MeDjFt0AySqv5FTo4JxEL8DgG0URxj9Gd+GRttNHVEL7ajPdPq9Hnm7+lkr5wP8A8DDtu5Ir3JPtN2TWkBX27QDJsU74ZyuTslgTsu7sI4dRI47p0r/TLWdpRuFEnkKIwaXuTawpSDWF1wxr4BlzXZrP6GdUEK6cFMESbcMeA+d6CjZt824XHLQT8HCBfMrz8fK+LfQerm0pxdQF8sFFhqzRS2r5yzDSg0YMdmwCE5d10F/TG/tutbSkD37MZaghDTPYzlpe+rwkf5A6Tvr1ETR0TXicqQzNet2xg4Ilm38QvAn3vHQwmUd+LlfZ4B/lNkbEf1amnp6IPzisWzEP4DrvAY2AOYxxD/3Np4sV372JOzK+TiKwLAnOMUb9AECJzS2AR2ezIH6RwPjyihmVdR7EyyUP/Xz2HzaH3thKLdlkVLxvqUifK/ElFycFUnAOCbOu3mn834bgkdgL28tnzOuUCXCTCJITbwqBjcjkKUZvRUqZGtfkMJo6DEfeOGwyOAREXwDX9bHdjQyYih9JhgX5g5fZyq44GVlAvD9KFqX3VdOeVNAT9qqb1lFQVwHlwCjQVgUv3mCN+pFEG3BNmb757sAI0Rfc1ohYsqWLqa8t0raG9Tk3evFuljmE7orlFlMGlHkHuI=
+env:
+  global:
+  - WINEDLLOVERRIDES="mscoree,mshtml="
+  - WINEDEBUG="-all"
+  - DEBUG=electron-packager
