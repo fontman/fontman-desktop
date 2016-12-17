@@ -12,7 +12,7 @@ var fontman = angular.module(
 
 
 fontman
-    .config( function ($routeProvider, $httpProvider, $locationProvider) {
+    .config( function ($routeProvider) {
 
         $routeProvider
 
