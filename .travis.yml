@@ -5,12 +5,13 @@ node_js:
 before_install:
 - cd app && npm install
 - npm install electron-packager -g
-- cd .. && electron-packager app/ --platform=linux --arch=x64
-- cd .. && electron-packager app/ --platform=linux --arch=ia32
-- cd .. && electron-packager app/ --platform=darwin --arch=x64
-- cd .. && electron-packager app/ --platform=darwin --arch=ia32
-- cd .. && electron-packager app/ --platform=win32 --arch=x64
-- cd .. && electron-packager app/ --platform=win32 --arch=ia32
+- cd ..
+- electron-packager app/ --platform=linux --arch=x64
+- electron-packager app/ --platform=linux --arch=ia32
+- electron-packager app/ --platform=darwin --arch=x64
+- electron-packager app/ --platform=darwin --arch=ia32
+- electron-packager app/ --platform=win32 --arch=x64
+- electron-packager app/ --platform=win32 --arch=ia32
 - ls
 - tar -zcvf fontman-gui-linux-x64.tar.gz fontman-gui-linux-x64
 deploy:
