@@ -1,8 +1,10 @@
+sudo: required
 language: node_js
 node_js:
 - '4'
 before_install:
 - cd app && npm install
+- npm install electron-packager -g
 - cd .. && electron-packager app/ --all
 - ls
 install: true
