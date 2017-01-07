@@ -1,70 +1,161 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <title>Fontman</title>
 
-    <link rel="stylesheet" href="css/views.css">
-    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
-    <link rel="stylesheet" href="node_modules/angular-material-icons/angular-material-icons.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
 
-  </head>
+</head>
+<body ng-app="fontmanApp" ng-cloak style="font-family: Cantarell" >
 
-  <body ng-cloak="" ng-app="fontman">
+<div class="wrapper">
 
-  <div class="wrapper">
+    <div class="header">
 
-    <div class="header md-padding" ng-controller="fontman-navigation as nav">
+        <md-toolbar ng-controller="mainController">
 
-      <md-content class="ngm-navbar">
+            <div class="md-toolbar-tools"  ng-if="authStatus.indexOf('undefined') !== -1" style="background-color: white; color: black">
 
-        <md-nav-bar class="ngm-navbar" md-selected-nav-item="nav.current_nav_item" nav-bar-aria-label="navigation links">
+                <md-button aria-label="createNew" class="md-raised" style="background-color: #34c84a; color: white">
+                    CREATE PROFILE
+                </md-button>
 
-          <md-nav-item md-nav-href="#fonts" name="fonts">
-            <md-icon class="material-icons">font_download</md-icon> &nbsp;
-            FONTS
-          </md-nav-item>
+                <md-button class="md-fab md-mini" aria-label="Favorite">
+                    <img src="images/logo_small.png">
+                </md-button>
 
-          <span flex></span>
+                <h2>
+                    <span>{{fontmanUser}}</span>
+                </h2>
 
-          <md-nav-item md-nav-href="#preferences" name="preferences">
-            PREFERENCES
-          </md-nav-item>
+                <span flex></span>
 
-          <md-nav-item md-nav-href="#channels" name="channels">
-            CHANNELS
-          </md-nav-item>
+                <md-button class="md-raised" aria-label="Learn More">
+                    DONATE
+                </md-button>
 
-          <md-nav-item md-nav-href="#about" name="about">
-            ABOUT
-          </md-nav-item>
+            </div>
 
-        </md-nav-bar>
-
-      </md-content>
+        </md-toolbar>
 
     </div>
 
-    <div class="content" ng-view>
+    <div layout="row">
+
+        <div layout="column">
+
+            <div>
+                <md-card>
+                    <md-content>
+                        <p>
+                            Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis conclusionemque nam. Ne deleniti appetere reprimique pro, inani labitur disputationi te sed. At vix sale omnesque, id pro labitur reformidans accommodare, cum labores honestatis eu. Nec quem lucilius in, eam praesent reformidans no. Sed laudem aliquam ne.
+
+                            Facete delenit argumentum cum at. Pro rebum nostrum contentiones ad. Mel exerci tritani maiorum at, mea te audire phaedrum, mel et nibh aliquam. Malis causae equidem vel eu. Noster melius vis ea, duis alterum oporteat ea sea. Per cu vide munere fierent.
+
+                            Ad sea dolor accusata consequuntur. Sit facete convenire reprehendunt et. Usu cu nonumy dissentiet, mei choro omnes fuisset ad. Te qui docendi accusam efficiantur, doming noster prodesset eam ei. In vel posse movet, ut convenire referrentur eum, ceteros singulis intellegam eu sit.
+
+                            Sit saepe quaestio reprimique id, duo no congue nominati, cum id nobis facilisi. No est laoreet dissentias, idque consectetuer eam id. Clita possim assueverit cu his, solum virtute recteque et cum. Vel cu luptatum signiferumque, mel eu brute nostro senserit. Blandit euripidis consequat ex mei, atqui torquatos id cum, meliore luptatum ut usu. Cu zril perpetua gubergren pri. Accusamus rationibus instructior ei pro, eu nullam principes qui, reque justo omnes et quo.
+
+                        </p>
+                    </md-content>
+                </md-card>
+
+            </div>
+
+            <div class="content">
+
+                <div>
+
+                    <md-card>
+
+                        <md-content>
+                            <p>
+                                Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis conclusionemque nam. Ne deleniti appetere reprimique pro, inani labitur disputationi te sed. At vix sale omnesque, id pro labitur reformidans accommodare, cum labores honestatis eu. Nec quem lucilius in, eam praesent reformidans no. Sed laudem aliquam ne.
+
+                                Facete delenit argumentum cum at. Pro rebum nostrum contentiones ad. Mel exerci tritani maiorum at, mea te audire phaedrum, mel et nibh aliquam. Malis causae equidem vel eu. Noster melius vis ea, duis alterum oporteat ea sea. Per cu vide munere fierent.
+
+                                Ad sea dolor accusata consequuntur. Sit facete convenire reprehendunt et. Usu cu nonumy dissentiet, mei choro omnes fuisset ad. Te qui docendi accusam efficiantur, doming noster prodesset eam ei. In vel posse movet, ut convenire referrentur eum, ceteros singulis intellegam eu sit.
+
+                                Sit saepe quaestio reprimique id, duo no congue nominati, cum id nobis facilisi. No est laoreet dissentias, idque consectetuer eam id. Clita possim assueverit cu his, solum virtute recteque et cum. Vel cu luptatum signiferumque, mel eu brute nostro senserit. Blandit euripidis consequat ex mei, atqui torquatos id cum, meliore luptatum ut usu. Cu zril perpetua gubergren pri. Accusamus rationibus instructior ei pro, eu nullam principes qui, reque justo omnes et quo.
+
+                            </p>
+                        </md-content>
+
+                    </md-card>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="sideBar" layout="column">
+
+            <div class="content">
+
+                <md-card>
+
+                    <md-content>
+                        <p>
+                            Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis conclusionemque nam. Ne deleniti appetere reprimique pro, inani labitur disputationi te sed. At vix sale omnesque, id pro labitur reformidans accommodare, cum labores honestatis eu. Nec quem lucilius in, eam praesent reformidans no. Sed laudem aliquam ne.
+
+                            Facete delenit argumentum cum at. Pro rebum nostrum contentiones ad. Mel exerci tritani maiorum at, mea te audire phaedrum, mel et nibh aliquam. Malis causae equidem vel eu. Noster melius vis ea, duis alterum oporteat ea sea. Per cu vide munere fierent.
+
+                            Ad sea dolor accusata consequuntur. Sit facete convenire reprehendunt et. Usu cu nonumy dissentiet, mei choro omnes fuisset ad. Te qui docendi accusam efficiantur, doming noster prodesset eam ei. In vel posse movet, ut convenire referrentur eum, ceteros singulis intellegam eu sit.
+
+                            Sit saepe quaestio reprimique id, duo no congue nominati, cum id nobis facilisi. No est laoreet dissentias, idque consectetuer eam id. Clita possim assueverit cu his, solum virtute recteque et cum. Vel cu luptatum signiferumque, mel eu brute nostro senserit. Blandit euripidis consequat ex mei, atqui torquatos id cum, meliore luptatum ut usu. Cu zril perpetua gubergren pri. Accusamus rationibus instructior ei pro, eu nullam principes qui, reque justo omnes et quo.
+
+                        </p>
+                    </md-content>
+
+                </md-card>
+
+            </div>
+
+            <div>
+
+                <div>
+
+                    <md-card>
+
+                        <md-content>
+                            <p>
+                                Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis conclusionemque nam. Ne deleniti appetere reprimique pro, inani labitur disputationi te sed. At vix sale omnesque, id pro labitur reformidans accommodare, cum labores honestatis eu. Nec quem lucilius in, eam praesent reformidans no. Sed laudem aliquam ne.
+
+                                Facete delenit argumentum cum at. Pro rebum nostrum contentiones ad. Mel exerci tritani maiorum at, mea te audire phaedrum, mel et nibh aliquam. Malis causae equidem vel eu. Noster melius vis ea, duis alterum oporteat ea sea. Per cu vide munere fierent.
+
+                                Ad sea dolor accusata consequuntur. Sit facete convenire reprehendunt et. Usu cu nonumy dissentiet, mei choro omnes fuisset ad. Te qui docendi accusam efficiantur, doming noster prodesset eam ei. In vel posse movet, ut convenire referrentur eum, ceteros singulis intellegam eu sit.
+
+                                Sit saepe quaestio reprimique id, duo no congue nominati, cum id nobis facilisi. No est laoreet dissentias, idque consectetuer eam id. Clita possim assueverit cu his, solum virtute recteque et cum. Vel cu luptatum signiferumque, mel eu brute nostro senserit. Blandit euripidis consequat ex mei, atqui torquatos id cum, meliore luptatum ut usu. Cu zril perpetua gubergren pri. Accusamus rationibus instructior ei pro, eu nullam principes qui, reque justo omnes et quo.
+
+                            </p>
+                        </md-content>
+
+                    </md-card>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
     </div>
 
-  </div>
+</div>
 
 
-  <script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
-  <script src="node_modules/angular/angular.min.js" type="text/javascript"></script>
-  <script src="node_modules/angular-route/angular-route.min.js" type="text/javascript"></script>
-  <script src="node_modules/angular-animate/angular-animate.js" type="text/javascript"></script>
-  <script src="node_modules/angular-aria/angular-aria.min.js" type="text/javascript"></script>
-  <script src="node_modules/angular-messages/angular-messages.min.js" type="text/javascript"></script>
-  <script src="node_modules/angular-material/angular-material.js" type="text/javascript"></script>
-  <script src="node_modules/angular-material-icons/angular-material-icons.min.js" type="text/javascript"></script>
+<script src="node_modules/jquery/dist/jquery.js" type="text/javascript"></script>
+<script src="node_modules/angular/angular.js" type="text/javascript"></script>
+<script src="node_modules/angular-animate/angular-animate.js" type="text/javascript"></script>
+<script src="node_modules/angular-aria/angular-aria.js" type="text/javascript"></script>
+<script src="node_modules/angular-messages/angular-messages.js" type="text/javascript"></script>
+<script src="node_modules/angular-material/angular-material.js" type="text/javascript"></script>
+<script src="node_modules/angular-route/angular-route.js" type="text/javascript"></script>
 
-  <script src="fontman.js" type="text/javascript"></script>
-  <script src="scripts/about.js" type="text/javascript"></script>
-  <script src="scripts/channels.js" type="text/javascript"></script>
-  <script src="scripts/fonts.js" type="text/javascript"></script>
-  <script src="scripts/preferences.js" type="text/javascript"></script>
+<script src="fontman.js" type="text/javascript"></script>
 
-  </body>
+</body>
 </html>

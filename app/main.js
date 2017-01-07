@@ -3,6 +3,10 @@ const electron = require('electron');
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
+// Module to control tray application.
+const Tray = electron.Tray;
+const Menu = electron.Menu;
+
 
 const path = require('path');
 const url = require('url');
@@ -10,10 +14,26 @@ const url = require('url');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let appIcon = null;
 
 function createWindow () {
+
+  // set tray icon
+  appIcon = new Tray("images/fontman.png");
+
+  var contextMenu = Menu.buildFromTemplate([
+    { label: 'Item1', type: 'radio' },
+    { label: 'Item2', type: 'radio' },
+    { label: 'Item3', type: 'radio', checked: true },
+    { label: 'Item4', type: 'radio' }
+  ]);
+
+  appIcon.setToolTip('Fontman');
+  appIcon.setContextMenu(contextMenu);
+  appIcon.setHighlightMode("selection");
+
   // Create the browser window.
-  mainWindow = new BrowserWindow({titleBarStyle: 'hidden', width: 1500, height: 600, webPreferences: {"nodeIntegration": false}});
+  mainWindow = new BrowserWindow({titleBarStyle: 'hidden', width: 1600, height: 800, webPreferences: {"nodeIntegration": false}});
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -23,7 +43,7 @@ function createWindow () {
   }));
 
   // remove default main menu
-  mainWindow.setMenu(null);
+  //mainWindow.setMenu(null);
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
@@ -34,7 +54,9 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
-  })
+  });
+
+
 }
 
 // This method will be called when Electron has finished

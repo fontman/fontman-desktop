@@ -1,46 +1,47 @@
 /** Angular JS app
  *
- * Control fontman gui body.
+ * Control main gui body.
  *
  * Created by Lahiru Pathirage @Mooniak <lpsandaruwan@gmail.com> on 11/28/16.
  */
 
-var fontman = angular.module(
-    "fontman",
-    ["about", "fonts", "ngAnimate", "ngMaterial", "ngMdIcons", "ngMessages", "ngRoute", "channels", "preferences"]
-);
+var fontmanApp = angular.module("fontmanApp", ["ngMaterial", "ngRoute"]);
 
+fontmanApp
+    .controller("mainController", function ($http, $scope, authService) {
+        authService.setStatus();
 
-fontman
-    .config( function ($routeProvider) {
-
-        $routeProvider
-
-            .when("/about", {
-                templateUrl: "views/about.html",
-                controller: "about"
-            })
-            
-            .when("/channels", {
-                templateUrl: "views/channels.html", 
-                controller: "channels"
-            })
-            
-            .when("/fonts", {
-                templateUrl: "views/fonts.html", 
-                controller: "fonts"
-            })
-            
-            .when("/preferences", {
-                templateUrl: "views/preferences.html", 
-                controller: "preferences"
-            })
-
-            .otherwise("/fonts");
-    
+        $scope.authStatus = authService.getStatus();
+        $scope.fontmanUser = "Fontman User";
+        
     });
 
-fontman
-    .controller("fontman-navigation", function () {
-       this.current_nav_item = "fonts";
+fontmanApp
+    .config(function ($routeProvider) {
+        $routeProvider.when("/", {
+            templateUrl: "index.html",
+            controller: fontmanApp
+        })
+    })
+
+    .factory("authService", function ($http, $q) {
+        var authStatus =  $q.defer();
+
+        return {
+            setStatus: function () {
+                $http.get("http://127.0.0.1:5000/auth/status")
+                    .then(function onSuccess(response) {
+                        authStatus.resolve(response.data["status"]);
+                    })
+                    .catch(function onError(response)  {
+
+                    });
+            },
+
+            getStatus: function() {
+                return authStatus;
+            }
+        };
+
+
     });

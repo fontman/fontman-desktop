@@ -1,0 +1,46 @@
+body {
+    background-color: #edfceb;
+}
+
+@font-face {
+    font-family: Cantarell;
+    src: local('Cantarell');
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+*:after,
+*:before{
+    box-sizing: border-box;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.header{
+    flex: 0 0 auto;
+    background: #aaa;
+}
+
+.content{
+    flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+.footer{
+    flex: 0 0 auto;
+    background: #aaa;
+    text-align: center;
+}
+
+.sideBar {
+    min-width: 400px;
+    max-width: 500px;
+}
