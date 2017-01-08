@@ -1,0 +1,49 @@
+<md-dialog aria-label="login" class="auth-dialog">
+    <form name="loginForm" ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools" >
+                <h2>Login</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close dialog" style="color: #c41200">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+
+                <md-input-container class="md-block" >
+                    <label>Email</label>
+                    <input required="" type="email" name="loginEmail" ng-model="loginData.email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/">
+
+                    <div ng-messages="loginForm.loginEmail.$error" role="alert">
+                        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                            Your email must be between 10 and 100 characters long and look like an e-mail address.
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Password</label>
+                    <input required="" type="password" name="password" ng-model="loginData.password">
+                    <div ng-messages="loginForm.password.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-progress-circular ng-if="inProgress" class="md-accent" md-diameter="40"></md-progress-circular>
+            <span flex></span>
+            <md-button class="md-raised" ng-click="clearFields()">
+                CLEAR
+            </md-button>
+            <md-button class="md-primary md-raised" ng-click="loginProfile()" ng-disabled="loginForm.$invalid">
+                PROCEED
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

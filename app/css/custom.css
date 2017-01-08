@@ -34,13 +34,26 @@ body {
     overflow-y: auto;
 }
 
+.auth-dialog {
+    min-width: 550px;
+}
+
 .footer{
     flex: 0 0 auto;
     background: #aaa;
     text-align: center;
 }
 
+.md-toolbar-tools {
+    background-color: white;
+    color: black;
+}
+
 .sideBar {
     min-width: 400px;
     max-width: 500px;
+}
+
+.validator-message {
+    font-size: 11px;
 }
