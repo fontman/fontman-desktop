@@ -1,0 +1,130 @@
+<md-dialog aria-label="myFonts" class="auth-dialog">
+        <md-toolbar>
+            <div class="md-toolbar-tools" >
+                <h2>My Fonts</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close dialog" style="color: #c41200">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+    <md-dialog-content>
+
+        <md-tabs md-dynamic-height md-selected="selectedIndex" style="padding:5px 20px 20px 20px">
+
+            <md-tab label="MY FONTS" md-on-select="onTabChange(false)">
+
+                <md-list style="padding-top: 20px">
+
+                    <md-list-item class="md3-line" ng-repeat="font in myFonts">
+
+                        <div class="md-list-item-text">
+
+                            <h3>{{font.name}}</h3>
+                            <p>{{font.type}}</p>
+
+                        </div>
+
+                        <md-button class="md-secondary" style="color: #310000">ACTIONS</md-button>
+                        <md-divider ng-if="!$last"></md-divider>
+
+                    </md-list-item>
+
+                </md-list>
+
+            </md-tab>
+
+            <md-tab label="ADD NEW FONT" md-on-select="onTabChange(true)" style="height: 100%">
+
+                <form name="newFontForm" ng-cloak style="padding-left: 20px; padding-right: 20px; padding-top: 20px">
+
+                    <md-input-container class="md-block">
+                        <label>Font Name</label>
+                        <input required="" name="name" ng-model="newFont.name">
+                        <div ng-messages="newFontForm.name.$error" >
+                            <div ng-message="required" >Font name is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex="50" style="padding-right: 60px">
+                        <label>Type</label>
+                        <md-select ng-model="newFont.type">
+                            <md-option ng-repeat="type in types" value="{{type.type}}">
+                                {{type.type}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container flex="50" >
+                        <label>Font Channel</label>
+                        <md-select ng-model="newFont.channel_id">
+                            <md-option ng-repeat="channel in channelsList" value="{{channel.channel_id}}">
+                                {{channel.name}} {{channel.type}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <div flex></div>
+
+                    <md-input-container>
+                        <label>GitHub User/Organization</label>
+                        <input required="" name="gitUser" ng-model="newFont.gitUser">
+                        <div ng-messages="newFontForm.gitUser.$error">
+                            <div ng-message="required">GitHub username/organization name is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container >
+                        <label>GitHub Repository</label>
+                        <input required="" name="gitRepository" ng-model="newFont.gitRepository">
+                        <div ng-messages="newFontForm.gitRepository.$error">
+                            <div ng-message="required">Repository is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>GitHub Pages Branch</label>
+                        <input required="" name="ghPagesBranch" ng-model="newFont.ghPagesBranch">
+                        <div ng-messages="newFontForm.ghPagesBranch.$error">
+                            <div ng-message="required">Branch name containing sample fonts is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>GitHub Pages Fonts Directory Path</label>
+                        <input required="" name="ghPagesFontDir" ng-model="newFont.ghPagesFontDir">
+                        <div ng-messages="newFontForm.ghPagesFontDir.$error">
+                            <div ng-message="required">Directory path containing sample fonts is required.</div>
+                        </div>
+                    </md-input-container>
+
+                </form>
+
+            </md-tab>
+
+            <md-tab></md-tab>
+
+        </md-tabs>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-progress-circular ng-if="inProgress" class="md-accent" md-diameter="40"></md-progress-circular>
+        <span flex></span>
+
+        <md-button class="md-raised" ng-click="cancel()" ng-if="!formButtons">
+            CLOSE
+        </md-button>
+
+        <md-button class="md-raised" ng-click="clearFields()" ng-if="formButtons">
+            CLEAR
+        </md-button>
+
+        <md-button class="md-primary md-raised" ng-click="addNewFont()" ng-disabled="newFontForm.$invalid" style="background-color: #34c84a; color: white" ng-if="formButtons">
+            ADD
+        </md-button>
+
+    </md-dialog-actions>
+
+</md-dialog>

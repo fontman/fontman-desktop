@@ -33,7 +33,7 @@ function createWindow () {
   appIcon.setHighlightMode("selection");
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({titleBarStyle: 'hidden', width: 1600, height: 800, webPreferences: {"nodeIntegration": false}});
+  mainWindow = new BrowserWindow({titleBarStyle: 'hidden', width: 1600, height: 850, webPreferences: {"nodeIntegration": false}});
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({

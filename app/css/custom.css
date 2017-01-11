@@ -1,12 +1,3 @@
-body {
-    background-color: #edfceb;
-}
-
-@font-face {
-    font-family: Cantarell;
-    src: local('Cantarell');
-}
-
 *{
     box-sizing: border-box;
     margin: 0;
@@ -17,6 +8,10 @@ body {
     box-sizing: border-box;
 }
 
+body {
+    background-color: white;
+}
+
 .wrapper{
     display: flex;
     flex-direction: column;
@@ -24,18 +19,27 @@ body {
     overflow: hidden;
 }
 
+.single-font-view {
+}
+
+.editable-box {
+    padding: 20px 20px 20px 20px;
+}
+
 .header{
     flex: 0 0 auto;
-    background: #aaa;
+    -webkit-user-select: none;
 }
 
 .content{
     flex: 1 1 auto;
     overflow-y: auto;
+    -webkit-user-select: none;
 }
 
 .auth-dialog {
-    min-width: 550px;
+    min-width: 600px;
+    -webkit-user-select: none;
 }
 
 .footer{
@@ -44,16 +48,25 @@ body {
     text-align: center;
 }
 
+.font-card {
+    padding: 10px 10px 10px 10px;
+}
+
 .md-toolbar-tools {
     background-color: white;
     color: black;
+    -webkit-user-select: none;
 }
 
 .sideBar {
-    min-width: 400px;
-    max-width: 500px;
+    height: 100%;
+    min-width: 200px;
+}
+
+.form-content {
+    border: none;
 }
 
 .validator-message {
-    font-size: 11px;
+    font-size: 12px;
 }
