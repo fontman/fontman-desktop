@@ -4,7 +4,7 @@
                 <h2>My Fonts</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon aria-label="Close dialog" style="color: #c41200">close</md-icon>
+                    <md-icon aria-label="Close dialog" style="color: #6f6f6f">close</md-icon>
                 </md-button>
             </div>
         </md-toolbar>
@@ -26,7 +26,7 @@
 
                         </div>
 
-                        <md-button class="md-secondary" style="color: #310000">ACTIONS</md-button>
+                        <md-button class="md-secondary" style="color: #132c00">ACTIONS</md-button>
                         <md-divider ng-if="!$last"></md-divider>
 
                     </md-list-item>
@@ -121,7 +121,7 @@
             CLEAR
         </md-button>
 
-        <md-button class="md-primary md-raised" ng-click="addNewFont()" ng-disabled="newFontForm.$invalid" style="background-color: #34c84a; color: white" ng-if="formButtons">
+        <md-button class="md-raised" ng-click="addNewFont()" ng-disabled="newFontForm.$invalid" ng-if="formButtons">
             ADD
         </md-button>
 

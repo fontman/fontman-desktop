@@ -26,15 +26,15 @@
                     <md-subheader class="md-no-sticky" style="background-color: white">Fonts</md-subheader>
 
                     <md-sidemenu-button href="#/" ng-click="setSelectedNavIndex(0)" ng-style="{'color': {true: 'green'}[selectedNavIndex===0]}">
-                        Fonts
+                        FONTS
                     </md-sidemenu-button>
 
                     <md-sidemenu-button href="#/bucket" ng-click="setSelectedNavIndex(1)" ng-style="{'color': {true: 'green'}[selectedNavIndex===1]}">
-                        Font Bucket
+                        FONT BUCKET
                     </md-sidemenu-button>
 
-                    <md-sidemenu-button href="#/collections" ng-click="setSelectedNavIndex(2)" ng-style="{'color': {true: 'green'}[selectedNavIndex===2]}">
-                        Collections
+                    <md-sidemenu-button href="#/comparison" ng-click="setSelectedNavIndex(2)" ng-style="{'color': {true: 'green'}[selectedNavIndex===2]}">
+                        COMPARE
                     </md-sidemenu-button>
 
                 </md-sidemenu-group>
@@ -45,17 +45,25 @@
                     <md-subheader class="md-no-sticky" style="background-color: white">Profile</md-subheader>
 
                     <md-sidemenu-button ng-if="authStatus.includes('undefined')" ng-click="createProfileDialog($event)">
-                        Sign In
+                        SIGN UP
                     </md-sidemenu-button>
 
                     <md-sidemenu-button ng-if="authStatus===false" ng-click="loginDialog($event)">
-                        Log In
+                        SIGN IN
                     </md-sidemenu-button>
 
                     <md-sidemenu-content md-heading="{{fontmanUser}}" md-arrow="true" ng-if="authStatus===true">
 
+                        <md-sidemenu-button  ng-click="myFontsDialog($event)">
+                            MY FONTS
+                        </md-sidemenu-button>
+
+                        <md-sidemenu-button>
+                            TEAMWORK
+                        </md-sidemenu-button>
+
                         <md-sidemenu-button  ng-click="logout($event)">
-                            Logout
+                            LOGOUT
                         </md-sidemenu-button>
 
                     </md-sidemenu-content>
@@ -67,16 +75,16 @@
                 <md-sidemenu-group>
                     <md-subheader class="md-no-sticky" style="background-color: white">More</md-subheader>
 
-                    <md-sidemenu-button href="#">
-                        Donate
+                    <md-sidemenu-button>
+                        DONATE
                     </md-sidemenu-button>
 
                     <md-sidemenu-button href="#">
-                        More From Libre
+                        MORE FROM LIBRE
                     </md-sidemenu-button>
 
                     <md-sidemenu-button href="#">
-                        Share
+                        SHARE
                     </md-sidemenu-button>
 
                 </md-sidemenu-group>

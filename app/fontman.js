@@ -27,9 +27,9 @@ fontmanApp
                 templateUrl: "views/font-bucket.html",
                 controller: "fontBucketController"
             })
-            .when("/collections", {
-                templateUrl: "views/collections.html",
-                controller: "collectionsController"
+            .when("/comparison", {
+                templateUrl: "views/compare.html",
+                controller: "comparisonController"
             }).otherwise("/");
     });
 
@@ -238,9 +238,9 @@ fontmanApp
         var profileCreationController = function ($http, $mdDialog, $mdToast, $scope) {
             $scope.inProgress = false;
             $scope.profileData = {
-                email: "example@mail.com",
-                name: "Fontman User",
-                password: "Secret@123"
+                email: undefined,
+                name: undefined,
+                password: undefined
             };
             $scope.confirmPassword = undefined;
 
@@ -291,13 +291,13 @@ fontmanApp
             if($scope.authStatus===true) {
                 $http.get("http://127.0.0.1:5000/auth/profile/name")
                     .then(function onSuccess(response) {
-                        $scope.fontmanUser = response.data.name;
+                        $scope.fontmanUser = (response.data.name).toUpperCase();
                     })
                     .catch(function onError(response) {
                         alert("FMS connection failed!");
                     })
             }  else  {
-                $scope.fontmanUser = "Fontman User";
+                $scope.fontmanUser = "FONTMAN USER";
             }
         };
 

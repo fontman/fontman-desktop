@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-user-select: none;
 }
 *:after,
 *:before{
@@ -49,13 +50,19 @@ body {
 }
 
 .font-card {
-    padding: 10px 10px 10px 10px;
+    float: left;
+    padding: 5px 5px 5px 5px;
+    height: 180px;
+    width: 300px;
 }
 
 .md-toolbar-tools {
     background-color: white;
     color: black;
-    -webkit-user-select: none;
+}
+
+.nav-selected {
+    background-color: green;
 }
 
 .sideBar {
@@ -69,4 +76,39 @@ body {
 
 .validator-message {
     font-size: 12px;
+}
+
+#green-slider .md-thumb:after, #green-slider .md-track-fill{
+    background-color: green !important;
+    border-color: green !important;
+}
+
+#green-slider .md-focus-thumb, #green-slider .md-focus-ring{
+    background-color: green;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+    border-color: green;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused label {
+    color: green;
+}
+
+md-input-container > md-select:not([disabled]):focus .md-select-label {
+    border-bottom: 2px solid;
+    padding-bottom: 0;
+}
+
+md-select:not([disabled]):focus .md-select-value {
+    border-bottom-color: green;
+}
+
+md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
+    color: green !important;
+    background-color:green !important;
+}
+
+md-tabs > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-active, md-tabs > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-active md-icon, md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-active md-icon, md-tabs.md-default-theme.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-focused, md-tabs.md-default-theme.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-focused md-icon {
+    color: green !important;
 }
