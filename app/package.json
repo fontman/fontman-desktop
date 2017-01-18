@@ -18,6 +18,8 @@
     "angular-ui-validate": "1.2.2",
     "font-awesome": "^4.7.0",
     "jquery": "3.1.1",
+    "ng-sanitize": "0.0.2",
+    "rangy": "^1.3.0",
     "textangular": "^1.5.16"
   },
   "devDependencies": {

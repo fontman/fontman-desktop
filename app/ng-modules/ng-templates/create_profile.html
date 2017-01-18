@@ -1,11 +1,14 @@
 <md-dialog aria-label="createProfile" class="auth-dialog">
+
 <form name="createProfileForm" ng-cloak>
+
     <md-toolbar>
         <div class="md-toolbar-tools" >
             <h2>Create New Profile</h2>
             <span flex></span>
+
             <md-button class="md-icon-button" ng-click="cancel()">
-                <md-icon aria-label="Close dialog" style="color: #6f6f6f">close</md-icon>
+                <md-icon aria-label="Close dialog" class="close-dialog-box">close</md-icon>
             </md-button>
         </div>
     </md-toolbar>
@@ -54,10 +57,10 @@
     <md-dialog-actions layout="row">
         <md-progress-circular ng-if="inProgress" class="md-accent" md-diameter="40"></md-progress-circular>
         <span flex></span>
-        <md-button class="md-raised" ng-click="clearFields()">
+        <md-button ng-click="clearFields()">
             CLEAR
         </md-button>
-        <md-button class="md-raised" ng-click="createProfile()" ng-disabled="createProfileForm.$invalid" style="background-color: #34c84a; color: white">
+        <md-button ng-click="createProfile()" ng-disabled="createProfileForm.$invalid">
             CREATE
         </md-button>
     </md-dialog-actions>

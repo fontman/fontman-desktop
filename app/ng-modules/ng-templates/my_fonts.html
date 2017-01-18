@@ -4,18 +4,18 @@
                 <h2>My Fonts</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon aria-label="Close dialog" style="color: #6f6f6f">close</md-icon>
+                    <md-icon aria-label="Close dialog" class="close-dialog-box">close</md-icon>
                 </md-button>
             </div>
         </md-toolbar>
 
     <md-dialog-content>
 
-        <md-tabs md-dynamic-height md-selected="selectedIndex" style="padding:5px 20px 20px 20px">
+        <md-tabs class="dialog-box-body" md-dynamic-height md-selected="selectedIndex">
 
             <md-tab label="MY FONTS" md-on-select="onTabChange(false)">
 
-                <md-list style="padding-top: 20px">
+                <md-list class="dialog-box-list">
 
                     <md-list-item class="md3-line" ng-repeat="font in myFonts">
 
@@ -26,7 +26,7 @@
 
                         </div>
 
-                        <md-button class="md-secondary" style="color: #132c00">ACTIONS</md-button>
+                        <md-button class="md-secondary">ACTIONS</md-button>
                         <md-divider ng-if="!$last"></md-divider>
 
                     </md-list-item>
@@ -35,9 +35,9 @@
 
             </md-tab>
 
-            <md-tab label="ADD NEW FONT" md-on-select="onTabChange(true)" style="height: 100%">
+            <md-tab class="full-height" label="ADD NEW FONT" md-on-select="onTabChange(true)">
 
-                <form name="newFontForm" ng-cloak style="padding-left: 20px; padding-right: 20px; padding-top: 20px">
+                <form class="font-form" name="newFontForm" ng-cloak>
 
                     <md-input-container class="md-block">
                         <label>Font Name</label>
@@ -47,7 +47,7 @@
                         </div>
                     </md-input-container>
 
-                    <md-input-container flex="50" style="padding-right: 60px">
+                    <md-input-container class="type" flex="50">
                         <label>Type</label>
                         <md-select ng-model="newFont.type">
                             <md-option ng-repeat="type in types" value="{{type.type}}">
@@ -110,7 +110,7 @@
     </md-dialog-content>
 
     <md-dialog-actions layout="row">
-        <md-progress-circular ng-if="inProgress" class="md-accent" md-diameter="40"></md-progress-circular>
+        <md-progress-circular class="md-accent" md-diameter="40" ng-if="inProgress"></md-progress-circular>
         <span flex></span>
 
         <md-button class="md-raised" ng-click="cancel()" ng-if="!formButtons">

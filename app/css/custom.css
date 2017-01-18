@@ -9,27 +9,22 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: white;
+#red-slider .md-thumb:after, #red-slider .md-track-fill{
+    background-color: red !important;
+    border-color: red !important;
 }
 
-.wrapper{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
+#red-slider .md-focus-thumb, #red-slider .md-focus-ring{
+    background-color: red;
 }
 
-.single-font-view {
-}
-
-.editable-box {
-    padding: 20px 20px 20px 20px;
-}
-
-.header{
-    flex: 0 0 auto;
+.auth-dialog {
+    min-width: 600px;
     -webkit-user-select: none;
+}
+
+.close-dialog-box {
+    color: #6f6f6f;
 }
 
 .content{
@@ -38,9 +33,24 @@ body {
     -webkit-user-select: none;
 }
 
-.auth-dialog {
-    min-width: 600px;
-    -webkit-user-select: none;
+.dialog-box-body {
+    padding:5px 20px 20px 20px;
+}
+
+.dialog-box-list {
+    padding-top: 20px
+}
+
+.dialog-box-list .md-secondary {
+    color: #132c00;
+}
+
+.editable-box {
+    padding: 20px 20px 20px 20px;
+}
+
+.editableText {
+    margin: 0;
 }
 
 .footer{
@@ -51,9 +61,56 @@ body {
 
 .font-card {
     float: left;
-    padding: 5px 5px 5px 5px;
     height: 180px;
+    padding: 5px 5px 5px 5px;
+    text-align: center;
     width: 300px;
+}
+
+.font-card .card-button {
+    font-size: 12px;
+}
+
+.font-card .div {
+    height: 60px;
+    padding-bottom: 10px;
+}
+
+.font-card .input-container {
+    font-size: 12px;
+    padding-right: 30px;
+}
+
+.font-card .slider {
+    font-size: 12px;
+    padding-right: 30px;
+}
+
+.font-form {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+.font-form .type {
+    padding-right: 60px;
+}
+
+.font-page-body {
+    padding: 20px 20px 20px 20px;
+}
+
+.form-content {
+    border: none;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.header{
+    flex: 0 0 auto;
+    -webkit-user-select: none;
 }
 
 .md-toolbar-tools {
@@ -62,7 +119,12 @@ body {
 }
 
 .nav-selected {
-    background-color: green;
+    background-color: red;
+}
+
+.search-area {
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 .sideBar {
@@ -70,29 +132,42 @@ body {
     min-width: 200px;
 }
 
-.form-content {
-    border: none;
+.sideBar-space-padding {
+    padding-bottom: 50px
+}
+
+.single-font-view {
 }
 
 .validator-message {
     font-size: 12px;
 }
 
-#green-slider .md-thumb:after, #green-slider .md-track-fill{
-    background-color: green !important;
-    border-color: green !important;
+.white-background {
+    background-color: white;
 }
 
-#green-slider .md-focus-thumb, #green-slider .md-focus-ring{
-    background-color: green;
+.white-colored {
+    color: white;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+body {
+    background-color: white;
 }
 
 md-input-container:not(.md-input-invalid).md-input-focused .md-input {
-    border-color: green;
+    border-color: red;
 }
 
 md-input-container:not(.md-input-invalid).md-input-focused label {
-    color: green;
+    color: red;
 }
 
 md-input-container > md-select:not([disabled]):focus .md-select-label {
@@ -101,14 +176,18 @@ md-input-container > md-select:not([disabled]):focus .md-select-label {
 }
 
 md-select:not([disabled]):focus .md-select-value {
-    border-bottom-color: green;
+    border-bottom-color: red;
 }
 
 md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
-    color: green !important;
-    background-color:green !important;
+    color: red !important;
+    background-color:red !important;
 }
 
 md-tabs > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-active, md-tabs > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-active md-icon, md-tabs.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-active md-icon, md-tabs.md-default-theme.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-focused, md-tabs.md-default-theme.md-accent > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-focused md-icon {
-    color: green !important;
+    color: red !important;
+}
+
+ul {
+    list-style: none;
 }

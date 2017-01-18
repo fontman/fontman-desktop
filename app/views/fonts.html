@@ -2,8 +2,8 @@
 
     <div class="header">
 
-        <md-input-container flex="15" style="padding-bottom: 0; margin-bottom: 0">
-            <md-icon class="material-icons" style="color: green">&#xE8B6;</md-icon>
+        <md-input-container class="search-area" flex="15">
+            <md-icon class="material-icons">&#xE8B6;</md-icon>
             <input placeholder="Search fonts">
         </md-input-container>
 
@@ -16,19 +16,19 @@
 
     <md-divider></md-divider>
 
-    <div class="content" style="padding: 20px 20px 20px 20px;">
+    <div class="content font-page-body">
 
-        <ul style="list-style: none">
+        <ul>
 
             <li ng-repeat="font in fontsList" class="font-card" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
 
-                <div style="height: 60px; padding-bottom: 10px">
+                <div class="div">
 
                     <div layout="row" ng-show="hoverEdit">
 
-                        <md-input-container flex="40" style="padding-right: 30px; font-size: 12px">
+                        <md-input-container class="input-container" flex="40">
 
-                            <label style="color: white">ff</label>
+                            <label class="white-colored">ff</label>
 
                             <md-select ng-model="font.selectedFontface">
                                 <md-option ng-repeat="fontface in font.fontfaces" value="{{font.name}}-{{fontface.fontface}}">
@@ -38,9 +38,9 @@
 
                         </md-input-container>
 
-                        <md-slider-container flex style="padding-right: 30px; font-size: 12px">
+                        <md-slider-container class="slider">
 
-                            <md-slider id="green-slider" ng-model="bodyTextSize" step="1" min="10" max="100" aria-label="textSize" class="">
+                            <md-slider id="red-slider" ng-model="bodyTextSize" step="1" min="10" max="100" aria-label="textSize" class="">
                             </md-slider>
 
                             <span>{{bodyTextSize}}px</span>
@@ -54,7 +54,7 @@
 
                 <div>
 
-                    <div ng-style="{'color': {true: 'green'}[hoverEdit]}">
+                    <div ng-style="{'color': {true: 'red'}[hoverEdit]}">
 
                         <div ng-repeat="fontface in font.fontfaces">
 
@@ -64,7 +64,7 @@
 
                         </div>
 
-                        <p style="background-color: white; font-size: {{bodyTextSize}}px; text-align: center; font-family: {{font.selectedFontface}}">
+                        <p contentEditable class="editableText" style="font-size: {{bodyTextSize}}px; font-family: {{font.selectedFontface}}">
                             {{bodyText}}
                         </p>
 
@@ -74,15 +74,15 @@
 
                 <div layout="row" ng-show="hoverEdit">
 
-                    <md-button style="font-size: 12px">
+                    <md-button class="card-button">
                         SEE
                     </md-button>
 
-                    <md-button style="font-size: 12px">
+                    <md-button class="card-button">
                         TEST
                     </md-button>
 
-                    <md-button style="font-size: 12px">
+                    <md-button class="card-button">
                         INSTALL
                     </md-button>
 

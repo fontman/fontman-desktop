@@ -10,7 +10,7 @@ var fontsModule = angular.module("fontsModule", []);
 
 fontsModule
     .controller("fontsController", function ($http, $mdDialog, $scope, $timeout, fontSelectorService) {
-        $scope.bodyText = "aBc";
+        $scope.bodyText = "Fontman";
         $scope.bodyTextSize = 40;
         $scope.fontsList = null;
         $scope.selectedFont = null;

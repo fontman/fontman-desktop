@@ -6,11 +6,14 @@
  */
 
 var fontmanApp = angular.module("fontmanApp", [
+    "collectionsModule",
     "fontsModule",
+    "InlineTextEditor",
     "ngMaterial",
     "ngMaterialSidemenu",
     "ngMessages",
     "ngRoute",
+    "ngSanitize",
     "ui.validate"
 ]);
 
@@ -23,9 +26,9 @@ fontmanApp
                 templateUrl: "views/fonts.html",
                 controller: "fontsController"
             })
-            .when("/bucket", {
-                templateUrl: "views/font-bucket.html",
-                controller: "fontBucketController"
+            .when("/collections", {
+                templateUrl: "views/collections.html",
+                controller: "collectionsController"
             })
             .when("/comparison", {
                 templateUrl: "views/compare.html",
