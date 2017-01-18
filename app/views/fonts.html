@@ -2,14 +2,11 @@
 
     <div class="header">
 
-        <md-input-container class="search-area" flex="15">
-            <md-icon class="material-icons">&#xE8B6;</md-icon>
-            <input placeholder="Search fonts">
-        </md-input-container>
+        <md-input-container class="md-block">
 
-        <md-input-container style="padding-bottom: 0; padding-left: 20px; margin-bottom: 0">
             <label></label>
-            <input ng-model="bodyText">
+            <input name="fontText" ng-model="selectedFont.defaultText">
+
         </md-input-container>
 
     </div>
@@ -40,15 +37,14 @@
 
                         <md-slider-container class="slider">
 
-                            <md-slider id="red-slider" ng-model="bodyTextSize" step="1" min="10" max="100" aria-label="textSize" class="">
+                            <md-slider id="red-slider" ng-model="font.defaultTextSize" step="1" min="10" max="100" aria-label="textSize" class="">
                             </md-slider>
 
-                            <span>{{bodyTextSize}}px</span>
+                            <span>{{font.defaultTextSize}}px</span>
 
                         </md-slider-container>
 
                     </div>
-
 
                 </div>
 
@@ -64,8 +60,8 @@
 
                         </div>
 
-                        <p contentEditable class="editableText" style="font-size: {{bodyTextSize}}px; font-family: {{font.selectedFontface}}">
-                            {{bodyText}}
+                        <p contentEditable class="editableText" style="font-size: {{font.defaultTextSize}}px; font-family: {{font.selectedFontface}}">
+                            {{font.defaultText}}
                         </p>
 
                     </div>
@@ -88,12 +84,10 @@
 
                 </div>
 
-
             </li>
 
         </ul>
 
     </div>
-
 
 </div>

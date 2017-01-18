@@ -9,11 +9,11 @@ var fontsModule = angular.module("fontsModule", []);
 
 
 fontsModule
-    .controller("fontsController", function ($http, $mdDialog, $scope, $timeout, fontSelectorService) {
-        $scope.bodyText = "Fontman";
-        $scope.bodyTextSize = 40;
+    .controller("fontsController", function ($http, $mdDialog, $scope, $timeout, fontBucketService, fontSelectorService) {
         $scope.fontsList = null;
-        $scope.selectedFont = null;
+        $scope.selectedFont = {};
+        $scope.selectedFont.defaultText = "Fontman";
+        $scope.selectedFont.defaultTextSize = 40;
 
         // set selected font data
         $scope.selectFont = function (font) {
@@ -32,36 +32,8 @@ fontsModule
                 })
         };
 
-        // get fontfaces list and assign it to font.fontfaces
-        var getFontfacesList = function (font) {
-            $http.get("http://127.0.0.1:5000/fontfaces/?font_id=" + font.font_id)
-                .then(function onSuccess(response) {
-                    font.fontfaces = response.data;
-                    setRegularFont(font);
-                })
-                .catch(function onError(response) {
-                    alert("FMS connection failed!");
-                });
-
-        };
-
-        // set regular font as default font
-        var setRegularFont = function (font) {
-            angular.forEach(font.fontfaces, function (fontface) {
-                if((fontface.fontface).toLowerCase().includes('regular')) {
-                    font.selectedFontface = font.name + "-" + fontface.fontface;
-                }
-            })
-        };
-
         getFontsList();
-
-        $timeout(function () {
-            angular.forEach($scope.fontsList, function (font) {
-                getFontfacesList(font);
-            });
-
-        });
+        
 
         /* option display on mouse hover */
         $scope.hoverIn = function () {
@@ -71,12 +43,6 @@ fontsModule
         $scope.hoverOut = function () {
             this.hoverEdit = false;
         };
-    });
-
-
-fontsModule
-    .controller("fontBucketController", function ($http, $mdDialog, $scope, $timeout, fontBucketService) {
-
     });
 
 

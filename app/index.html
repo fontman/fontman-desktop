@@ -22,19 +22,27 @@
 
             <md-sidemenu locked="true">
 
+                <div class="search-area">
+
+                    <md-input-container flex="80">
+                        <input placeholder="Search">
+                    </md-input-container>
+
+                </div>
+
                 <div class="sideBar-space-padding"></div>
 
                 <md-sidemenu-group>
 
-                    <md-sidemenu-button href="#/" ng-click="setSelectedNavIndex(0)" ng-style="{'color': {true: 'red'}[selectedNavIndex===0]}">
+                    <md-sidemenu-button href="#/" ng-class="{'nav-selected':selectedNavIndex==0}" ng-click="setSelectedNavIndex(0)">
                         FONTS
                     </md-sidemenu-button>
 
-                    <md-sidemenu-button href="#/collections" ng-click="setSelectedNavIndex(1)" ng-style="{'color': {true: 'red'}[selectedNavIndex===1]}">
+                    <md-sidemenu-button href="#/collections" ng-class="{'nav-selected':selectedNavIndex==1}" ng-click="setSelectedNavIndex(1)">
                         COLLECTIONS
                     </md-sidemenu-button>
 
-                    <md-sidemenu-button href="#/comparison" ng-click="setSelectedNavIndex(2)" ng-style="{'color': {true: 'red'}[selectedNavIndex===2]}">
+                    <md-sidemenu-button href="#/comparison" ng-class="{'nav-selected':selectedNavIndex==2}" ng-click="setSelectedNavIndex(2)">
                         TEST/COMPARE
                     </md-sidemenu-button>
 
@@ -51,8 +59,6 @@
                     <md-sidemenu-button ng-if="authStatus===false" ng-click="loginDialog($event)">
                         SIGN IN
                     </md-sidemenu-button>
-
-
 
                     <md-sidemenu-content md-heading="{{fontmanUser}}" md-arrow="true" ng-if="authStatus===true">
 
@@ -76,7 +82,7 @@
                         SHARE
                     </md-sidemenu-button>
 
-                    <md-sidemenu-button>
+                    <md-sidemenu-button href="#">
                         FUND
                     </md-sidemenu-button>
 
@@ -89,7 +95,6 @@
             </md-sidemenu>
 
         </div>
-
 
         <div layout="column">
 

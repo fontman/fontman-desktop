@@ -4,7 +4,7 @@
                 <h2>My Fonts</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon aria-label="Close dialog" class="close-dialog-box">close</md-icon>
+                    <md-icon aria-label="Close dialog" class="close-dialog-icon">close</md-icon>
                 </md-button>
             </div>
         </md-toolbar>
@@ -113,15 +113,15 @@
         <md-progress-circular class="md-accent" md-diameter="40" ng-if="inProgress"></md-progress-circular>
         <span flex></span>
 
-        <md-button class="md-raised" ng-click="cancel()" ng-if="!formButtons">
+        <md-button ng-click="cancel()" ng-if="!formButtons">
             CLOSE
         </md-button>
 
-        <md-button class="md-raised" ng-click="clearFields()" ng-if="formButtons">
+        <md-button ng-click="clearFields()" ng-if="formButtons">
             CLEAR
         </md-button>
 
-        <md-button class="md-raised" ng-click="addNewFont()" ng-disabled="newFontForm.$invalid" ng-if="formButtons">
+        <md-button ng-click="addNewFont()" ng-disabled="newFontForm.$invalid" ng-if="formButtons">
             ADD
         </md-button>
 
