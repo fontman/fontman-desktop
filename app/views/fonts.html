@@ -27,7 +27,7 @@
 
         <ul>
 
-            <li ng-repeat="font in fontBucket" class="font-card" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
+            <li class="font-card" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontBucket">
 
                 <div class="div">
 
@@ -89,7 +89,7 @@
 
             </li>
 
-            <li ng-repeat="font in fontsList" class="font-card" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
+            <li class="font-card" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontsList">
 
                 <div class="div">
 
@@ -116,7 +116,6 @@
                         <md-icon class="bucket-button" ng-click="removeFromBucket(font)" ng-if="font.chosen">
                             remove_circle
                         </md-icon>
-
 
                     </div>
 

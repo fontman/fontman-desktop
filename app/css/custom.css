@@ -33,12 +33,45 @@
     cursor: pointer;
 }
 
+.bucket-card {
+    cursor: pointer;
+    float: left;
+    height: 100px;
+    padding-left: 20px;
+    width: 100px;
+}
+
+.bucket-card .bucketed-text {
+    bottom: 5px;
+    text-align: center;
+}
+
+.bucket-list-bar {
+    height: 140px;
+    overflow-y: auto;
+    padding: 20px 20px 20px 20px;
+    -webkit-user-select: none;
+}
+
 .bucketed-text {
     color: red;
 }
 
 .close-dialog-icon {
     color: #6f6f6f !important;
+}
+
+.comparison-body {
+    flex: 0 0 auto;
+    -webkit-user-select: none;
+}
+
+.comparison-body .padding{
+    padding-right: 40px;
+}
+
+.comparison-body .body-padding{
+    padding-bottom: 30px;
 }
 
 .content{

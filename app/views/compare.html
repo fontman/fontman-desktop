@@ -1,1 +1,72 @@
-Compare
+<div class="wrapper" ng-controller="comparisonController">
+
+    <div class="bucket-list-bar">
+
+        <ul>
+
+            <li class="bucket-card" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontBucket">
+
+                <div>
+
+                    <div>
+
+                        <div ng-repeat="fontface in font.fontfaces">
+
+                            <style scoped>
+                                @font-face {font-family:"{{font.name}}-{{fontface.fontface}}"; src: url({{fontface.resource_path}}) format("opentype");}
+                            </style>
+
+                        </div>
+
+                        <p class="bucketed-text" style="font-size: {{font.defaultTextSize}}px; font-family: {{font.selectedFontface}}">
+                            {{font.defaultText}}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div class="comparison-body" layout="row">
+
+        <div class="padding" flex="50">
+
+            <h1 class="body-padding" contentEditable>
+                {{mainTitle}}
+            </h1>
+
+            <h3 class="body-padding" contentEditable>
+                {{subTitle}}
+            </h3>
+
+            <p contentEditable>
+                {{textBody}}
+            </p>
+
+        </div>
+
+        <div class="padding" flex="50">
+
+            <h1 class="body-padding" contentEditable>
+                {{mainTitle}}
+            </h1>
+
+            <h3 class="body-padding" contentEditable>
+                {{subTitle}}
+            </h3>
+
+            <p contentEditable>
+                {{textBody}}
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+

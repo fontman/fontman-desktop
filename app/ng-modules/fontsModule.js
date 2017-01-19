@@ -9,7 +9,7 @@ var fontsModule = angular.module("fontsModule", []);
 
 
 fontsModule
-    .controller("fontsController", function ($filter, $http, $mdDialog, $scope, $timeout, fontSelectorService) {
+    .controller("fontsController", function ($http, $mdDialog, $scope, $timeout, fontSelectorService) {
         $scope.fontsList = null;
         $scope.fontBucket = null;
         $scope.selectedFont = {};
@@ -123,5 +123,33 @@ fontsModule
 
 fontsModule
     .controller("comparisonController", function ($http, $mdDialog, $scope, $timeout) {
-        
+        $scope.fontBucket = null;
+        $scope.mainTitle = "maintitle";
+        $scope.subTitle = "subtitle";
+        $scope.textBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus ex, maximus vel dignissim et, auctor et lectus. Integer aliquet quam augue, eget venenatis ante fermentum in. Integer semper cursus nisi, non mattis ipsum pellentesque id. Donec auctor eros eu nunc vehicula posuere. Vivamus pharetra pulvinar molestie. Phasellus ullamcorper dui pretium, faucibus leo vel, hendrerit nisi. Etiam sed condimentum metus, quis vehicula nisl. Suspendisse sodales est lorem, eget luctus nisi egestas nec. Pellentesque rhoncus mi sed purus malesuada, quis laoreet lorem molestie. Sed nec purus elit. Nullam ut tortor congue, feugiat eros hendrerit, feugiat turpis.";
+
+        // get font bucket list
+        var getFontBucket = function () {
+            $http.get("http://127.0.0.1:5000/fonts/?" + "is_chosen=true")
+                .then(function onSuccess(response) {
+                    $scope.fontBucket = response.data;
+                })
+                .catch(function onError(response) {
+                    return {"error": "FMS connection failed"}
+                });
+        };
+
+
+        /* option display on mouse hover */
+        $scope.hoverIn = function () {
+            this.hoverEdit = true;
+        };
+
+        $scope.hoverOut = function () {
+            this.hoverEdit = false;
+        };
+
+        $timeout(function () {
+            getFontBucket();
+        }, 300);
     });
