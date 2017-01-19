@@ -2,12 +2,22 @@
 
     <div class="header">
 
-        <md-input-container class="md-block">
+        <div ng-show="false" layout="column" style="height: 100px;">
 
-            <label></label>
-            <input name="fontText" ng-model="selectedFont.defaultText">
+            <md-input-container>
+                <label></label>
+                <input name="fontText" ng-model="selectedFont.defaultText">
+            </md-input-container>
 
-        </md-input-container>
+            <md-input-container>
+                <input flex="" type="number" ng-model="selectedFont.defaultTextSize" aria-label="red" aria-controls="red-slider">
+            </md-input-container>
+
+            <md-button class="card-button">
+                APPLY TO ALL
+            </md-button>
+
+        </div>
 
     </div>
 
@@ -17,14 +27,13 @@
 
         <ul>
 
-            <li ng-repeat="font in fontsList" class="font-card" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
+            <li ng-repeat="font in fontBucket" class="font-card" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
 
                 <div class="div">
 
                     <div layout="row" ng-show="hoverEdit">
 
                         <md-input-container class="input-container" flex="40">
-
                             <label class="white-colored">ff</label>
 
                             <md-select ng-model="font.selectedFontface">
@@ -32,17 +41,82 @@
                                     {{fontface.fontface}}
                                 </md-option>
                             </md-select>
-
                         </md-input-container>
 
-                        <md-slider-container class="slider">
+                        <md-input-container>
+                            <input flex="30" type="number" ng-model="font.defaultTextSize" aria-label="red" aria-controls="red-slider">
+                        </md-input-container>
 
-                            <md-slider id="red-slider" ng-model="font.defaultTextSize" step="1" min="10" max="100" aria-label="textSize" class="">
-                            </md-slider>
+                    </div>
 
-                            <span>{{font.defaultTextSize}}px</span>
+                </div>
 
-                        </md-slider-container>
+                <div>
+
+                    <div ng-style="{'color': {true: 'red'}[hoverEdit]}">
+
+                        <div ng-repeat="fontface in font.fontfaces">
+
+                            <style scoped>
+                                @font-face {font-family:"{{font.name}}-{{fontface.fontface}}"; src: url({{fontface.resource_path}}) format("opentype");}
+                            </style>
+
+                        </div>
+
+                        <p class="bucketed-text" style="font-size: {{font.defaultTextSize}}px; font-family: {{font.selectedFontface}}">
+                            {{font.defaultText}}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div layout="row" ng-show="hoverEdit">
+
+                    <md-button class="card-button">
+                        SEE
+                    </md-button>
+
+                    <md-button class="card-button">
+                        TEST
+                    </md-button>
+
+                    <md-button class="card-button">
+                        INSTALL
+                    </md-button>
+
+                </div>
+
+            </li>
+
+            <li ng-repeat="font in fontsList" class="font-card" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
+
+                <div class="div">
+
+                    <div layout="row" ng-show="hoverEdit">
+
+                        <md-input-container class="input-container" flex="40">
+                            <label class="white-colored">ff</label>
+
+                            <md-select ng-model="font.selectedFontface">
+                                <md-option ng-repeat="fontface in font.fontfaces" value="{{font.name}}-{{fontface.fontface}}">
+                                    {{fontface.fontface}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container>
+                            <input flex="30" type="number" ng-model="font.defaultTextSize" aria-label="red" aria-controls="red-slider">
+                        </md-input-container>
+
+                        <md-icon class="bucket-button" ng-click="addToBucket(font)" ng-if="!font.chosen">
+                            add_circle
+                        </md-icon>
+
+                        <md-icon class="bucket-button" ng-click="removeFromBucket(font)" ng-if="font.chosen">
+                            remove_circle
+                        </md-icon>
+
 
                     </div>
 

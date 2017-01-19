@@ -322,27 +322,3 @@ fontmanApp
             }
         }
     });
-
-
-fontmanApp
-    .service("fontBucketService", function () {
-        var fontBucket = [];
-
-        return {
-            addToBucket: function (font) {
-                fontBucket = fontBucket.concat(font);
-            },
-
-            flushBucket: function () {
-                fontBucket = [];
-            },
-
-            getBucket: function () {
-                return fontBucket;
-            },
-
-            removeFromBucket: function (font) {
-                fontBucket.splice(fontBucket.indexOf(font), 1);
-            }
-        }
-    });

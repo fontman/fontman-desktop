@@ -9,9 +9,14 @@
     box-sizing: border-box;
 }
 
+*:focus {
+    outline: 0 !important;
+}
+
 #red-slider .md-thumb:after, #red-slider .md-track-fill{
     background-color: red !important;
     border-color: red !important;
+    padding-top: 1px !important;
 }
 
 #red-slider .md-focus-thumb, #red-slider .md-focus-ring{
@@ -21,6 +26,15 @@
 .auth-dialog {
     min-width: 600px;
     -webkit-user-select: none;
+}
+
+.bucket-button {
+    color: red !important;
+    cursor: pointer;
+}
+
+.bucketed-text {
+    color: red;
 }
 
 .close-dialog-icon {
@@ -140,6 +154,10 @@
 }
 
 .single-font-view {
+}
+
+.slider-label {
+    font-size: 12px;
 }
 
 .validator-message {
