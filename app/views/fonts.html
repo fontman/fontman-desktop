@@ -37,14 +37,14 @@
                             <label class="white-colored">ff</label>
 
                             <md-select ng-model="font.selectedFontface">
-                                <md-option ng-repeat="fontface in font.fontfaces" value="{{font.name}}-{{fontface.fontface}}">
+                                <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
                                     {{fontface.fontface}}
                                 </md-option>
                             </md-select>
                         </md-input-container>
 
                         <md-input-container>
-                            <input flex="30" type="number" ng-model="font.defaultTextSize" aria-label="red" aria-controls="red-slider">
+                            <input flex="30" type="number" ng-model="font.defaultTextSize" aria-label="red">
                         </md-input-container>
 
                     </div>
@@ -63,7 +63,7 @@
 
                         </div>
 
-                        <p class="bucketed-text" style="font-size: {{font.defaultTextSize}}px; font-family: {{font.selectedFontface}}">
+                        <p class="bucketed-text" style="font-size: {{font.defaultTextSize}}px; font-family: {{font.name}}-{{font.selectedFontface}}">
                             {{font.defaultText}}
                         </p>
 
@@ -99,7 +99,7 @@
                             <label class="white-colored">ff</label>
 
                             <md-select ng-model="font.selectedFontface">
-                                <md-option ng-repeat="fontface in font.fontfaces" value="{{font.name}}-{{fontface.fontface}}">
+                                <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
                                     {{fontface.fontface}}
                                 </md-option>
                             </md-select>
@@ -133,7 +133,7 @@
 
                         </div>
 
-                        <p contentEditable class="editableText" style="font-size: {{font.defaultTextSize}}px; font-family: {{font.selectedFontface}}">
+                        <p contentEditable style="font-size: {{font.defaultTextSize}}px; font-family: {{font.name}}-{{font.selectedFontface}}">
                             {{font.defaultText}}
                         </p>
 

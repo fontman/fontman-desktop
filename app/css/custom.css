@@ -47,9 +47,9 @@
 }
 
 .bucket-list-bar {
-    height: 140px;
+    height: 150px;
     overflow-y: auto;
-    padding: 20px 20px 20px 20px;
+    padding: 30px 20px 0 20px;
     -webkit-user-select: none;
 }
 
@@ -63,6 +63,7 @@
 
 .comparison-body {
     flex: 0 0 auto;
+    padding-left: 30px;
     -webkit-user-select: none;
 }
 
@@ -70,8 +71,13 @@
     padding-right: 40px;
 }
 
-.comparison-body .body-padding{
-    padding-bottom: 30px;
+.comparison-controllers {
+    font-size: 12px;
+    padding: 0 10px 10px 10px;
+}
+
+.comparison-controllers .padding {
+    padding-right: 20px;
 }
 
 .content{
@@ -231,6 +237,11 @@ md-input-container > md-select:not([disabled]):focus .md-select-label {
 
 md-select:not([disabled]):focus .md-select-value {
     border-bottom-color: red;
+    font-size: 12px !important;
+}
+
+md-select .md-select-value {
+    font-size: 12px !important;
 }
 
 md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
