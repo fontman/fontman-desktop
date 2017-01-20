@@ -15,6 +15,48 @@ fontsModule
         $scope.selectedFont = {};
         $scope.selectedFont.defaultText = "Fontman";
         $scope.selectedFont.defaultTextSize = 40;
+        
+        
+        // font installation
+        var fontInstallerController = function ($http, $mdDialog, $scope, font_id) {
+            $scope.font_id = font_id;
+            $scope.fontInfo = undefined;
+            $scope.inProgress = false;
+            $scope.relInfo = undefined;
+            $scope.selectedReleaseId = undefined;
+            
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+
+            $scope.installFont = function () {
+                $scope.inProgress = true;
+
+                $http.get("http://127.0.0.1:5000/fonts/" + $scope.font_id + "/install/" + $scope.selectedReleaseId)
+                    .then(function onSucess(response) {
+                        if (response.data) {
+                            $scope.inProgress = false;
+                            $mdDialog.cancel();
+                        } else {
+                            alert(response.data.error);
+                        }
+                    })
+                    .catch(function onError() {
+                        $scope.inProgress = false;
+                    })
+            };
+
+            $http.get("http://127.0.0.1:5000/fonts/" + $scope.font_id)
+                .then(function onSuccess(response) {
+                    $scope.fontInfo = response.data;
+                });
+
+            $http.get("http://127.0.0.1:5000/fonts/" + $scope.font_id + "/releases")
+                .then(function onSuccess(response) {
+                    $scope.relInfo = response.data;
+                });
+
+        };
 
         // get font bucket list
         var getFontBucket = function () {
@@ -80,6 +122,23 @@ fontsModule
 
         $scope.hoverOut = function () {
             this.hoverEdit = false;
+        };
+
+        // font installer dialog
+        $scope.showFontInstaller = function (ev, font_id) {
+            $mdDialog.show({
+                controller: fontInstallerController,
+                templateUrl: "ng-modules/ng-templates/install_font.html",
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: $scope.customFullscreen,
+                locals : {
+                    font_id: font_id
+                }
+            })
+                .then(function () {
+                })
         };
 
         // remove from temp choices

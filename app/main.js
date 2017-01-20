@@ -18,22 +18,8 @@ let appIcon = null;
 
 function createWindow () {
 
-  // set tray icon
-  appIcon = new Tray("images/fontman.png");
-
-  var contextMenu = Menu.buildFromTemplate([
-    { label: 'Item1', type: 'radio' },
-    { label: 'Item2', type: 'radio' },
-    { label: 'Item3', type: 'radio', checked: true },
-    { label: 'Item4', type: 'radio' }
-  ]);
-
-  appIcon.setToolTip('Fontman');
-  appIcon.setContextMenu(contextMenu);
-  appIcon.setHighlightMode("selection");
-
   // Create the browser window.
-  mainWindow = new BrowserWindow({titleBarStyle: 'hidden', width: 1600, height: 850, webPreferences: {"nodeIntegration": false}});
+  mainWindow = new BrowserWindow({icon: 'images/fontman.ico', titleBarStyle: 'hidden', width: 1600, height: 850, webPreferences: {"nodeIntegration": false}});
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({

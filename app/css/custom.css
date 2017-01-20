@@ -149,6 +149,10 @@
     padding-right: 60px;
 }
 
+.font-installer-form {
+    padding: 20px 100px 20px 40px;
+}
+
 .font-page-body {
     padding: 20px 20px 20px 20px;
 }
@@ -180,7 +184,9 @@
 }
 
 .search-area {
-    padding: 10px 10px 10px 10px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
 }
 
 .sideBar {
@@ -190,6 +196,10 @@
 
 .sideBar-space-padding {
     padding-bottom: 50px
+}
+
+.sideBar-space-padding-empty {
+    padding-bottom: 74px
 }
 
 .single-font-view {

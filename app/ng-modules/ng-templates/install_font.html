@@ -1,0 +1,46 @@
+<md-dialog aria-label="installFont" class="auth-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools" >
+            <h2>Install Font</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog" class="close-dialog-icon">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+
+        <div class="font-installer-form" layout="row">
+
+            <md-input-container>
+                <h3>{{fontInfo.name}}</h3>
+            </md-input-container>
+
+            <span flex></span>
+
+            <md-input-container class="input-container">
+                <label>version</label>
+
+                <md-select flex="100" ng-model="selectedReleaseId">
+                    <md-option ng-repeat="release in relInfo" ng-value="release.id">
+                        {{release.tag_name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+        </div>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-progress-circular class="md-accent" md-diameter="40" ng-if="inProgress"></md-progress-circular>
+        <span flex></span>
+
+        <md-button ng-click="installFont()">
+            INSTALL
+        </md-button>
+
+    </md-dialog-actions>
+
+</md-dialog>

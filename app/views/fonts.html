@@ -2,20 +2,10 @@
 
     <div class="header">
 
-        <div ng-show="false" layout="column" style="height: 100px;">
-
-            <md-input-container>
-                <label></label>
-                <input name="fontText" ng-model="selectedFont.defaultText">
+        <div class="search-area">
+            <md-input-container flex="80">
+                <input ng-model="searchText" placeholder="Search">
             </md-input-container>
-
-            <md-input-container>
-                <input flex="" type="number" ng-model="selectedFont.defaultTextSize" aria-label="red" aria-controls="red-slider">
-            </md-input-container>
-
-            <md-button class="card-button">
-                APPLY TO ALL
-            </md-button>
 
         </div>
 
@@ -81,7 +71,11 @@
                         TEST
                     </md-button>
 
-                    <md-button class="card-button">
+                    <md-button class="card-button" ng-show="font.is_installed">
+                        REINSTALL
+                    </md-button>
+
+                    <md-button class="card-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="!font.is_installed">
                         INSTALL
                     </md-button>
 
@@ -89,7 +83,7 @@
 
             </li>
 
-            <li class="font-card" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontsList">
+            <li class="font-card" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontsList | filter:searchText">
 
                 <div class="div">
 
@@ -151,7 +145,11 @@
                         TEST
                     </md-button>
 
-                    <md-button class="card-button">
+                    <md-button class="card-button" ng-show="font.is_installed">
+                        REINSTALL
+                    </md-button>
+
+                    <md-button class="card-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="!font.is_installed">
                         INSTALL
                     </md-button>
 

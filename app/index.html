@@ -20,17 +20,12 @@
 
         <div class="sideBar" layout="column" ng-controller="mainController">
 
+            <span class="sideBar-space-padding-empty">
+                <md-input-container>
+                </md-input-container>
+            </span>
+
             <md-sidemenu locked="true">
-
-                <div class="search-area">
-
-                    <md-input-container flex="80">
-                        <input placeholder="Search">
-                    </md-input-container>
-
-                </div>
-
-                <div class="sideBar-space-padding"></div>
 
                 <md-sidemenu-group>
 
@@ -75,19 +70,11 @@
                 <md-sidemenu-group>
 
                     <md-sidemenu-button  ng-click="myFontsDialog($event)" ng-if="authStatus===true">
-                        MY TYPE CASE
-                    </md-sidemenu-button>
-
-                    <md-sidemenu-button href="#">
-                        SHARE
+                        MY TYPECASE
                     </md-sidemenu-button>
 
                     <md-sidemenu-button href="#">
                         FUND
-                    </md-sidemenu-button>
-
-                    <md-sidemenu-button href="#">
-                        MORE FROM LIBRE
                     </md-sidemenu-button>
 
                 </md-sidemenu-group>
