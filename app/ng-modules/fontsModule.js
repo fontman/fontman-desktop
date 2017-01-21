@@ -21,6 +21,8 @@ fontsModule
         var fontInstallerController = function ($http, $mdDialog, $scope, font_id) {
             $scope.font_id = font_id;
             $scope.fontInfo = undefined;
+            $scope.error = false;
+            $scope.errorMsg = "";
             $scope.inProgress = false;
             $scope.relInfo = undefined;
             $scope.selectedReleaseId = undefined;
@@ -36,14 +38,32 @@ fontsModule
                     .then(function onSucess(response) {
                         if (response.data) {
                             $scope.inProgress = false;
-                            $mdDialog.cancel();
                         } else {
+                            $scope.inProgress = false;
+                            $scope.error = true;
+                            $scope.errorMsg = response.data.error;
+                        }
+                    })
+                    .catch(function onError() {
+                        $scope.inProgress = false;
+                    });
+            };
+
+            $scope.reinstallFont = function () {
+                $scope.inProgress = true;
+
+                $http.get("http://127.0.0.1:5000/fonts/" + $scope.font_id + "/reinstall/" + $scope.selectedReleaseId)
+                    .then(function onSucess(response) {
+                        if (response.data) {
+                            $scope.inProgress = false;
+                        } else {
+                            $scope.inProgress = false;
                             alert(response.data.error);
                         }
                     })
                     .catch(function onError() {
                         $scope.inProgress = false;
-                    })
+                    });
             };
 
             $http.get("http://127.0.0.1:5000/fonts/" + $scope.font_id)
@@ -138,6 +158,8 @@ fontsModule
                 }
             })
                 .then(function () {
+                    getFontBucket();
+                    getFontsList();
                 })
         };
 

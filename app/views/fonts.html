@@ -71,7 +71,7 @@
                         TEST
                     </md-button>
 
-                    <md-button class="card-button" ng-show="font.is_installed">
+                    <md-button class="card-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="font.is_installed">
                         REINSTALL
                     </md-button>
 
@@ -145,7 +145,7 @@
                         TEST
                     </md-button>
 
-                    <md-button class="card-button" ng-show="font.is_installed">
+                    <md-button class="card-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="font.is_installed">
                         REINSTALL
                     </md-button>
 

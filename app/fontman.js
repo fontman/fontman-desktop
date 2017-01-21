@@ -139,14 +139,17 @@ fontmanApp
 
                 $http.post("http://127.0.0.1:5000/auth/login", $scope.loginData)
                     .then(function onSuccess(response) {
-                        if(response.data === true) {
+                        if(response.data) {
+                            $scope.inProgress = false;
                             $mdDialog.hide();
                         } else {
                             alert(response.data.error);
+                            $scope.inProgress = false;
                         }
                     })
                     .catch(function onError() {
-                        alert("FMS connection failed!")
+                        $scope.inProgress = false;
+                        alert("FMS connection failed!");
                     });
 
                 $scope.inProgress = false;
@@ -193,10 +196,12 @@ fontmanApp
                             $scope.inProgress = false;
                             setSelectedIndexToZero();
                         } else {
+                            $scope.inProgress = false;
                             alert(response.data.error);
                         }
                     })
                     .catch(function onError() {
+                        $scope.inProgress = false;
                         alert("FMS connection failed!")
                     });
             };
@@ -264,12 +269,15 @@ fontmanApp
                 $http.post("http://127.0.0.1:5000/auth/new/profile", $scope.profileData)
                     .then(function onSuccess(response) {
                         if(response.data === true) {
+                            $scope.inProgress = false;
                             $mdDialog.hide();
                         } else {
+                            $scope.inProgress = false;
                             alert(response.data.error);
                         }
                     })
                     .catch(function onError() {
+                        $scope.inProgress = false;
                         alert("FMS connection failed!")
                     });
 

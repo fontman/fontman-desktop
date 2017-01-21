@@ -31,14 +31,24 @@
 
         </div>
 
+        <md-input-container ng-show="error">
+            <p>
+                {{errorMsg}}
+            </p>
+        </md-input-container>
+
     </md-dialog-content>
 
     <md-dialog-actions layout="row">
         <md-progress-circular class="md-accent" md-diameter="40" ng-if="inProgress"></md-progress-circular>
         <span flex></span>
 
-        <md-button ng-click="installFont()">
+        <md-button ng-show="!fontInfo.is_installed" ng-click="installFont()">
             INSTALL
+        </md-button>
+
+        <md-button ng-show="fontInfo.is_installed" ng-click="reinstallFont()">
+            REINSTALL
         </md-button>
 
     </md-dialog-actions>
