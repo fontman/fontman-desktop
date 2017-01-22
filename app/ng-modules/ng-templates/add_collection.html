@@ -1,0 +1,53 @@
+<md-dialog aria-label="addCollection">
+
+    <form name="addCollectionForm">
+
+        <md-toolbar>
+            <div class="md-toolbar-tools" >
+                <h2>Add New Collection</h2>
+                <span flex></span>
+
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close dialog" class="close-dialog-icon ">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+
+            <div class="md-dialog-content">
+
+                <md-input-container class="md-block">
+                    <label>Name</label>
+                    <input required="" name="name" ng-model="newCollection.name">
+                    <div ng-messages="addCollectionForm.name.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex="50" >
+                    <label>Type</label>
+                    <md-select ng-model="newCollection.type">
+                        <md-option ng-repeat="type in types" value="{{type}}">
+                            {{type}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+            </div>
+
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-progress-circular class="md-accent" md-diameter="40" ng-if="inProgress"></md-progress-circular>
+            <span flex></span>
+
+            <md-button ng-click="createCollection()" ng-disabled="addCollectionForm.$invalid">
+                ADD
+            </md-button>
+
+        </md-dialog-actions>
+
+    </form>
+
+</md-dialog>

@@ -77,7 +77,7 @@ fontmanApp
         $scope.logout = function (ev) {
             var confirm = $mdDialog.confirm()
                 .title("Logout?")
-                .textContent("You won't be able to use collaboration tools and my fonts service after logging out.")
+                .textContent("You won't be able to use collaboration tools and typecase features after logging out.")
                 .ariaLabel('logoutPrompt')
                 .targetEvent(ev)
                 .ok("Logout")

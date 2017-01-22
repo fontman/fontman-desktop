@@ -1,0 +1,63 @@
+<div class="wrapper" ng-controller="collectionsController">
+
+    <div class="content collections-body">
+
+        <ul>
+
+            <li class="collection-card">
+
+                <md-card>
+
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Add new collection</span>
+                            <span class="md-subhead">Keep your choices standby</span>
+                        </md-card-title-text>
+
+                        <md-card-title-media>
+                        </md-card-title-media>
+                    </md-card-title>
+
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="addCollectionDialog($event)">
+                            ADD NEW
+                        </md-button>
+                    </md-card-actions>
+                </md-card>
+
+            </li>
+
+
+            <li class="collection-card" ng-repeat="collection in collectionsList">
+
+                <md-card>
+
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{collection.name}}</span>
+                            <span class="md-subhead">{{collection.type}}</span>
+                        </md-card-title-text>
+
+                        <md-card-title-media>
+
+                        </md-card-title-media>
+                    </md-card-title>
+
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button>
+                            SEE
+                        </md-button>
+                        <md-button>
+                            OPTIONS
+                        </md-button>
+                    </md-card-actions>
+
+                </md-card>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+</div>

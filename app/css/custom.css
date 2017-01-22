@@ -61,6 +61,16 @@
     color: #6f6f6f !important;
 }
 
+.collections-body {
+    padding:40px 40px 40px 40px;
+}
+
+.collection-card {
+    float: left;
+    height: 180px;
+    width: 300px;
+}
+
 .comparison-body {
     flex: 0 0 auto;
     padding-left: 30px;
