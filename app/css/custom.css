@@ -71,6 +71,11 @@
     width: 300px;
 }
 
+.collection-page-body {
+    padding: 40px 40px 40px 40px;
+    min-width: 600px;
+}
+
 .comparison-body {
     flex: 0 0 auto;
     padding-left: 30px;
@@ -87,7 +92,8 @@
 }
 
 .comparison-controllers .padding {
-    padding-right: 20px;
+    padding: 40px 40px 40px 40px;
+    width: 100%;
 }
 
 .content{
@@ -150,6 +156,7 @@
 }
 
 .font-form {
+    background-color: white;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 20px;

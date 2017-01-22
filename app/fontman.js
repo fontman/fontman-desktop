@@ -14,6 +14,7 @@ var fontmanApp = angular.module("fontmanApp", [
     "ngMessages",
     "ngRoute",
     "ngSanitize",
+    "typecasesModule",
     "ui.validate"
 ]);
 
@@ -33,7 +34,12 @@ fontmanApp
             .when("/comparison", {
                 templateUrl: "views/compare.html",
                 controller: "comparisonController"
-            }).otherwise("/");
+            })
+            .when("/typecases", {
+                templateUrl: "views/typecases.html",
+                controller: "typecasesController"
+            })
+            .otherwise("/");
     });
 
 
@@ -97,21 +103,6 @@ fontmanApp
             })
         };
         
-        // display my fonts dialog box
-        $scope.myFontsDialog = function (ev) {
-            $mdDialog.show({
-                controller: myFontsController,
-                templateUrl: "ng-modules/ng-templates/my_fonts.html",
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true,
-                fullscreen: $scope.customFullscreen
-            })
-                .then(function () {
-                    getFontsList();
-                })
-        };
-        
         // set navigation index
         $scope.setSelectedNavIndex = function (index) {
             $scope.selectedNavIndex = index;
@@ -121,8 +112,8 @@ fontmanApp
         var loginController = function ($http, $mdDialog, $scope) {
             $scope.inProgress = false;
             $scope.loginData = {
-                email: "example@mail.com",
-                password: "Secret@123"
+                email: undefined,
+                password: undefined
             };
 
             $scope.cancel = function() {
@@ -154,92 +145,6 @@ fontmanApp
 
                 $scope.inProgress = false;
             };
-        };
-
-        // user fonts controller
-        var myFontsController = function ($http, $mdDialog, $scope) {
-            $scope.channelsList = undefined;
-            $scope.formButtons = false;
-            $scope.inProgress = false;
-            $scope.myFonts = undefined;
-            $scope.newFont = {
-                channel_id: undefined,
-                ghPagesBranch: undefined,
-                gitRepository: undefined,
-                ghPagesFontDir: undefined,
-                gitUser: undefined,
-                name: undefined,
-                type: "Public"
-            };
-            $scope.selectedIndex = 0;
-            $scope.types = [{"id": 1, "type": "Public"}];
-
-            $scope.cancel = function() {
-                $mdDialog.cancel();
-            };
-
-            $scope.clearFields = function () {
-                $scope.newFont.ghPagesBranch = undefined;
-                $scope.newFont.ghPagesFontDir = undefined;
-                $scope.newFont.gitRepository = undefined;
-                $scope.newFont.gitUser = undefined;
-                $scope.newFont.name = undefined;
-            };
-
-            $scope.addNewFont = function () {
-                $scope.inProgress = true;
-
-                $http.post("http://127.0.0.1:5000/fonts/new", $scope.newFont)
-                    .then(function onSuccess(response) {
-                        if (response.data === true) {
-                            refreshMyFontsList();
-                            $scope.inProgress = false;
-                            setSelectedIndexToZero();
-                        } else {
-                            $scope.inProgress = false;
-                            alert(response.data.error);
-                        }
-                    })
-                    .catch(function onError() {
-                        $scope.inProgress = false;
-                        alert("FMS connection failed!")
-                    });
-            };
-            
-            // set form button display boolean factor
-            $scope.onTabChange = function (value) {
-                $scope.formButtons = value;
-            };
-
-            // get my fonts list
-            var refreshMyFontsList = function () {
-                $http.get("http://127.0.0.1:5000/fonts/admin")
-                    .then(function onSuccess(response) {
-                        $scope.myFonts = response.data;
-                    })
-                    .catch(function onError() {
-                        alert("FMS connection failed!");
-                    })
-            };
-
-            // set channels list
-            var setChannelsList = function () {
-                $http.get("http://127.0.0.1:5000/channels")
-                    .then(function onSuccess(response) {
-                        $scope.channelsList = response.data;
-                        $scope.newFont.channel_id = $scope.channelsList[0].channel_id;
-                    })
-                    .catch(function () {
-                        alert("FMS connection failed!");
-                    })
-            };
-
-            var setSelectedIndexToZero = function () {
-                $scope.selectedIndex = 0;
-            };
-
-            refreshMyFontsList();
-            setChannelsList();
         };
 
         // profile creation dialog controller

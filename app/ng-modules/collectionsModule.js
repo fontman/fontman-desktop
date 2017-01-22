@@ -44,7 +44,7 @@ collectionsModule
             };
 
             $scope.cancel = function() {
-                $mdDialog.cancel();
+                $mdDialog.hide();
             };
 
             $scope.createCollection = function () {
@@ -62,7 +62,6 @@ collectionsModule
             };
 
         };
-
-
+        
         getCollectionsList();
     });

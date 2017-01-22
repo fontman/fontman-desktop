@@ -1,44 +1,25 @@
 <md-dialog aria-label="myFonts" class="auth-dialog">
-        <md-toolbar>
-            <div class="md-toolbar-tools" >
-                <h2>My Fonts</h2>
-                <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon aria-label="Close dialog" class="close-dialog-icon">close</md-icon>
-                </md-button>
-            </div>
-        </md-toolbar>
 
-    <md-dialog-content>
+    <form class="font-form" name="newFontForm" ng-cloak>
 
-        <md-tabs class="dialog-box-body" md-dynamic-height md-selected="selectedIndex">
+    <md-toolbar>
 
-            <md-tab label="MY FONTS" md-on-select="onTabChange(false)">
+        <div class="md-toolbar-tools" >
+            <h2>My Fonts</h2>
+            <span flex></span>
 
-                <md-list class="dialog-box-list">
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog" class="close-dialog-icon">close</md-icon>
+            </md-button>
+        </div>
 
-                    <md-list-item class="md3-line" ng-repeat="font in myFonts">
+    </md-toolbar>
 
-                        <div class="md-list-item-text">
+        <md-dialog-content>
 
-                            <h3>{{font.name}}</h3>
-                            <p>{{font.type}}</p>
+            <div class="md-dialog-content">
 
-                        </div>
-
-                        <md-button class="md-secondary">ACTIONS</md-button>
-                        <md-divider ng-if="!$last"></md-divider>
-
-                    </md-list-item>
-
-                </md-list>
-
-            </md-tab>
-
-            <md-tab class="full-height" label="ADD NEW FONT" md-on-select="onTabChange(true)">
-
-                <form class="font-form" name="newFontForm" ng-cloak>
-
+                <div class="full-height" label="ADD NEW FONT" >
                     <md-input-container class="md-block">
                         <label>Font Name</label>
                         <input required="" name="name" ng-model="newFont.name">
@@ -99,32 +80,26 @@
                         </div>
                     </md-input-container>
 
-                </form>
+                </div>
 
-            </md-tab>
+            </div>
 
-            <md-tab></md-tab>
+        </md-dialog-content>
 
-        </md-tabs>
+        <md-dialog-actions layout="row">
+            <md-progress-circular class="md-accent" md-diameter="40" ng-if="inProgress"></md-progress-circular>
+            <span flex></span>
 
-    </md-dialog-content>
+            <md-button ng-click="clearFields()">
+                CLEAR
+            </md-button>
 
-    <md-dialog-actions layout="row">
-        <md-progress-circular class="md-accent" md-diameter="40" ng-if="inProgress"></md-progress-circular>
-        <span flex></span>
-
-        <md-button ng-click="cancel()" ng-if="!formButtons">
-            CLOSE
-        </md-button>
-
-        <md-button ng-click="clearFields()" ng-if="formButtons">
-            CLEAR
-        </md-button>
-
-        <md-button ng-click="addNewFont()" ng-disabled="newFontForm.$invalid" ng-if="formButtons">
+            <md-button ng-click="addNewFont()" ng-disabled="newFontForm.$invalid">
             ADD
-        </md-button>
+            </md-button>
 
-    </md-dialog-actions>
+        </md-dialog-actions>
+
+    </form>
 
 </md-dialog>

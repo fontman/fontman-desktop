@@ -28,7 +28,7 @@ fontsModule
             $scope.selectedReleaseId = undefined;
             
             $scope.cancel = function() {
-                $mdDialog.cancel();
+                $mdDialog.hide();
             };
 
             $scope.installFont = function () {
@@ -56,6 +56,7 @@ fontsModule
                     .then(function onSucess(response) {
                         if (response.data) {
                             $scope.inProgress = false;
+                            $scope.cancel();
                         } else {
                             $scope.inProgress = false;
                             alert(response.data.error);
