@@ -1,6 +1,12 @@
 <div class="wrapper" ng-controller="comparisonController">
 
-    <div class="bucket-list-bar">
+    <div ng-show="!isFilledBucket">
+
+        <h3>Consider after adding Fonts to temp choices.</h3>
+
+    </div>
+
+    <div class="bucket-list-bar" ng-show="isFilledBucket">
 
         <ul>
 
@@ -33,7 +39,7 @@
     </div>
 
 
-    <div class="comparison-body" layout="row">
+    <div class="comparison-body" layout="row" ng-show="isFilledBucket">
 
         <div class="padding" flex="50">
 

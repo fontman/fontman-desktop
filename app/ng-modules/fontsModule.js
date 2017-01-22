@@ -208,7 +208,8 @@ fontsModule
         $scope.applyStyleToAll = true;
         $scope.unifiedLeft = true;
         $scope.unifiedRight = true;
-        
+
+        $scope.isFilledBucket = false;
         $scope.fontBucket = [];
         $scope.selectedFont = undefined;
 
@@ -269,7 +270,18 @@ fontsModule
                 $scope.unifiedRight = true;
             }
         };
-        
+
+        // get bucket status
+        var getBucketStatus = function () {
+            $http.get("http://127.0.0.1:5000/fonts/status/chosen")
+                .then(function onSuccess(response) {
+                    $scope.isFilledBucket = response.data;
+                })
+                .catch(function onError(response) {
+                    alert("FMS connection failed")
+                });
+        };
+
         // get font bucket list
         var getFontBucket = function () {
             $http.get("http://127.0.0.1:5000/fonts/?" + "is_chosen=true")
@@ -292,6 +304,7 @@ fontsModule
 
         // load font bucket
         $timeout(function () {
+            getBucketStatus();
             getFontBucket();
         });
 
