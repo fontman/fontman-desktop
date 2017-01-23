@@ -284,14 +284,25 @@ fontsModule
 
         // get font bucket list
         var getFontBucket = function () {
-            $http.get("http://127.0.0.1:5000/fonts/?" + "is_chosen=true")
-                .then(function onSuccess(response) {
-                    $scope.fontBucket = response.data;
-                })
-                .catch(function onError(response) {
-                    return {"error": "FMS connection failed"}
-                });
+            if ($scope.isFilledBucket) {
+                $http.get("http://127.0.0.1:5000/fonts/?" + "is_chosen=true")
+                    .then(function onSuccess(response) {
+                        $scope.fontBucket = response.data;
+                    })
+                    .catch(function onError(response) {
+                        return {"error": "FMS connection failed"}
+                    });
+            } else {
+                $http.get("http://127.0.0.1:5000/fonts")
+                    .then(function onSuccess(response) {
+                        $scope.fontBucket = response.data;
+                    })
+                    .catch(function onError(response) {
+                        return {"error": "FMS connection failed"}
+                    });
+            }
         };
+
 
         /* option display on mouse hover */
         $scope.hoverIn = function () {
@@ -302,11 +313,12 @@ fontsModule
             this.hoverEdit = false;
         };
 
+        getBucketStatus();
+
         // load font bucket
         $timeout(function () {
-            getBucketStatus();
             getFontBucket();
-        });
+        }, 200);
 
         // left side view and functions
         $timeout(function () {
