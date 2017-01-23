@@ -173,6 +173,14 @@
     padding: 20px 20px 20px 20px;
 }
 
+.font-test-dialog {
+    padding: 0 40px 40px 40px;
+}
+
+.font-test-dialog .controller-padding {
+    padding-right: 40px;
+}
+
 .form-content {
     border: none;
 }

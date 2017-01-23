@@ -1,0 +1,111 @@
+<md-dialog aria-label="testFont" class="auth-dialog">
+
+    <md-toolbar>
+
+        <div class="md-toolbar-tools" >
+            <h2>{{font.name}}</h2>
+            <span flex></span>
+
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog" class="close-dialog-icon">close</md-icon>
+            </md-button>
+        </div>
+
+    </md-toolbar>
+
+    <md-dialog-content class="font-test-dialog">
+
+        <div class="font-test-controllers" layout="row" ng-show="mainTitleControllers">
+
+            <md-input-container class="input-container padding" flex="10">
+                <md-select aria-label="sfontface" ng-model="mainTitleFont.selectedFontface">
+                    <md-option ng-repeat="fontface in mainTitleFont.fontfaces" ng-value="(fontface.fontface)">
+                        {{fontface.fontface}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <span class="controller-padding"></span>
+
+            <md-input-container class="padding" flex="5">
+                <input aria-label="mainTitleFontSize" ng-model="mainTitleFontSize"  type="number">
+            </md-input-container>
+
+        </div>
+
+        <div class="font-test-controllers" layout="row" ng-show="subTitleControllers">
+
+            <md-input-container class="input-container padding" flex="10">
+                <md-select aria-label="sfontface" ng-model="subTitleFont.selectedFontface">
+                    <md-option ng-repeat="fontface in subTitleFont.fontfaces" ng-value="(fontface.fontface)">
+                        {{fontface.fontface}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <span class="controller-padding"></span>
+
+            <md-input-container class="padding" flex="5">
+                <input aria-label="subTitleFontSize" ng-model="subTitleFontSize"  type="number">
+            </md-input-container>
+
+        </div>
+
+        <div class="font-test-controllers" layout="row" ng-show="textBodyControllers">
+
+            <md-input-container class="input-container padding" flex="10">
+                <md-select aria-label="sfontface" ng-model="textBodyFont.selectedFontface">
+                    <md-option ng-repeat="fontface in textBodyFont.fontfaces" ng-value="(fontface.fontface)">
+                        {{fontface.fontface}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <span class="controller-padding"></span>
+
+            <md-input-container class="padding" flex="5">
+                <input aria-label="textBodyFontSize" ng-model="textBodyFontSize"  type="number">
+            </md-input-container>
+
+        </div>
+
+        <div class="editable-box">
+
+            <div ng-click="mainTitleClick()">
+
+                <h1 contentEditable style="font-size:{{mainTitleFontSize}}px; font-family: {{mainTitleFont.name}}-{{mainTitleFont.selectedFontface}}">
+                    {{mainTitle}}
+                </h1>
+
+            </div>
+
+            <div ng-click="subTitleClick()">
+
+                <h3 contentEditable style="font-size:{{subTitleFontSize}}px; font-family: {{subTitleFont.name}}-{{subTitleFont.selectedFontface}}">
+                    {{subTitle}}
+                </h3>
+
+            </div>
+
+            <div ng-click="textBodyClick()">
+
+                <p contentEditable style="font-size:{{textBodyFontSize}}px; font-family: {{textBodyFont.name}}-{{textBodyFont.selectedFontface}}">
+                    {{textBody}}
+                </p>
+
+            </div>
+
+        </div>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <span flex></span>
+
+        <md-button ng-click="cancel()">
+            CLOSE
+        </md-button>
+
+    </md-dialog-actions>
+
+</md-dialog>

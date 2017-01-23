@@ -15,8 +15,8 @@ fontsModule
         $scope.selectedFont = {};
         $scope.selectedFont.defaultText = "Fontman";
         $scope.selectedFont.defaultTextSize = 40;
-        
-        
+
+
         // font installation
         var fontInstallerController = function ($http, $mdDialog, $scope, font_id) {
             $scope.font_id = font_id;
@@ -77,6 +77,49 @@ fontsModule
                     $scope.relInfo = response.data;
                 });
 
+        };
+        
+        // font test controller
+        var fontTestController = function ($http, $mdDialog, $scope, font) {
+            $scope.font = angular.copy(font);
+
+            $scope.mainTitle = "maintitle";
+            $scope.mainTitleControllers = true;
+            $scope.mainTitleFont = angular.copy($scope.font);
+            $scope.mainTitleFontSize = 70;
+
+            $scope.subTitle = "subtitle";
+            $scope.subTitleControllers = false;
+            $scope.subTitleFont = angular.copy($scope.font);
+            $scope.subTitleFontSize = 40;
+
+            $scope.textBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus ex, maximus vel dignissim et, auctor et lectus. Integer aliquet quam augue, eget venenatis ante fermentum in. Integer semper cursus nisi, non mattis ipsum pellentesque id. Donec auctor eros eu nunc vehicula posuere. Vivamus pharetra pulvinar molestie. Phasellus ullamcorper dui pretium, faucibus leo vel, hendrerit nisi. Etiam sed condimentum metus, quis vehicula nisl. Suspendisse sodales est lorem, eget luctus nisi egestas nec. Pellentesque rhoncus mi sed purus malesuada, quis laoreet lorem molestie. Sed nec purus elit. Nullam ut tortor congue, feugiat eros hendrerit, feugiat turpis.";
+            $scope.textBodyControllers = false;
+            $scope.textBodyFont = angular.copy($scope.font);
+            $scope.textBodyFontSize = 16;
+
+            $scope.cancel = function() {
+                $mdDialog.hide();
+            };
+            
+            $scope.mainTitleClick = function () {
+                $scope.mainTitleControllers = true;
+                $scope.subTitleControllers = false;
+                $scope.textBodyControllers = false
+            };
+
+            $scope.subTitleClick = function () {
+                $scope.mainTitleControllers = false;
+                $scope.subTitleControllers = true;
+                $scope.textBodyControllers = false
+            };
+
+            $scope.textBodyClick = function () {
+                $scope.mainTitleControllers = false;
+                $scope.subTitleControllers = false;
+                $scope.textBodyControllers = true
+            };
+            
         };
 
         // get font bucket list
@@ -161,6 +204,22 @@ fontsModule
                 .then(function () {
                     getFontBucket();
                     getFontsList();
+                })
+        };
+        
+        $scope.showFontTester = function (ev, font) {
+            $mdDialog.show({
+                controller: fontTestController,
+                templateUrl: "ng-modules/ng-templates/font_test.html",
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: $scope.customFullscreen,
+                locals : {
+                    font: font
+                }
+            })
+                .then(function () {
                 })
         };
 
