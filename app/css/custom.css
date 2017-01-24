@@ -279,6 +279,10 @@ span.offcurve { color: red; }
     font-size: 12px;
 }
 
+.specimen-navbar {
+    font-size: 12px;
+}
+
 .specimen-view {
     padding: 40px 40px 40px 40px;
 }

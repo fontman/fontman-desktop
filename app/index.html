@@ -47,17 +47,17 @@
 
                 <md-sidemenu-group>
 
+                    <md-sidemenu-button ng-if="authStatus===false || authStatus.includes('undefined')" ng-click="loginDialog($event)">
+                        SIGN IN
+                    </md-sidemenu-button>
+
                     <md-sidemenu-button ng-if="authStatus.includes('undefined')" ng-click="createProfileDialog($event)">
                         SIGN UP
                     </md-sidemenu-button>
 
-                    <md-sidemenu-button ng-if="authStatus===false" ng-click="loginDialog($event)">
-                        SIGN IN
-                    </md-sidemenu-button>
-
                     <md-sidemenu-content md-heading="{{fontmanUser}}" md-arrow="true" ng-if="authStatus===true">
 
-                        <md-sidemenu-button  ng-click="logout($event)">
+                        <md-sidemenu-button  ng-click="logout($event, fontmanUserId)">
                             LOGOUT
                         </md-sidemenu-button>
 

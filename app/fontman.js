@@ -47,6 +47,7 @@ fontmanApp
     .controller("mainController", function ($http, $mdDialog, $scope) {
         $scope.authStatus = undefined;
         $scope.fontmanUser = undefined;
+        $scope.fontmanUserId = undefined;
         $scope.inProgress = false;
         $scope.selectedNavIndex = 0;
 
@@ -80,7 +81,7 @@ fontmanApp
         };
 
         // logout prompt
-        $scope.logout = function (ev) {
+        $scope.logout = function (ev, user_id) {
             var confirm = $mdDialog.confirm()
                 .title("Logout?")
                 .textContent("You won't be able to use collaboration tools and typecase features after logging out.")
@@ -90,7 +91,7 @@ fontmanApp
                 .cancel("Cancel");
             
             $mdDialog.show(confirm).then(function () {
-                $http.get("http://127.0.0.1:5000/auth/logout")
+                $http.get("http://127.0.0.1:5000/auth/" + user_id + "logout")
                     .then(function onSuccess(response) {
                         if(response.data === true) {
                             setAuthStatus();
@@ -208,6 +209,7 @@ fontmanApp
                 $http.get("http://127.0.0.1:5000/auth/profile/name")
                     .then(function onSuccess(response) {
                         $scope.fontmanUser = (response.data.name).toUpperCase();
+                        $scope.fontmanUserId = response.data.user_id;
                     })
                     .catch(function onError(response) {
                         alert("FMS connection failed!");
