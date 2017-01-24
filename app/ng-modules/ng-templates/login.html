@@ -15,6 +15,8 @@
         <md-dialog-content>
             <div class="md-dialog-content">
 
+                <div class="error-response">{{errorResponse.error}}</div>
+
                 <md-input-container class="md-block" >
                     <label>Email</label>
                     <input required="" type="email" name="loginEmail" ng-model="loginData.email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/">
@@ -40,10 +42,10 @@
         <md-dialog-actions layout="row">
             <md-progress-circular ng-if="inProgress" class="md-accent" md-diameter="40"></md-progress-circular>
             <span flex></span>
-            <md-button class="md-raised" ng-click="clearFields()">
+            <md-button ng-click="clearFields()">
                 CLEAR
             </md-button>
-            <md-button class="md-raised" ng-click="loginProfile()" ng-disabled="loginForm.$invalid">
+            <md-button ng-click="loginProfile()" ng-disabled="loginForm.$invalid">
                 LOGIN
             </md-button>
         </md-dialog-actions>

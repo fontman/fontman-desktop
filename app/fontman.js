@@ -91,7 +91,7 @@ fontmanApp
                 .cancel("Cancel");
             
             $mdDialog.show(confirm).then(function () {
-                $http.get("http://127.0.0.1:5000/auth/" + user_id + "logout")
+                $http.get("http://127.0.0.1:5000/auth/" + user_id + "/logout")
                     .then(function onSuccess(response) {
                         if(response.data === true) {
                             setAuthStatus();
@@ -112,6 +112,7 @@ fontmanApp
         // login controller
         var loginController = function ($http, $mdDialog, $scope) {
             $scope.inProgress = false;
+            $scope.errorResponse = undefined;
             $scope.loginData = {
                 email: undefined,
                 password: undefined
@@ -131,11 +132,11 @@ fontmanApp
 
                 $http.post("http://127.0.0.1:5000/auth/login", $scope.loginData)
                     .then(function onSuccess(response) {
-                        if(response.data) {
+                        if(response.data === true) {
                             $scope.inProgress = false;
                             $mdDialog.hide();
                         } else {
-                            alert(response.data.error);
+                            $scope.errorResponse = response.data;
                             $scope.inProgress = false;
                         }
                     })
@@ -206,7 +207,7 @@ fontmanApp
         // set user data
         var setUserData = function () {
             if($scope.authStatus===true) {
-                $http.get("http://127.0.0.1:5000/auth/profile/name")
+                $http.get("http://127.0.0.1:5000/auth/profile")
                     .then(function onSuccess(response) {
                         $scope.fontmanUser = (response.data.name).toUpperCase();
                         $scope.fontmanUserId = response.data.user_id;

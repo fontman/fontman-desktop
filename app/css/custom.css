@@ -167,6 +167,12 @@ span.offcurve { color: red; }
     margin: 0;
 }
 
+.error-response {
+    color: red;
+    font-size: 14px;
+    padding-bottom: 10px;
+}
+
 .footer{
     flex: 0 0 auto;
     background: #aaa;
