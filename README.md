@@ -7,10 +7,11 @@ Fontman GUI using electron, angularjs and angular material.
 
 #####Requirements
 
-Make sure you have installed npm. cd into app directory,
+Make sure you have installed npm and bower. cd into app directory,
 
 ```bash
 npm install
+bower install angular-inline-text-editor
 ```
 
 #####Run application
