@@ -1,0 +1,190 @@
+<md-dialog aria-label="fontSpecimen">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{font.name}}</h2>
+            <span flex></span>
+
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog" class="close-dialog-icon">close</md-icon>
+            </md-button>
+        </div>
+
+    </md-toolbar>
+
+    <md-dialog-content>
+
+        <div class="specimen-view">
+
+            <div class="container">
+
+                <div>
+                    Glyphs <span id="pagination"></span>
+                    <br><br>
+                    <div id="glyph-list-end"></div>
+                </div>
+
+
+            </div>
+
+            <script>
+                var cellCount = 100,
+                        cellWidth = 70,
+                        cellHeight = 70,
+                        cellMarginTop = 1,
+                        cellMarginBottom = 8,
+                        cellMarginLeftRight = 1,
+                        glyphMargin = 5,
+                        pixelRatio = window.devicePixelRatio || 1;
+
+                var pageSelected, font, fontScale, fontSize, fontBaseline, glyphScale, glyphSize, glyphBaseline;
+
+                function enableHighDPICanvas(canvas) {
+                    if (typeof canvas === 'string') {
+                        canvas = document.getElementById(canvas);
+                    }
+                    var pixelRatio = window.devicePixelRatio || 1;
+                    if (pixelRatio === 1) return;
+                    var oldWidth = canvas.width;
+                    var oldHeight = canvas.height;
+                    canvas.width = oldWidth * pixelRatio;
+                    canvas.height = oldHeight * pixelRatio;
+                    canvas.style.width = oldWidth + 'px';
+                    canvas.style.height = oldHeight + 'px';
+                    canvas.getContext('2d').scale(pixelRatio, pixelRatio);
+                }
+
+                function showErrorMessage(message) {
+                    var el = document.getElementById('message');
+                    if (!message || message.trim().length === 0) {
+                        el.style.display = 'none';
+                    } else {
+                        el.style.display = 'block';
+                    }
+                    el.innerHTML = message;
+                }
+
+                function pathCommandToString(cmd) {
+                    var str = '<strong>' + cmd.type + '</strong> ' +
+                            ((cmd.x !== undefined) ? 'x='+cmd.x+' y='+cmd.y+' ' : '') +
+                            ((cmd.x1 !== undefined) ? 'x1='+cmd.x1+' y1='+cmd.y1+' ' : '') +
+                            ((cmd.x2 !== undefined) ? 'x2='+cmd.x2+' y2='+cmd.y2 : '');
+                    return str;
+                }
+
+                function contourToString(contour) {
+                    return '<pre class="contour">' + contour.map(function(point) {
+                                return '<span class="' + (point.onCurve ? 'on' : 'off') + 'curve">x=' + point.x + ' y=' + point.y + '</span>';
+                            }).join('\n') + '</pre>';
+                }
+
+                function formatUnicode(unicode) {
+                    unicode = unicode.toString(16);
+                    if (unicode.length > 4) {
+                        return ("000000" + unicode.toUpperCase()).substr(-6)
+                    } else {
+                        return ("0000" + unicode.toUpperCase()).substr(-4)
+                    }
+                }
+
+                var arrowLength = 10,
+                        arrowAperture = 4;
+
+                function renderGlyphItem(canvas, glyphIndex) {
+                    var cellMarkSize = 4;
+                    var ctx = canvas.getContext('2d');
+                    ctx.clearRect(0, 0, cellWidth, cellHeight);
+                    if (glyphIndex >= font.numGlyphs) return;
+
+                    ctx.fillStyle = '#606060';
+                    ctx.fillText(glyphIndex, 1, cellHeight-1);
+                    var glyph = font.glyphs.get(glyphIndex),
+                            glyphWidth = glyph.advanceWidth * fontScale,
+                            xmin = (cellWidth - glyphWidth)/2,
+                            xmax = (cellWidth + glyphWidth)/2,
+                            x0 = xmin;
+
+                    ctx.fillStyle = '#000000';
+                    glyph.draw(ctx, x0, fontBaseline, fontSize);
+                }
+
+                function displayGlyphPage(pageNum) {
+                    pageSelected = pageNum;
+                    document.getElementById('p'+pageNum).className = 'page-selected';
+                    var firstGlyph = pageNum * cellCount;
+                    for(var i = 0; i < cellCount; i++) {
+                        renderGlyphItem(document.getElementById('g'+i), firstGlyph+i);
+                    }
+                }
+
+                function pageSelect(event) {
+                    document.getElementsByClassName('page-selected')[0].className = '';
+                    displayGlyphPage(+event.target.id.substr(1));
+                }
+
+                function onFontLoaded(font) {
+                    window.font = font;
+
+                    var w = cellWidth - cellMarginLeftRight * 2,
+                            h = cellHeight - cellMarginTop - cellMarginBottom,
+                            head = font.tables.head,
+                            maxHeight = head.yMax - head.yMin;
+                    fontScale = Math.min(w/(head.xMax - head.xMin), h/maxHeight);
+                    fontSize = fontScale * font.unitsPerEm;
+                    fontBaseline = cellMarginTop + h * head.yMax / maxHeight;
+
+                    var pagination = document.getElementById("pagination");
+                    pagination.innerHTML = '';
+                    var fragment = document.createDocumentFragment();
+                    var numPages = Math.ceil(font.numGlyphs / cellCount);
+                    for(var i = 0; i < numPages; i++) {
+                        var link = document.createElement('span');
+                        var lastIndex = Math.min(font.numGlyphs-1, (i+1)*cellCount-1);
+                        link.textContent = i*cellCount + '-' + lastIndex;
+                        link.id = 'p' + i;
+                        link.addEventListener('click', pageSelect, false);
+                        fragment.appendChild(link);
+                        // A white space allows to break very long lines into multiple lines.
+                        // This is needed for fonts with thousands of glyphs.
+                        fragment.appendChild(document.createTextNode(' '));
+                    }
+                    pagination.appendChild(fragment);
+
+                    displayGlyphPage(0);
+                }
+
+
+                function prepareGlyphList() {
+                    var marker = document.getElementById('glyph-list-end'),
+                            parent = marker.parentElement;
+                    for(var i = 0; i < cellCount; i++) {
+                        var canvas = document.createElement('canvas');
+                        canvas.width = cellWidth;
+                        canvas.height = cellHeight;
+                        canvas.className = 'item';
+                        canvas.id = 'g'+i;
+                        enableHighDPICanvas(canvas);
+                        parent.insertBefore(canvas, marker);
+                    }
+                }
+
+
+                    $.getJSON('http://127.0.0.1:5000/fontfaces/specimen/get', function(data){
+                        prepareGlyphList();
+                        opentype.load(data.resource, function(err, font) {
+                            var amount, glyph, ctx, x, y, fontSize;
+                            if (err) {
+                                showErrorMessage(err.toString());
+                                return;
+                            }
+                            onFontLoaded(font);
+                        });
+                    });
+
+            </script>
+
+        </div>
+
+    </md-dialog-content>
+
+</md-dialog>

@@ -79,6 +79,15 @@ fontsModule
 
         };
         
+        // font specimen view controller
+        var fontSpecimenController = function ($http, $mdDialog, $scope, font) {
+            $scope.font = font;
+            
+            $scope.cancel = function() {
+                $mdDialog.hide();
+            };
+        };
+        
         // font test controller
         var fontTestController = function ($http, $mdDialog, $scope, font) {
             $scope.font = angular.copy(font);
@@ -204,6 +213,30 @@ fontsModule
                 .then(function () {
                     getFontBucket();
                     getFontsList();
+                })
+        };
+        
+        $scope.showFontSpecimen = function (ev, font) {
+            json_data = {"selectedFontface": font.selectedFontface};
+            $http.post("http://127.0.0.1:5000/fontfaces/" + font.font_id + "/specimen/set", json_data)
+                .then(function onSuccess(response) {
+                })
+                .catch(function onError(response) {
+                    alert("FMS connection failed");
+                });
+
+            $mdDialog.show({
+                controller: fontSpecimenController,
+                templateUrl: "ng-modules/ng-templates/specimen.html",
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: $scope.customFullscreen,
+                locals : {
+                    font: font
+                }
+            })
+                .then(function () {
                 })
         };
         

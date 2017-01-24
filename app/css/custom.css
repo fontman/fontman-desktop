@@ -13,6 +13,52 @@
     outline: 0 !important;
 }
 
+#pagination span {
+    margin: 0 0.3em;
+    color: #505050;
+    cursor: pointer;
+}
+
+#pagination span.page-selected {
+    background-color: red;
+    color: white;
+}
+
+canvas.item {
+    float: left;
+    margin-right: -1px;
+    margin-bottom: -1px;
+    cursor: pointer;
+}
+
+#glyph-list-end {
+    clear: both;
+    height: 20px;
+}
+
+#glyph, glyph-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#glyph-data dl { margin: 0; }
+#glyph-data dt { float: left; }
+#glyph-data dd { margin-left: 12em; }
+
+#glyph-contours {
+    flex: 1 1 0;
+    overflow: auto;
+}
+
+#glyph-data pre { font-size: 16px; }
+pre:not(.contour) { margin: 0; }
+pre.contour { margin: 0 0 1em 2em; border-bottom: solid 1px #a0a0a0; }
+span.oncurve { color: blue; }
+span.offcurve { color: red; }
+
+
+
 #red-slider .md-thumb:after, #red-slider .md-track-fill{
     background-color: red !important;
     border-color: red !important;
@@ -231,6 +277,10 @@
 
 .slider-label {
     font-size: 12px;
+}
+
+.specimen-view {
+    padding: 40px 40px 40px 40px;
 }
 
 .validator-message {
