@@ -2,7 +2,7 @@
 
 ######Version: 0.1.0-SNAPSHOT
 
-Fontman GUI using electron, angularjs and angular material.
+Fontman desktop using electron, angularjs and angular material.
 <br>
 
 #####Requirements
@@ -16,7 +16,7 @@ bower install angular-inline-text-editor
 
 #####Run application
 
-Make sure [fms](https://github.com/fontman/fms) is running, otherwise it will only load the frames.
+Make sure [fontman-desktop-core](https://github.com/fontman/fontman-desktop-core) is running, otherwise it will only load the frames.
 
 ```bash
 npm start

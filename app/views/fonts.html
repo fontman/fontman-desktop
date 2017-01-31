@@ -11,30 +11,24 @@
 
     </div>
 
-    <md-divider></md-divider>
-
     <div class="content font-page-body">
 
         <ul>
 
-            <li class="font-card" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontBucket">
+            <li class="font-box" ng-mouseleave="!hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontBucket">
 
                 <div class="div">
 
                     <div layout="row" ng-show="hoverEdit">
 
-                        <md-input-container class="input-container" flex="40">
-                            <label class="white-colored">ff</label>
 
-                            <md-select ng-model="font.selectedFontface">
-                                <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
-                                    {{fontface.fontface}}
-                                </md-option>
-                            </md-select>
-                        </md-input-container>
 
-                        <md-input-container>
-                            <input flex="30" type="number" ng-model="font.defaultTextSize" aria-label="red">
+
+                        <md-select ng-model=>
+                            <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
+                                {{fontface.fontface}}
+                            </md-option>
+                        </md-select>
                         </md-input-container>
 
                     </div>
@@ -43,7 +37,7 @@
 
                 <div>
 
-                    <div ng-style="{'color': {true: 'red'}[hoverEdit]}">
+                    <div ng-style="{'color': {true: 'orangered'}[hoverEdit]}">
 
                         <div ng-repeat="fontface in font.fontfaces">
 
@@ -61,47 +55,41 @@
 
                 </div>
 
-                <div layout="row" ng-show="hoverEdit">
+                <div layout="row" ng-show="!hoverEdit">
 
-                    <md-button class="card-button" ng-click="showFontSpecimen($event, font)">
+                    <div class="box-button" ng-click="showFontSpecimen($event, font)">
                         SEE
-                    </md-button>
+                    </div>
 
-                    <md-button class="card-button" ng-click="showFontTester($event, font)">
+                    <div class="box-button" ng-click="showFontTester($event, font)">
                         TEST
-                    </md-button>
+                    </div>
 
-                    <md-button class="card-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="font.is_installed">
+                    <div class="box-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="font.is_installed">
                         REINSTALL
-                    </md-button>
+                    </div>
 
-                    <md-button class="card-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="!font.is_installed">
+                    <div class="box-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="!font.is_installed">
                         INSTALL
-                    </md-button>
+                    </div>
 
                 </div>
 
             </li>
 
-            <li class="font-card" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontsList | filter:searchText">
+            <li class="font-box" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontsList | filter:searchText">
 
                 <div class="div">
 
                     <div layout="row" ng-show="hoverEdit">
 
-                        <md-input-container class="input-container" flex="40">
-                            <label class="white-colored">ff</label>
+                        <md-select aria-label="a" ng-model="font.selectedFontface">
+                            <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
+                                {{fontface.fontface}}
+                            </md-option>
+                        </md-select>
 
-                            <md-select ng-model="font.selectedFontface">
-                                <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
-                                    {{fontface.fontface}}
-                                </md-option>
-                            </md-select>
-                        </md-input-container>
-
-                        <md-input-container>
-                            <input flex="30" type="number" ng-model="font.defaultTextSize" aria-label="red" aria-controls="red-slider">
-                        </md-input-container>
+                        <span flex></span>
 
                         <md-icon class="bucket-button" ng-click="addToBucket(font)" ng-if="!font.chosen">
                             add_circle
@@ -117,7 +105,7 @@
 
                 <div>
 
-                    <div ng-style="{'color': {true: 'red'}[hoverEdit]}">
+                    <div ng-style="{'color': {true: 'orangered'}[hoverEdit]}">
 
                         <div ng-repeat="fontface in font.fontfaces">
 
@@ -137,21 +125,21 @@
 
                 <div layout="row" ng-show="hoverEdit">
 
-                    <md-button class="card-button" ng-click="showFontSpecimen($event, font)">
+                    <div class="box-button" ng-click="showFontSpecimen($event, font)">
                         SEE
-                    </md-button>
+                    </div>
 
-                    <md-button class="card-button" ng-click="showFontTester($event, font)">
+                    <div class="box-button" ng-click="showFontTester($event, font)">
                         TEST
-                    </md-button>
+                    </div>
 
-                    <md-button class="card-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="font.is_installed">
+                    <div class="box-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="font.is_installed">
                         REINSTALL
-                    </md-button>
+                    </div>
 
-                    <md-button class="card-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="!font.is_installed">
+                    <div class="box-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="!font.is_installed">
                         INSTALL
-                    </md-button>
+                    </div>
 
                 </div>
 
