@@ -159,43 +159,6 @@ span.offcurve { color: orangered; }
     color: #132c00;
 }
 
-/* Style The Dropdown Button */
-.dropbtn {
-    font-size: 12px;
-    border: none;
-    cursor: pointer;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    font-size: 12px;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 100px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 2px 4px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
 .editable-box {
     padding: 20px 20px 20px 20px;
 }
@@ -206,7 +169,7 @@ span.offcurve { color: orangered; }
 
 .error-response {
     color: orangered;
-    font-size: 14px;
+    font-size: 12px;
     padding-bottom: 10px;
 }
 
@@ -249,10 +212,6 @@ span.offcurve { color: orangered; }
 .font-box .slider {
     font-size: 12px;
     padding-right: 30px;
-}
-
-.font-box .dropdown {
-
 }
 
 .font-form {
@@ -315,19 +274,15 @@ span.offcurve { color: orangered; }
 }
 
 .sideBar {
-    height: 100%;
-    min-width: 200px;
+    display: flex;
 }
 
 .sideBar-space-padding {
-    padding-bottom: 50px
+    padding-top: 30px;
 }
 
 .sideBar-space-padding-empty {
-    padding-bottom: 74px
-}
-
-.single-font-view {
+    padding-top: 150px;
 }
 
 .slider-label {
@@ -348,10 +303,6 @@ span.offcurve { color: orangered; }
 
 .white-background {
     background-color: white;
-}
-
-.white-coloorangered {
-    color: white !important;
 }
 
 .wrapper{
@@ -391,7 +342,6 @@ md-option:focus {
     color: orangered;
     font-size: 12px !important;
 }
-
 
 md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
     color: #464646 !important;

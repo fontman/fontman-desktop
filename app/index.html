@@ -20,6 +20,51 @@
 
         <div class="sideBar" layout="column" ng-controller="mainController">
 
+            <span class="sideBar-space-padding-empty">
+                <md-input-container>
+                </md-input-container>
+            </span>
+
+            <md-sidemenu locked="true">
+
+                <md-sidemenu-group>
+
+                    <md-sidemenu-button href="#/" ng-class="{'nav-selected':selectedNavIndex==0}" ng-click="setSelectedNavIndex(0)">
+                        Fonts
+                    </md-sidemenu-button>
+
+                    <md-sidemenu-button  href="#/typecases">
+                        My Typecase
+                    </md-sidemenu-button>
+
+                    <md-sidemenu-button href="#/comparison" ng-class="{'nav-selected':selectedNavIndex==2}" ng-click="setSelectedNavIndex(2)">
+                        Test/Compare
+                    </md-sidemenu-button>
+
+                    <md-sidemenu-button href="http://fontman.io/fund" target="_blank">
+                        Fund
+                    </md-sidemenu-button>
+
+                </md-sidemenu-group>
+
+                <md-sidemenu-group>
+
+                    <md-sidemenu-button ng-if="authStatus===false || authStatus.includes('undefined')" ng-click="loginDialog($event)">
+                        Sign-up
+                    </md-sidemenu-button>
+
+                    <md-sidemenu-content md-heading="{{fontmanUser}}" md-arrow="true" ng-if="authStatus===true">
+
+                        <md-sidemenu-button  ng-click="logout($event, fontmanUserId)">
+                            Logout
+                        </md-sidemenu-button>
+
+                    </md-sidemenu-content>
+
+                </md-sidemenu-group>
+
+
+            </md-sidemenu>
 
         </div>
 
