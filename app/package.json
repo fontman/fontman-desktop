@@ -1,5 +1,5 @@
 {
-  "name": "fontman-gui",
+  "name": "fontman-desktop",
   "version": "0.1.0-SNAPSHOT",
   "description": "Most elegant font manager",
   "main": "main.js",

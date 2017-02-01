@@ -1,4 +1,4 @@
-# fontman-gui
+# fontman-desktop-application
 
 ######Version: 0.1.0-SNAPSHOT
 

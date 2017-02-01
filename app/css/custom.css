@@ -75,8 +75,9 @@ span.offcurve { color: orangered; }
 }
 
 .bucket-button {
-    color: orangered !important;
+    color: orangered;
     cursor: pointer;
+    font-size: 20px !important;
 }
 
 .bucket-box {
@@ -181,8 +182,9 @@ span.offcurve { color: orangered; }
 
 .font-box {
     float: left;
-    min-height: 200px;
-    min-width: 200px;
+    max-width: 250px;
+    min-height: 180px;
+    min-width: 180px;
     padding: 5px 5px 5px 5px;
     text-align: center;
 }
@@ -199,9 +201,12 @@ span.offcurve { color: orangered; }
     cursor: pointer;
 }
 
-.font-box .div {
-    height: 60px;
-    padding-bottom: 10px;
+.font-box .divider {
+    color: #e2e2e2;
+}
+
+.font-box .font-name {
+    font-size: 14px;
 }
 
 .font-box .input-container {
@@ -212,6 +217,10 @@ span.offcurve { color: orangered; }
 .font-box .slider {
     font-size: 12px;
     padding-right: 30px;
+}
+
+.font-box .top-indicator {
+    height: 30px;
 }
 
 .font-form {
@@ -268,9 +277,7 @@ span.offcurve { color: orangered; }
 }
 
 .search-area {
-    position: absolute;
-    left: 10px;
-    top: 10px;
+
 }
 
 .sideBar {
@@ -338,9 +345,23 @@ md-select .md-select-value {
     font-size: 12px !important;
 }
 
+md-option {
+    height: 30px;
+}
+
 md-option:focus {
     color: orangered;
     font-size: 12px !important;
+}
+
+md-select {
+    border-bottom: none;
+    margin: 0 !important;
+}
+
+.md-select-value {
+    border-bottom: none !important;
+    min-width: 30px !important;
 }
 
 md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {

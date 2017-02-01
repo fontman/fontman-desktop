@@ -2,42 +2,55 @@
 
     <div class="header">
 
-        <div class="search-area">
-            <md-input-container flex="80">
-                <input ng-model="searchText" placeholder="Search">
-            </md-input-container>
+        <div class="options-panel" layout="row">
+
+            <div class="search-area">
+                <md-input-container flex="80">
+                    <input ng-model="searchText" placeholder="Search">
+                </md-input-container>
+            </div>
+
+            <div class="font-view-options">
+                <md-input-container>
+                    <md-select aria-label="a" ng-model="viewId.id" placeholder="Custom">
+                        <md-option ng-value="view.id" ng-repeat="view in viewMethods">
+                            {{view.value}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
 
         </div>
 
     </div>
 
-    <div class="content font-page-body">
+    <div class="content">
 
         <ul>
 
-            <li class="font-box" ng-mouseleave="!hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontBucket">
+            <li class="font-box" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontBucket">
 
-                <div class="div">
+                <div layout="row" ng-show="hoverEdit">
 
-                    <div layout="row" ng-show="hoverEdit">
+                    <md-select aria-label="a" ng-model="font.selectedFontface">
+                        <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
+                            {{fontface.fontface}}
+                        </md-option>
+                    </md-select>
 
+                    <md-icon class="bucket-button" ng-click="addToBucket(font)" ng-if="!font.chosen">
+                        add_circle
+                    </md-icon>
 
-
-
-                        <md-select ng-model=>
-                            <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
-                                {{fontface.fontface}}
-                            </md-option>
-                        </md-select>
-                        </md-input-container>
-
-                    </div>
+                    <md-icon class="bucket-button" ng-click="removeFromBucket(font)" ng-if="font.chosen">
+                        remove_circle
+                    </md-icon>
 
                 </div>
 
                 <div>
 
-                    <div ng-style="{'color': {true: 'orangered'}[hoverEdit]}">
+                    <div>
 
                         <div ng-repeat="fontface in font.fontfaces">
 
@@ -47,8 +60,8 @@
 
                         </div>
 
-                        <p class="bucketed-text" style="font-size: {{font.defaultTextSize}}px; font-family: {{font.name}}-{{font.selectedFontface}}">
-                            {{font.defaultText}}
+                        <p class="bucketed-text" style="font-size: {{textSize}}px; font-family: {{font.name}}-{{font.selectedFontface}}">
+                            {{font.displayText}}
                         </p>
 
                     </div>
@@ -79,17 +92,11 @@
 
             <li class="font-box" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontsList | filter:searchText">
 
-                <div class="div">
+                <div class="top-indicator">
 
                     <div layout="row" ng-show="hoverEdit">
 
-                        <md-select aria-label="a" ng-model="font.selectedFontface">
-                            <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
-                                {{fontface.fontface}}
-                            </md-option>
-                        </md-select>
-
-                        <span flex></span>
+                        <div class="font-name">{{font.name}}</div>
 
                         <md-icon class="bucket-button" ng-click="addToBucket(font)" ng-if="!font.chosen">
                             add_circle
@@ -105,7 +112,7 @@
 
                 <div>
 
-                    <div ng-style="{'color': {true: 'orangered'}[hoverEdit]}">
+                    <div>
 
                         <div ng-repeat="fontface in font.fontfaces">
 
@@ -115,13 +122,25 @@
 
                         </div>
 
-                        <p contentEditable style="font-size: {{font.defaultTextSize}}px; font-family: {{font.name}}-{{font.selectedFontface}}">
-                            {{font.defaultText}}
+                        <p contentEditable style="font-size: {{textSize}}px; font-family: {{font.name}}-{{font.selectedFontface}}">
+                            {{font.displayText}}
                         </p>
 
                     </div>
 
                 </div>
+
+                <div layout="row">
+                    <div flex></div>
+
+                    <md-select aria-label="a" ng-model="font.selectedFontface" ng-show="hoverEdit">
+                        <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
+                            {{fontface.fontface}}
+                        </md-option>
+                    </md-select>
+                </div>
+
+                <hr class="divider" ng-show="hoverEdit">
 
                 <div layout="row" ng-show="hoverEdit">
 
