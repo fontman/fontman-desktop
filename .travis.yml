@@ -13,11 +13,11 @@ before_install:
 - electron-packager app/ --platform=win32 --arch=x64
 - electron-packager app/ --platform=win32 --arch=ia32
 - ls
-- tar -zcvf fontman-gui-linux-x64.tar.gz fontman-gui-linux-x64
-- tar -zcvf fontman-gui-linux-ia32.tar.gz fontman-gui-linux-ia32
-- tar -zcvf fontman-gui-darwin-x64.tar.gz fontman-gui-darwin-x64
-- zip -r fontman-gui-win32-ia32.zip fontman-gui-win32-ia32
-- zip -r fontman-gui-win32-x64.zip fontman-gui-win32-x64
+- tar -zcvf fontman-desktop-linux-x64.tar.gz fontman-desktop-linux-x64
+- tar -zcvf fontman-desktop-linux-ia32.tar.gz fontman-desktop-linux-ia32
+- tar -zcvf fontman-desktop-darwin-x64.tar.gz fontman-desktop-darwin-x64
+- zip -r fontman-desktop-win32-ia32.zip fontman-desktop-win32-ia32
+- zip -r fontman-desktop-win32-x64.zip fontman-desktop-win32-x64
 - ls
 script: echo "done"
 deploy:
@@ -25,15 +25,15 @@ deploy:
   provider: releases
   skip_cleanup: true
   file:
-  - fontman-gui-darwin-x64.tar.gz
-  - fontman-gui-linux-x64.tar.gz
-  - fontman-gui-linux-ia32.tar.gz
-  - fontman-gui-win32-ia32.zip
-  - fontman-gui-win32-x64.zip
+  - fontman-desktop-darwin-x64.tar.gz
+  - fontman-desktop-linux-x64.tar.gz
+  - fontman-desktop-linux-ia32.tar.gz
+  - fontman-desktop-win32-ia32.zip
+  - fontman-desktop-win32-x64.zip
   on:
     tags: true
     all_branches: true
-    repo: fontman/fontman-gui
+    repo: fontman/fontman-desktop
   api-key:
     secure: N9IU2xYJQBMuf9Ay828WCGs/zZJgRwcd+MeDjFt0AySqv5FTo4JxEL8DgG0URxj9Gd+GRttNHVEL7ajPdPq9Hnm7+lkr5wP8A8DDtu5Ir3JPtN2TWkBX27QDJsU74ZyuTslgTsu7sI4dRI47p0r/TLWdpRuFEnkKIwaXuTawpSDWF1wxr4BlzXZrP6GdUEK6cFMESbcMeA+d6CjZt824XHLQT8HCBfMrz8fK+LfQerm0pxdQF8sFFhqzRS2r5yzDSg0YMdmwCE5d10F/TG/tutbSkD37MZaghDTPYzlpe+rwkf5A6Tvr1ETR0TXicqQzNet2xg4Ilm38QvAn3vHQwmUd+LlfZ4B/lNkbEf1amnp6IPzisWzEP4DrvAY2AOYxxD/3Np4sV372JOzK+TiKwLAnOMUb9AECJzS2AR2ezIH6RwPjyihmVdR7EyyUP/Xz2HzaH3thKLdlkVLxvqUifK/ElFycFUnAOCbOu3mn834bgkdgL28tnzOuUCXCTCJITbwqBjcjkKUZvRUqZGtfkMJo6DEfeOGwyOAREXwDX9bHdjQyYih9JhgX5g5fZyq44GVlAvD9KFqX3VdOeVNAT9qqb1lFQVwHlwCjQVgUv3mCN+pFEG3BNmb757sAI0Rfc1ohYsqWLqa8t0raG9Tk3evFuljmE7orlFlMGlHkHuI=
 env:

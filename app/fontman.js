@@ -51,20 +51,6 @@ fontmanApp
         $scope.inProgress = false;
         $scope.selectedNavIndex = 0;
 
-        // profile creation dialog
-        $scope.createProfileDialog = function (ev) {
-            $mdDialog.show({
-                controller: profileCreationController,
-                templateUrl: "ng-modules/ng-templates/create_profile.html",
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true
-            })
-                .then(function () {
-                    setAuthStatus();  // refresh auth status
-                })
-        };
-
         // login dialog
         $scope.loginDialog = function (ev) {
             $mdDialog.show({
@@ -118,40 +104,6 @@ fontmanApp
                 password: undefined
             };
 
-            $scope.cancel = function() {
-                $mdDialog.cancel();
-            };
-
-            $scope.clearFields = function () {
-                $scope.loginData.email = undefined;
-                $scope.loginData.password = undefined;
-            };
-
-            $scope.loginProfile = function () {
-                $scope.inProgress = true;
-
-                $http.post("http://127.0.0.1:5000/auth/login", $scope.loginData)
-                    .then(function onSuccess(response) {
-                        if(response.data === true) {
-                            $scope.inProgress = false;
-                            $mdDialog.hide();
-                        } else {
-                            $scope.errorResponse = response.data;
-                            $scope.inProgress = false;
-                        }
-                    })
-                    .catch(function onError() {
-                        $scope.inProgress = false;
-                        alert("FMS connection failed!");
-                    });
-
-                $scope.inProgress = false;
-            };
-        };
-
-        // profile creation dialog controller
-        var profileCreationController = function ($http, $mdDialog, $mdToast, $scope) {
-            $scope.inProgress = false;
             $scope.profileData = {
                 email: undefined,
                 name: undefined,
@@ -162,7 +114,7 @@ fontmanApp
             $scope.cancel = function() {
                 $mdDialog.cancel();
             };
-            
+
             $scope.clearFields = function () {
                 $scope.profileData.email = undefined;
                 $scope.profileData.name = undefined;
@@ -190,6 +142,27 @@ fontmanApp
 
                 $scope.inProgress = false;
             };
+
+            $scope.loginProfile = function () {
+                $scope.inProgress = true;
+
+                $http.post("http://127.0.0.1:5000/auth/login", $scope.loginData)
+                    .then(function onSuccess(response) {
+                        if(response.data === true) {
+                            $scope.inProgress = false;
+                            $mdDialog.hide();
+                        } else {
+                            $scope.errorResponse = response.data;
+                            $scope.inProgress = false;
+                        }
+                    })
+                    .catch(function onError() {
+                        $scope.inProgress = false;
+                        alert("FMS connection failed!");
+                    });
+
+                $scope.inProgress = false;
+            };
         };
 
         // set user status
@@ -209,7 +182,7 @@ fontmanApp
             if($scope.authStatus===true) {
                 $http.get("http://127.0.0.1:5000/auth/profile")
                     .then(function onSuccess(response) {
-                        $scope.fontmanUser = (response.data.name).toUpperCase();
+                        $scope.fontmanUser = (response.data.name);
                         $scope.fontmanUserId = response.data.user_id;
                     })
                     .catch(function onError(response) {

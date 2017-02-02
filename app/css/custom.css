@@ -292,6 +292,11 @@ span.offcurve { color: orangered; }
     padding-top: 150px;
 }
 
+.sign-up {
+    background-color: white;
+    padding: 10px 10px 10px 10px;
+}
+
 .slider-label {
     font-size: 12px;
 }
