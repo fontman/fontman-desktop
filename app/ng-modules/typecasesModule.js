@@ -7,94 +7,80 @@ var typecasesModule = angular.module("typecasesModule", []);
 
 
 typecasesModule
-    .controller("typecasesController", function ($http, $mdDialog, $scope) {
-        $scope.myFonts = undefined;
-        
-        $scope.addNewFontDialog = function (ev) {
-            $mdDialog.show({
-                controller: addNewFontController,
-                templateUrl: "ng-modules/ng-templates/add_font.html",
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true,
-                fullscreen: $scope.customFullscreen
-            })
-                .then(function () {
-                    refreshMyFontsList();
-                })
-        };
+    .controller("typecasesController", function ($http, $mdDialog, $scope, $timeout) {
+        $scope.fontsList = undefined;
+        $scope.viewId = {id: 2};
+        $scope.textSize = 50;
+        $scope.viewMethods = [
+            {id: 1, value: "Numerals"},
+            {id: 2, value: "Font name"},
+            {id: 3, value: "Phrase"},
+            {id: 4, value: "Paragraph"}
+        ];
 
-        var addNewFontController = function ($http, $mdDialog, $scope) {
-            $scope.channelsList = undefined;
-            $scope.inProgress = false;
-            $scope.newFont = {
-                channel_id: undefined,
-                ghPagesBranch: undefined,
-                gitRepository: undefined,
-                ghPagesFontDir: undefined,
-                gitUser: undefined,
-                name: undefined,
-                type: "Public"
-            };
-            $scope.selectedIndex = 0;
-            $scope.types = [{"id": 1, "type": "Public"}];
+        // change font view
+        $scope.$watch('viewId.id', function () {
+            if ($scope.viewId.id === 1) {
+                angular.forEach($scope.fontsList, function (font) {
+                    font.displayText = "1 2 3 4 5 6 7 8 9 0";
+                });
 
-            $scope.cancel = function() {
-                $mdDialog.hide();
-            };
+                $scope.textSize = 40;
 
-            $scope.clearFields = function () {
-                $scope.newFont.ghPagesBranch = undefined;
-                $scope.newFont.ghPagesFontDir = undefined;
-                $scope.newFont.gitRepository = undefined;
-                $scope.newFont.gitUser = undefined;
-                $scope.newFont.name = undefined;
-            };
+            } else if ($scope.viewId.id === 2) {
+                angular.forEach($scope.fontsList, function (font) {
+                    font.displayText = font.name;
+                });
 
-            $scope.addNewFont = function () {
-                $scope.inProgress = true;
+                $scope.textSize = 30;
 
-                $http.post("http://127.0.0.1:5000/fonts/new", $scope.newFont)
-                    .then(function onSuccess(response) {
-                        if (response.data === true) {
-                            $scope.inProgress = false;
-                            $scope.cancel();
-                        } else {
-                            $scope.inProgress = false;
-                            alert(response.data.error);
-                        }
-                    })
-                    .catch(function onError() {
-                        $scope.inProgress = false;
-                        alert("FMS connection failed!")
-                    });
-            };
+            } else if ($scope.viewId.id === 3) {
+                $scope.displayTexts = [
+                    "Nymphs blitz quick vex dwarf jog.",
+                    "DJs flock by when MTV ax quiz prog.",
+                    "Big fjords vex quick waltz nymph.",
+                    "Junk MTV quiz graced by fox whelps.",
+                    "Vamp fox held quartz duck just by wing."
+                ];
+                $scope.phraseIndex = 0;
 
-            // set channels list
-            var setChannelsList = function () {
-                $http.get("http://127.0.0.1:5000/channels")
-                    .then(function onSuccess(response) {
-                        $scope.channelsList = response.data;
-                        $scope.newFont.channel_id = $scope.channelsList[0].channel_id;
-                    })
-                    .catch(function () {
-                        alert("FMS connection failed!");
-                    })
-            };
+                angular.forEach($scope.fontsList, function (font) {
+                    font.displayText = $scope.displayTexts[$scope.phraseIndex%5];
+                    $scope.phraseIndex++;
+                });
 
-            setChannelsList();
-        };
+                $scope.textSize = 30;
 
-        // get my fonts list
-        var refreshMyFontsList = function () {
-            $http.get("http://127.0.0.1:5000/fonts/admin")
+            } else if($scope.viewId.id === 4) {
+                angular.forEach($scope.fontsList, function (font) {
+                    font.displayText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus ex, maximus vel dignissim et, auctor et lectus. Integer aliquet quam augue, eget venenatis ante fermentum in. Integer semper cursus nisi, non mattis ipsum pellentesque id. Donec auctor eros eu nunc vehicula posuere. Vivamus pharetra pulvinar molestie. Phasellus ullamcorper dui pretium, faucibus leo vel, hendrerit nisi. Etiam sed condimentum metus, quis vehicula nisl. Suspendisse sodales est lorem, eget luctus nisi egestas nec. Pellentesque rhoncus mi sed purus malesuada, quis laoreet lorem molestie. Sed nec purus elit. Nullam ut tortor congue, feugiat eros hendrerit, feugiat turpis.";
+                });
+
+                $scope.textSize = 16;
+            }
+        });
+
+        // get active fonts list
+        var getActiveFontsList = function () {
+            $http.get("http://127.0.0.1:5000/system/fonts")
                 .then(function onSuccess(response) {
-                    $scope.myFonts = response.data;
+                    $scope.fontsList = response.data;
                 })
-                .catch(function onError() {
-                    alert("FMS connection failed!");
-                })
+                .catch(function onError(response) {
+                });
         };
 
-        refreshMyFontsList();
+        /* option display on mouse hover */
+        $scope.hoverIn = function () {
+            this.hoverEdit = true;
+        };
+
+        $scope.hoverOut = function () {
+            this.hoverEdit = false;
+        };
+
+        $timeout(function () {
+            getActiveFontsList();
+        }, 100);
+
     });

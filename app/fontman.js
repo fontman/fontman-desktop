@@ -36,7 +36,7 @@ fontmanApp
                 controller: "comparisonController"
             })
             .when("/typecases", {
-                templateUrl: "views/typecases.html",
+                templateUrl: "views/typecase.html",
                 controller: "typecasesController"
             })
             .otherwise("/");

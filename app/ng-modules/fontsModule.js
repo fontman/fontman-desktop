@@ -12,6 +12,8 @@ fontsModule
     .controller("fontsController", function ($http, $mdDialog, $scope, $timeout, fontSelectorService) {
         $scope.fontsList = null;
         $scope.fontBucket = null;
+        $scope.selectedFont = {};
+        $scope.textSize = 50;
         $scope.viewId = {id: 2};
         $scope.viewMethods = [
             {id: 1, value: "Numerals"},
@@ -19,10 +21,8 @@ fontsModule
             {id: 3, value: "Phrase"},
             {id: 4, value: "Paragraph"}
         ];
-        $scope.selectedFont = {};
-        $scope.textSize = 50;
 
-        // chnage font view
+        // change font view
         $scope.$watch('viewId.id', function () {
             if ($scope.viewId.id === 1) {
                 angular.forEach($scope.fontsList, function (font) {
@@ -220,9 +220,30 @@ fontsModule
 
             $timeout(function () {
                 getFontBucket();
+                getFontsList();
             }, 300);
 
 
+        };
+
+        // remove from temp choices
+        $scope.removeFromBucket = function (font) {
+            $scope.json_data = {is_chosen: false};
+
+            $http.post("http://127.0.0.1:5000/fonts/" + font.font_id + "/update", $scope.json_data)
+                .then(function onSuccess(response) {
+                    if (response.data) {
+                        font.chosen = false;
+                    }
+                })
+                .catch(function onError(response) {
+                    alert("FMS connection failed");
+                });
+
+            $timeout(function () {
+                getFontBucket();
+                getFontsList();
+            }, 300);
         };
 
         $scope.flushFontBucket = function () {
@@ -305,25 +326,6 @@ fontsModule
             })
                 .then(function () {
                 })
-        };
-
-        // remove from temp choices
-        $scope.removeFromBucket = function (font) {
-            $scope.json_data = {is_chosen: false};
-
-            $http.post("http://127.0.0.1:5000/fonts/" + font.font_id + "/update", $scope.json_data)
-                .then(function onSuccess(response) {
-                    if (response.data) {
-                        font.chosen = false;
-                    }
-                })
-                .catch(function onError(response) {
-                    alert("FMS connection failed");
-                });
-
-            $timeout(function () {
-                getFontBucket();
-            }, 300);
         };
 
         // set selected font data
