@@ -30,7 +30,7 @@
 
             <li class="font-box" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontBucket">
 
-                <div layout="row" ng-show="hoverEdit">
+                <div layout="row">
 
                     <md-select aria-label="a" ng-model="font.selectedFontface">
                         <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
@@ -38,11 +38,11 @@
                         </md-option>
                     </md-select>
 
-                    <md-icon class="bucket-button" ng-click="addToBucket(font)" ng-if="!font.chosen">
+                    <md-icon class="bucket-button" ng-click="addToBucket(font)" ng-if="!font.chosen" ng-show="hoverEdit">
                         add_circle
                     </md-icon>
 
-                    <md-icon class="bucket-button" ng-click="removeFromBucket(font)" ng-if="font.chosen">
+                    <md-icon class="bucket-button" ng-click="removeFromBucket(font)" ng-if="font.chosen" ng-show="hoverEdit">
                         remove_circle
                     </md-icon>
 
@@ -94,15 +94,15 @@
 
                 <div class="top-indicator">
 
-                    <div layout="row" ng-show="hoverEdit">
+                    <div layout="row">
 
                         <div class="font-name">{{font.name}}</div>
 
-                        <md-icon class="bucket-button" ng-click="addToBucket(font)" ng-if="!font.chosen">
+                        <md-icon class="bucket-button" ng-click="addToBucket(font)" ng-if="!font.chosen" ng-show="hoverEdit">
                             add_circle
                         </md-icon>
 
-                        <md-icon class="bucket-button" ng-click="removeFromBucket(font)" ng-if="font.chosen">
+                        <md-icon class="bucket-button" ng-click="removeFromBucket(font)" ng-if="font.chosen" ng-show="hoverEdit">
                             remove_circle
                         </md-icon>
 
@@ -130,14 +130,18 @@
 
                 </div>
 
-                <div layout="row">
-                    <div flex></div>
+                <div layout="row" ng-show="hoverEdit">
 
-                    <md-select aria-label="a" ng-model="font.selectedFontface" ng-show="hoverEdit">
+                    <md-select aria-label="a" ng-model="font.selectedFontface">
                         <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
                             {{fontface.fontface}}
                         </md-option>
                     </md-select>
+
+                    <md-slider-container>
+                        <md-slider min="0" max="120" ng-model="textSize" aria-label="fSizer"></md-slider>
+                    </md-slider-container>
+
                 </div>
 
                 <hr class="divider" ng-show="hoverEdit">
