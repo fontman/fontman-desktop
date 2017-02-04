@@ -351,11 +351,12 @@ md-select .md-select-value {
 }
 
 md-option {
-    height: 30px;
+    height: 30px !important;
+    padding-right: 5px !important;
 }
 
 md-option:focus {
-    color: orangered;
+    color: orangered !important;
     font-size: 12px !important;
 }
 
@@ -364,9 +365,21 @@ md-select {
     margin: 0 !important;
 }
 
+md-select-menu md-content {
+    min-width: 80px !important;
+}
+
 .md-select-value {
     border-bottom: none !important;
     min-width: 30px !important;
+}
+
+#red-slider .md-thumb:after, #red-slider .md-track{
+    background-color: orangered !important;
+    border-color: orangered !important;
+}
+#red-slider .md-focus-thumb, #red-slider .md-focus-ring{
+    background-color: orangered;
 }
 
 md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {

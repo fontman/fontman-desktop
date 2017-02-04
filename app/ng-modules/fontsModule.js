@@ -4,7 +4,6 @@
  * Created by lpsandaruwan on 1/11/17.
  */
 
-
 var fontsModule = angular.module("fontsModule", []);
 
 

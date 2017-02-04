@@ -1,12 +1,71 @@
 const electron = require('electron');
+
 // Module to control application life.
 const app = electron.app;
+
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
+
+// build app native menus
+const {Menu} = require('electron');
+
+
+// native menu template
+const nativeMenus = [
+  {
+    label: 'Fonts',
+    submenu: [
+      {
+        label: 'Check for updates'
+      }
+    ]
+
+  },
+  {
+    label: 'Account',
+    submenu: [
+      {
+        label: 'Register'
+      },
+      {
+        label: "Sign In"
+      }
+    ]
+  },
+  {
+    label: 'Settings'
+  },
+  {
+    label: 'About'
+  },
+  {
+    label: 'Help',
+    submenu: [
+      {
+        label: 'Help'
+      },
+      {
+        label: 'Interface guide'
+      },
+      {
+        label: 'Report a bug'
+      },
+      {
+        label: 'Ask a question'
+      },
+      {
+        label: 'Updates from @fontmanApp'
+      }
+    ]
+  }
+];
+
+const menu = Menu.buildFromTemplate(nativeMenus);
+Menu.setApplicationMenu(menu);
+
+
 // Module to control tray application.
 const Tray = electron.Tray;
-const Menu = electron.Menu;
-
 
 const path = require('path');
 const url = require('url');
@@ -19,7 +78,7 @@ let appIcon = null;
 function createWindow () {
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({icon: 'images/fontman.ico', titleBarStyle: 'hidden', width: 1600, height: 850, webPreferences: {"nodeIntegration": false}});
+  mainWindow = new BrowserWindow({icon: 'images/fontman.ico', titleBarStyle: 'hidden', width: 1600, height: 850});
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -67,6 +126,3 @@ app.on('activate', function () {
   }
 
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
