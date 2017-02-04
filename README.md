@@ -1,9 +1,7 @@
 # Fontman Desktop
+###Bringing high quality Libre and Open Source fonts to your desktop in a powerful font package manger.
 
-######Version: 0.1.0-SNAPSHOT
-
-Offical desktop client for Fontman-Server API using Electron, Angularjs and Angular Material frameworks.
-
+This is the source code of the Fontman Desktop, the offical desktop client for Fontman-Server API using Electron, Angularjs and Angular Material frameworks. Fontman is a free software project licensed under GNU GPL V3.
 
 ####Installation
 
