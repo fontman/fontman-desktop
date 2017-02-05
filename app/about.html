@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+</head>
+
+<style>
+
+    .app-logo {
+        height: 80px;
+    }
+
+</style>
+
+<script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
+<script src="node_modules/angular/angular.min.js" type="text/javascript"></script>
+
+<script>
+
+    var aboutModule = angular.module("aboutModule", []);
+
+    aboutModule.controller("aboutController", function ($http, $scope) {
+        $scope.abtData = undefined;
+
+        $http.get("http://127.0.0.1:5000/settings/about")
+                .then(function onSuccess(response) {
+                    $scope.abtData = response.data;
+                })
+                .catch(function onError(response) {
+
+                })
+    });
+
+</script>
+
+<body ng-app="aboutModule" ng-controller="aboutController">
+
+<img class="app-logo" src="images/fontman.png">
+<h3>Fontman Desktop</h3>
+<h4>Version {{abtData.version}} {{abtData.platform}}</h4>
+
+<p>Fontman Desktop is a cross-platform desktop font package manager which brings latest and greatest Libre, open source fonts to your desktop.</p>
+<p>Fontman is a free software project and welcomes bug reports, suggestions, contributions and code contributions. See FAQ for more information.</p>
+<p>This software is licensed under GNU GPL version 3 and the source code is hosted on Github. See the LICENSE for more information.</p>
+
+<h5>© Copyright {{abtData.year}} Fontman Project Authors.</h5>
+
+</body>
+</html>

@@ -6,9 +6,17 @@ const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
+const path = require('path');
+const url = require('url');
+
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+let mainWindow;
+
+
 // build app native menus
 const {Menu} = require('electron');
-
+const ipc = require('electron').ipcRenderer;
 
 // native menu template
 const nativeMenus = [
@@ -16,7 +24,8 @@ const nativeMenus = [
     label: 'Fonts',
     submenu: [
       {
-        label: 'Check for updates'
+        label: 'Check for updates',
+        click () {openCheckFontsUpdate();}
       }
     ]
 
@@ -36,22 +45,27 @@ const nativeMenus = [
     label: 'Settings'
   },
   {
-    label: 'About'
+    label: 'About',
+    click () {openAbout();}
   },
   {
     label: 'Help',
     submenu: [
       {
-        label: 'Help'
+        label: 'Help',
+        click () { require('electron').shell.openExternal('http://fontman.io/help') }
       },
       {
-        label: 'Interface guide'
+        label: 'Interface guide',
+        click () { require('electron').shell.openExternal('http://fontman.io/help#desktop-interface') }
       },
       {
-        label: 'Report a bug'
+        label: 'Report a bug',
+        click () { require('electron').shell.openExternal('http://github.com/fontman/fontman-desktop/issues/new') }
       },
       {
-        label: 'Ask a question'
+        label: 'Ask a question',
+        click () { require('electron').shell.openExternal('http://github.com/fontman/fontman-desktop/issues/new') }
       },
       {
         label: 'Updates from @fontmanApp'
@@ -64,16 +78,59 @@ const menu = Menu.buildFromTemplate(nativeMenus);
 Menu.setApplicationMenu(menu);
 
 
-// Module to control tray application.
-const Tray = electron.Tray;
+// font updates window
+var checkFontsUpdates = null;
 
-const path = require('path');
-const url = require('url');
+function openCheckFontsUpdate() {
+  if (checkFontsUpdates) {
+    checkFontsUpdates.focus();
+    return;
+  }
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let mainWindow;
-let appIcon = null;
+  checkFontsUpdates = new BrowserWindow({
+    height: 400,
+    resizable: false,
+    width: 400,
+    title: "Check for font updates",
+    minimizable: true,
+    fullscreenable: false
+  });
+
+  checkFontsUpdates.loadURL('file://' + __dirname + '/views/font_updates.html');
+  checkFontsUpdates.setMenu(null);
+
+  checkFontsUpdates.on('closed', function () {
+    checkFontsUpdates = null;
+  });
+}
+
+
+// about window
+var about = null;
+
+function openAbout() {
+  if (about) {
+    about.focus();
+    return;
+  }
+
+  about = new BrowserWindow({
+    height: 500,
+    resizable: false,
+    width: 600,
+    title: "About",
+    minimizable: false,
+    fullscreenable: false
+  });
+
+  about.loadURL('file://' + __dirname + '/about.html');
+  about.setMenu(null);
+
+  about.on('closed', function () {
+    about = null;
+  });
+}
+
 
 function createWindow () {
 
@@ -88,7 +145,7 @@ function createWindow () {
   }));
 
   // remove default main menu
-  //mainWindow.setMenu(null);
+  // mainWindow.setMenu('js/menu.js');
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
