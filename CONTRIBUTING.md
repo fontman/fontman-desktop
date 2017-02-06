@@ -1,13 +1,13 @@
-#How to contribute to Fontman
+#How to contribute to Fontman Project
 
 We welcome bud reports, feature requests, suggestions, code contributions and any other form of contribution to the project given that it aligns with the product roadmap, philosophy and the plans laid out by the community and the core developers. (Checkout the issue tracker and milestones for the roadmap until we publish a more documentation)   
-
 We want to keep it easy a possible to contribute without breaking the code or stability of the project. So there are few guidelines that we recommend contributors to follow, and please note that maintainers will not hesitate to say “no” to contributions if they do not follow these guidelines mentioned below. You can always send a pull request to discuss changes to these guidelines :)
 
 
-###Fontman server, client and other tools
-
-Fontman server is the most critical element of the project. Its purpose is to provide sustainable API for Fontman client and other Fontman API seekers. Fontman client also follows a client-server architecture, and it is made of two components: the [fontman-desktop-core](https://github.com/fontman/fontman-desktop-core) and the [fontman-desktop](https://github.com/fontman/fontman-desktop). `fontman-desktop-core` is the backend of the [fontman-desktop](https://github.com/fontman/fontman-desktop) GUI client, and it handles the font management tasks and Fontman server API consuming. `fontman-desktop` is a GUI desktop application with a beautiful and efficient user interface for managing font services from the Core.
+###About Fontman project
+The aim of Fontman (stands for font manager) project is to provide efficient, user-friendly and sustainable systems, tools and standards for managing, distributing and consuming fonts on multiple production platforms and workflows. Fontman software stack is the backbone of this scheme and is made of a few different components make sure we have a flexible set of tools that can achieve the expected functionality while maintaining an integrity of the code.
+Fontman project is led by a group of graphic designers, typeface designers, font developers and software developers interested in font and text technologies and free software. Thus the project is heavily focused on making functionally as well as beautiful software. We are actively seeking for contribution in any form to take the project forward. We strongly encourage you to take a look at the issue tracker to see how the community resolve issues to get hold of the philosophy of the project before contributing. (We will do better documentation by Ocotber 2017)
+ [fontman-server](https://github.com/fontman/fontman-server) provides a sustainable API for Fontman offcial desktop client and other Fontman API seekers. Fontman client also follows a client-server architecture, and it is made of two components: the [fontman-desktop-core](https://github.com/fontman/fontman-desktop-core) and the [fontman-desktop](https://github.com/fontman/fontman-desktop). `fontman-desktop-core` is the backend of the [fontman-desktop](https://github.com/fontman/fontman-desktop) GUI client, and it handles the font management tasks and Fontman server API consuming. `fontman-desktop` is a GUI desktop application with a beautiful and efficient user interface for managing font services from the Core.
 
 
 ###Getting started
