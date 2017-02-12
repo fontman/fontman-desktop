@@ -31,17 +31,6 @@ const nativeMenus = [
 
   },
   {
-    label: 'Account',
-    submenu: [
-      {
-        label: 'Register'
-      },
-      {
-        label: "Sign In"
-      }
-    ]
-  },
-  {
     label: 'Settings'
   },
   {

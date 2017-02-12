@@ -21,8 +21,6 @@
         <div class="sideBar" layout="column" ng-controller="mainController">
 
             <span class="sideBar-space-padding-empty">
-                <md-input-container>
-                </md-input-container>
             </span>
 
             <md-sidemenu locked="true">
@@ -63,6 +61,15 @@
 
                 </md-sidemenu-group>
 
+                <md-sidemenu-group>
+
+                    <li ng-repeat="elem in fontBucket">
+
+                        {{elem.name}}
+
+                    </li>
+
+                </md-sidemenu-group>
 
             </md-sidemenu>
 

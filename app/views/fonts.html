@@ -26,86 +26,51 @@
 
     <div class="content">
 
-        <ul>
-
-            <li class="font-box" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontBucket">
-
-                <div layout="row">
-
-                    <md-select aria-label="a" ng-model="font.selectedFontface">
-                        <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
-                            {{fontface.fontface}}
-                        </md-option>
-                    </md-select>
-
-                    <md-icon class="bucket-button" ng-click="addToBucket(font)" ng-if="!font.chosen" ng-show="hoverEdit">
-                        add_circle
-                    </md-icon>
-
-                    <md-icon class="bucket-button" ng-click="removeFromBucket(font)" ng-if="font.chosen" ng-show="hoverEdit">
-                        remove_circle
-                    </md-icon>
-
-                </div>
-
-                <div>
-
-                    <div>
-
-                        <div ng-repeat="fontface in font.fontfaces">
-
-                            <style scoped>
-                                @font-face {font-family:"{{font.name}}-{{fontface.fontface}}"; src: url({{fontface.resource_path}}) format("opentype");}
-                            </style>
-
-                        </div>
-
-                        <p class="bucketed-text" style="font-size: {{textSize}}px; font-family: {{font.name}}-{{font.selectedFontface}}">
-                            {{font.displayText}}
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div layout="row" ng-show="hoverEdit">
-
-                    <div class="box-button" ng-click="showFontSpecimen($event, font)">
-                        SEE
-                    </div>
-
-                    <div class="box-button" ng-click="showFontTester($event, font)">
-                        TEST
-                    </div>
-
-                    <div class="box-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="font.is_installed">
-                        REINSTALL
-                    </div>
-
-                    <div class="box-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="!font.is_installed">
-                        INSTALL
-                    </div>
-
-                </div>
-
-            </li>
+        <ul class="font-list">
 
             <li class="font-box" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontsList | filter:searchText">
 
-                <div class="top-indicator">
+                <div class="top-indicator" layout="row">
 
-                    <div layout="row">
+                    <div layout="column">
 
-                        <div class="font-name">{{font.name}}</div>
+                        <div layout="row">
 
-                        <md-icon class="bucket-button" ng-click="addToBucket(font)" ng-if="!font.chosen" ng-show="hoverEdit">
-                            add_circle
-                        </md-icon>
+                            <div class="font-name">
+                                {{font.name}}
 
-                        <md-icon class="bucket-button" ng-click="removeFromBucket(font)" ng-if="font.chosen" ng-show="hoverEdit">
-                            remove_circle
-                        </md-icon>
+                                <md-icon class="bucket-button" ng-click="addToBucket(font)" ng-if="!font.chosen" ng-show="hoverEdit">
+                                    add_circle
+                                </md-icon>
 
+                                <md-icon class="bucket-button" ng-click="removeFromBucket(font)" ng-if="font.chosen" ng-show="hoverEdit">
+                                    remove_circle
+                                </md-icon>
+
+                            </div>
+
+                        </div>
+
+                        <hr class="divider" ng-show="hoverEdit">
+
+                        <div layout="row" ng-show="hoverEdit">
+
+                            <md-select aria-label="a" ng-model="font.selectedFontface">
+                                <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
+                                    {{fontface.fontface}}
+                                </md-option>
+                            </md-select>
+
+                            <md-slider min="0" max="120" ng-model="textSize" aria-label="fSizer" id="red-slider"></md-slider>
+
+                        </div>
+
+                        <hr class="divider" ng-show="hoverEdit">
+
+                    </div>
+
+                    <div class="box-button" layout="column" flex="15" ng-show="hoverEdit">
+                        apply to all →
                     </div>
 
                 </div>
@@ -122,7 +87,7 @@
 
                         </div>
 
-                        <p contentEditable style="font-size: {{textSize}}px; font-family: {{font.name}}-{{font.selectedFontface}}">
+                        <p class="box-body" contentEditable style="font-size: {{textSize}}px; font-family: {{font.name}}-{{font.selectedFontface}}">
                             {{font.displayText}}
                         </p>
 
@@ -130,23 +95,11 @@
 
                 </div>
 
-                <div layout="row" ng-show="hoverEdit">
-
-                    <md-select aria-label="a" ng-model="font.selectedFontface">
-                        <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
-                            {{fontface.fontface}}
-                        </md-option>
-                    </md-select>
-
-                    <md-slider-container>
-                        <md-slider min="0" max="120" ng-model="textSize" aria-label="fSizer" id="red-slider"></md-slider>
-                    </md-slider-container>
-
-                </div>
+                <div flex></div>
 
                 <hr class="divider" ng-show="hoverEdit">
 
-                <div layout="row" ng-show="hoverEdit">
+                <div class="box-footer" layout="row" ng-show="hoverEdit">
 
                     <div class="box-button" ng-click="showFontSpecimen($event, font)">
                         SEE

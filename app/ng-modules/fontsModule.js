@@ -10,7 +10,6 @@ var fontsModule = angular.module("fontsModule", []);
 fontsModule
     .controller("fontsController", function ($http, $mdDialog, $scope, $timeout, fontSelectorService) {
         $scope.fontsList = null;
-        $scope.fontBucket = null;
         $scope.selectedFont = {};
         $scope.textSize = 50;
         $scope.viewId = {id: 2};
@@ -28,14 +27,14 @@ fontsModule
                     font.displayText = "1 2 3 4 5 6 7 8 9 0";
                 });
 
-                $scope.textSize = 40;
+                $scope.textSize = 60;
 
             } else if ($scope.viewId.id === 2) {
                 angular.forEach($scope.fontsList, function (font) {
                     font.displayText = font.name;
                 });
 
-                $scope.textSize = 30;
+                $scope.textSize = 60;
 
             } else if ($scope.viewId.id === 3) {
                 $scope.displayTexts = [
@@ -56,7 +55,7 @@ fontsModule
 
             } else if($scope.viewId.id === 4) {
                 angular.forEach($scope.fontsList, function (font) {
-                    font.displayText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus ex, maximus vel dignissim et, auctor et lectus. Integer aliquet quam augue, eget venenatis ante fermentum in. Integer semper cursus nisi, non mattis ipsum pellentesque id. Donec auctor eros eu nunc vehicula posuere. Vivamus pharetra pulvinar molestie. Phasellus ullamcorper dui pretium, faucibus leo vel, hendrerit nisi. Etiam sed condimentum metus, quis vehicula nisl. Suspendisse sodales est lorem, eget luctus nisi egestas nec. Pellentesque rhoncus mi sed purus malesuada, quis laoreet lorem molestie. Sed nec purus elit. Nullam ut tortor congue, feugiat eros hendrerit, feugiat turpis.";
+                    font.displayText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus ex, maximus vel dignissim et, auctor et lectus. Integer aliquet quam augue, eget venenatis ante fermentum in. Integer semper cursus nisi, non mattis ipsum pellentesque id. Donec auctor eros eu nunc vehicula posuere.";
                 });
 
                 $scope.textSize = 16;
@@ -81,9 +80,10 @@ fontsModule
                 $scope.inProgress = true;
 
                 $http.get("http://127.0.0.1:5000/fonts/" + $scope.font_id + "/install/" + $scope.selectedReleaseId)
-                    .then(function onSucess(response) {
+                    .then(function onSuccess(response) {
                         if (response.data) {
                             $scope.inProgress = false;
+                            $mdDialog.hide();
                         } else {
                             $scope.inProgress = false;
                             $scope.error = true;
@@ -94,16 +94,12 @@ fontsModule
                         $scope.inProgress = false;
                     });
             };
-            
-            $scope.test = function () {
-                alert("sfdfs");
-            };
 
             $scope.reinstallFont = function () {
                 $scope.inProgress = true;
 
                 $http.get("http://127.0.0.1:5000/fonts/" + $scope.font_id + "/reinstall/" + $scope.selectedReleaseId)
-                    .then(function onSucess(response) {
+                    .then(function onSuccess(response) {
                         if (response.data) {
                             $scope.inProgress = false;
                             $scope.cancel();
@@ -126,7 +122,6 @@ fontsModule
                 .then(function onSuccess(response) {
                     $scope.relInfo = response.data;
                 });
-
         };
         
         // font specimen view controller
@@ -181,8 +176,8 @@ fontsModule
             
         };
 
-        // get font bucket list
-        var getFontBucket = function () {
+        // set font bucket list
+        var setFontBucket = function () {
             $http.get("http://127.0.0.1:5000/fonts/?" + "is_chosen=true")
                 .then(function onSuccess(response) {
                     $scope.fontBucket = response.data;
@@ -216,9 +211,8 @@ fontsModule
                 .catch(function onError(response) {
                     alert("FMS connection failed");
                 });
-
+            
             $timeout(function () {
-                getFontBucket();
                 getFontsList();
             }, 300);
 
@@ -240,7 +234,7 @@ fontsModule
                 });
 
             $timeout(function () {
-                getFontBucket();
+                setFontBucket();
                 getFontsList();
             }, 300);
         };
@@ -250,7 +244,7 @@ fontsModule
             $http.post("http://127.0.0.1:5000/fonts/update", json_data)
                 .then(function onSuccess(response) {
                     if (response.data) {
-                        getFontBucket();
+                        setFontBucket();
                         getFontsList();
                     }
                 })
@@ -282,13 +276,12 @@ fontsModule
                 }
             })
                 .then(function () {
-                    getFontBucket();
+                    setFontBucket();
                     getFontsList();
                 })
         };
         
         $scope.showFontSpecimen = function (ev, font) {
-            json_data = {"selectedFontface": font.selectedFontface};
             $http.post("http://127.0.0.1:5000/fontfaces/" + font.font_id + "/specimen/set", json_data)
                 .then(function onSuccess(response) {
                 })
@@ -334,7 +327,7 @@ fontsModule
         };
 
         // load fonts list from FMS database
-        getFontBucket();
+        setFontBucket();
         getFontsList();
 
         // set first font of the fonts list as the selected font
@@ -427,7 +420,7 @@ fontsModule
         };
 
         // get font bucket list
-        var getFontBucket = function () {
+        var setFontBucket = function () {
             if ($scope.isFilledBucket) {
                 $http.get("http://127.0.0.1:5000/fonts/?" + "is_chosen=true")
                     .then(function onSuccess(response) {
@@ -461,7 +454,7 @@ fontsModule
 
         // load font bucket
         $timeout(function () {
-            getFontBucket();
+            setFontBucket();
         }, 200);
 
         // left side view and functions

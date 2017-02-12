@@ -192,10 +192,9 @@ fontmanApp
                 $scope.fontmanUser = "FONTMAN USER";
             }
         };
-
+        
         setAuthStatus();
     });
-
 
 fontmanApp
     .factory("fontSelectorService", function () {
