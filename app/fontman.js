@@ -6,7 +6,6 @@
  */
 
 var fontmanApp = angular.module("fontmanApp", [
-    "collectionsModule",
     "fontsModule",
     "InlineTextEditor",
     "ngMaterial",
@@ -26,14 +25,6 @@ fontmanApp
             .when("/", {
                 templateUrl: "views/fonts.html",
                 controller: "fontsController"
-            })
-            .when("/collections", {
-                templateUrl: "views/collections.html",
-                controller: "collectionsController"
-            })
-            .when("/comparison", {
-                templateUrl: "views/compare.html",
-                controller: "comparisonController"
             })
             .when("/typecases", {
                 templateUrl: "views/typecase.html",

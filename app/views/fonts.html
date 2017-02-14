@@ -39,11 +39,11 @@
                             <div class="font-name">
                                 {{font.name}}
 
-                                <md-icon class="bucket-button" ng-click="addToBucket(font)" ng-if="!font.chosen" ng-show="hoverEdit">
+                                <md-icon class="bucket-button" ng-click="addToFavorites(font)" ng-if="!font.chosen" ng-show="hoverEdit">
                                     add_circle
                                 </md-icon>
 
-                                <md-icon class="bucket-button" ng-click="removeFromBucket(font)" ng-if="font.chosen" ng-show="hoverEdit">
+                                <md-icon class="bucket-button" ng-click="removeFromFavorites(font)" ng-if="font.chosen" ng-show="hoverEdit">
                                     remove_circle
                                 </md-icon>
 
@@ -101,19 +101,19 @@
 
                 <div class="box-footer" layout="row" ng-show="hoverEdit">
 
-                    <div class="box-button" ng-click="showFontSpecimen($event, font)">
+                    <div class="box-button" ng-click="">
                         SEE
                     </div>
 
-                    <div class="box-button" ng-click="showFontTester($event, font)">
+                    <div class="box-button" ng-click="">
                         TEST
                     </div>
 
-                    <div class="box-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="font.is_installed">
-                        REINSTALL
+                    <div class="box-button" ng-click="" ng-show="font.is_installed">
+                        REMOVE
                     </div>
 
-                    <div class="box-button" ng-click="showFontInstaller($event, font.font_id)" ng-show="!font.is_installed">
+                    <div class="box-button" ng-click="" ng-show="!font.is_installed">
                         INSTALL
                     </div>
 

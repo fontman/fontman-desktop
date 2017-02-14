@@ -22,6 +22,8 @@
 
             <span class="sideBar-space-padding-empty">
             </span>
+            <span class="sideBar-space-padding-empty">
+            </span>
 
             <md-sidemenu locked="true">
 
@@ -35,18 +37,6 @@
                         My Typecase
                     </md-sidemenu-button>
 
-                    <md-sidemenu-button href="#/comparison" ng-class="{'nav-selected':selectedNavIndex==2}" ng-click="setSelectedNavIndex(2)">
-                        Test/Compare
-                    </md-sidemenu-button>
-
-                    <md-sidemenu-button href="http://fontman.io/fund" target="_blank">
-                        Fund
-                    </md-sidemenu-button>
-
-                </md-sidemenu-group>
-
-                <md-sidemenu-group>
-
                     <md-sidemenu-button ng-if="authStatus===false || authStatus.includes('undefined')" ng-click="loginDialog($event)">
                         Sign Up
                     </md-sidemenu-button>
@@ -59,15 +49,9 @@
 
                     </md-sidemenu-content>
 
-                </md-sidemenu-group>
-
-                <md-sidemenu-group>
-
-                    <li ng-repeat="elem in fontBucket">
-
-                        {{elem.name}}
-
-                    </li>
+                    <md-sidemenu-button href="http://fontman.io/fund" target="_blank">
+                        Fund
+                    </md-sidemenu-button>
 
                 </md-sidemenu-group>
 
@@ -101,7 +85,6 @@
 <script src="bower_components/angular-inline-text-editor/ite.js" type="text/javascript"></script>
 
 <script src="fontman.js" type="text/javascript"></script>
-<script src="ng-modules/collectionsModule.js" type="text/javascript"></script>
 <script src="ng-modules/fontsModule.js" type="text/javascript"></script>
 <script src="ng-modules/typecasesModule.js" type="text/javascript"></script>
 

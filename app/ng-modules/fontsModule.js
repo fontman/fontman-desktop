@@ -62,131 +62,6 @@ fontsModule
             }
         });
 
-        // font installation
-        var fontInstallerController = function ($http, $mdDialog, $scope, font_id) {
-            $scope.font_id = font_id;
-            $scope.fontInfo = undefined;
-            $scope.error = false;
-            $scope.errorMsg = "";
-            $scope.inProgress = false;
-            $scope.relInfo = undefined;
-            $scope.selectedReleaseId = undefined;
-            
-            $scope.cancel = function() {
-                $mdDialog.hide();
-            };
-
-            $scope.installFont = function () {
-                $scope.inProgress = true;
-
-                $http.get("http://127.0.0.1:5000/fonts/" + $scope.font_id + "/install/" + $scope.selectedReleaseId)
-                    .then(function onSuccess(response) {
-                        if (response.data) {
-                            $scope.inProgress = false;
-                            $mdDialog.hide();
-                        } else {
-                            $scope.inProgress = false;
-                            $scope.error = true;
-                            $scope.errorMsg = response.data.error;
-                        }
-                    })
-                    .catch(function onError() {
-                        $scope.inProgress = false;
-                    });
-            };
-
-            $scope.reinstallFont = function () {
-                $scope.inProgress = true;
-
-                $http.get("http://127.0.0.1:5000/fonts/" + $scope.font_id + "/reinstall/" + $scope.selectedReleaseId)
-                    .then(function onSuccess(response) {
-                        if (response.data) {
-                            $scope.inProgress = false;
-                            $scope.cancel();
-                        } else {
-                            $scope.inProgress = false;
-                            alert(response.data.error);
-                        }
-                    })
-                    .catch(function onError() {
-                        $scope.inProgress = false;
-                    });
-            };
-
-            $http.get("http://127.0.0.1:5000/fonts/" + $scope.font_id)
-                .then(function onSuccess(response) {
-                    $scope.fontInfo = response.data;
-                });
-
-            $http.get("http://127.0.0.1:5000/fonts/" + $scope.font_id + "/releases")
-                .then(function onSuccess(response) {
-                    $scope.relInfo = response.data;
-                });
-        };
-        
-        // font specimen view controller
-        var fontSpecimenController = function ($http, $mdDialog, $scope, font) {
-            $scope.font = font;
-            
-            $scope.cancel = function() {
-                $mdDialog.hide();
-            };
-        };
-        
-        // font test controller
-        var fontTestController = function ($http, $mdDialog, $scope, font) {
-            $scope.font = angular.copy(font);
-
-            $scope.mainTitle = "maintitle";
-            $scope.mainTitleControllers = true;
-            $scope.mainTitleFont = angular.copy($scope.font);
-            $scope.mainTitleFontSize = 70;
-
-            $scope.subTitle = "subtitle";
-            $scope.subTitleControllers = false;
-            $scope.subTitleFont = angular.copy($scope.font);
-            $scope.subTitleFontSize = 40;
-
-            $scope.textBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus ex, maximus vel dignissim et, auctor et lectus. Integer aliquet quam augue, eget venenatis ante fermentum in. Integer semper cursus nisi, non mattis ipsum pellentesque id. Donec auctor eros eu nunc vehicula posuere. Vivamus pharetra pulvinar molestie. Phasellus ullamcorper dui pretium, faucibus leo vel, hendrerit nisi. Etiam sed condimentum metus, quis vehicula nisl. Suspendisse sodales est lorem, eget luctus nisi egestas nec. Pellentesque rhoncus mi sed purus malesuada, quis laoreet lorem molestie. Sed nec purus elit. Nullam ut tortor congue, feugiat eros hendrerit, feugiat turpis.";
-            $scope.textBodyControllers = false;
-            $scope.textBodyFont = angular.copy($scope.font);
-            $scope.textBodyFontSize = 16;
-
-            $scope.cancel = function() {
-                $mdDialog.hide();
-            };
-            
-            $scope.mainTitleClick = function () {
-                $scope.mainTitleControllers = true;
-                $scope.subTitleControllers = false;
-                $scope.textBodyControllers = false
-            };
-
-            $scope.subTitleClick = function () {
-                $scope.mainTitleControllers = false;
-                $scope.subTitleControllers = true;
-                $scope.textBodyControllers = false
-            };
-
-            $scope.textBodyClick = function () {
-                $scope.mainTitleControllers = false;
-                $scope.subTitleControllers = false;
-                $scope.textBodyControllers = true
-            };
-            
-        };
-
-        // set font bucket list
-        var setFontBucket = function () {
-            $http.get("http://127.0.0.1:5000/fonts/?" + "is_chosen=true")
-                .then(function onSuccess(response) {
-                    $scope.fontBucket = response.data;
-                })
-                .catch(function onError(response) {
-                    return {"error": "FMS connection failed"}
-                });
-        };
-
         // get fonts list
         var getFontsList = function () {
             $http.get("http://127.0.0.1:5000/fonts")
@@ -199,7 +74,7 @@ fontsModule
         };
 
         // add font to temp choices
-        $scope.addToBucket = function (font) {
+        $scope.addToFavorites = function (font) {
             $scope.json_data = {is_chosen: true};
 
             $http.post("http://127.0.0.1:5000/fonts/" + font.font_id + "/update", $scope.json_data)
@@ -220,7 +95,7 @@ fontsModule
         };
 
         // remove from temp choices
-        $scope.removeFromBucket = function (font) {
+        $scope.removeFromFavorites = function (font) {
             $scope.json_data = {is_chosen: false};
 
             $http.post("http://127.0.0.1:5000/fonts/" + font.font_id + "/update", $scope.json_data)
@@ -234,23 +109,8 @@ fontsModule
                 });
 
             $timeout(function () {
-                setFontBucket();
                 getFontsList();
             }, 300);
-        };
-
-        $scope.flushFontBucket = function () {
-            var json_data = {is_chosen: false};
-            $http.post("http://127.0.0.1:5000/fonts/update", json_data)
-                .then(function onSuccess(response) {
-                    if (response.data) {
-                        setFontBucket();
-                        getFontsList();
-                    }
-                })
-                .catch(function onError(response) {
-                    alert("FMS connection failed");
-                });
         };
 
         /* option display on mouse hover */
@@ -260,64 +120,6 @@ fontsModule
 
         $scope.hoverOut = function () {
             this.hoverEdit = false;
-        };
-
-        // font installer dialog
-        $scope.showFontInstaller = function (ev, font_id) {
-            $mdDialog.show({
-                controller: fontInstallerController,
-                templateUrl: "ng-modules/ng-templates/install_font.html",
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true,
-                fullscreen: $scope.customFullscreen,
-                locals : {
-                    font_id: font_id
-                }
-            })
-                .then(function () {
-                    setFontBucket();
-                    getFontsList();
-                })
-        };
-        
-        $scope.showFontSpecimen = function (ev, font) {
-            $http.post("http://127.0.0.1:5000/fontfaces/" + font.font_id + "/specimen/set", json_data)
-                .then(function onSuccess(response) {
-                })
-                .catch(function onError(response) {
-                    alert("FMS connection failed");
-                });
-
-            $mdDialog.show({
-                controller: fontSpecimenController,
-                templateUrl: "ng-modules/ng-templates/specimen.html",
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true,
-                fullscreen: $scope.customFullscreen,
-                locals : {
-                    font: font
-                }
-            })
-                .then(function () {
-                })
-        };
-        
-        $scope.showFontTester = function (ev, font) {
-            $mdDialog.show({
-                controller: fontTestController,
-                templateUrl: "ng-modules/ng-templates/font_test.html",
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true,
-                fullscreen: $scope.customFullscreen,
-                locals : {
-                    font: font
-                }
-            })
-                .then(function () {
-                })
         };
 
         // set selected font data
@@ -327,7 +129,6 @@ fontsModule
         };
 
         // load fonts list from FMS database
-        setFontBucket();
         getFontsList();
 
         // set first font of the fonts list as the selected font
@@ -336,141 +137,5 @@ fontsModule
             $scope.selectedFont = fontSelectorService.getSelectedFont();
 
         }, 1000);
-
-    });
-
-
-fontsModule
-    .controller("comparisonController", function ($http, $mdDialog, $scope, $timeout) {
-        $scope.applyStyleToAll = true;
-        $scope.unifiedLeft = true;
-        $scope.unifiedRight = true;
-
-        $scope.isFilledBucket = false;
-        $scope.fontBucket = [];
-        $scope.selectedFont = undefined;
-
-        $scope.mainTitle = "maintitle";
-        $scope.mainTitleControllers = false;
-        $scope.mainTitleFont = undefined;
-        $scope.mainTitleFontList = undefined;
-        $scope.mainTitleFontSize = 70;
-
-        $scope.subTitle = "subtitle";
-        $scope.subTitleControllers = false;
-        $scope.subTitleFont = undefined;
-        $scope.subTitleFontList = undefined;
-        $scope.subTitleFontSize = 40;
-        
-        $scope.textBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus ex, maximus vel dignissim et, auctor et lectus. Integer aliquet quam augue, eget venenatis ante fermentum in. Integer semper cursus nisi, non mattis ipsum pellentesque id. Donec auctor eros eu nunc vehicula posuere. Vivamus pharetra pulvinar molestie. Phasellus ullamcorper dui pretium, faucibus leo vel, hendrerit nisi. Etiam sed condimentum metus, quis vehicula nisl. Suspendisse sodales est lorem, eget luctus nisi egestas nec. Pellentesque rhoncus mi sed purus malesuada, quis laoreet lorem molestie. Sed nec purus elit. Nullam ut tortor congue, feugiat eros hendrerit, feugiat turpis.";
-        $scope.textBodyControllers = false;
-        $scope.textBodyFont = undefined;
-        $scope.textBodyFontList = undefined;
-        $scope.textBodyFontSize = 16;
-        
-        // set controllers on ng click
-        $scope.mainTitleClick = function () {
-            $scope.applyStyleToAll = false;
-            $scope.mainTitleControllers = true;
-            $scope.subTitleControllers = false;
-            $scope.textBodyControllers = false;
-        };
-
-        $scope.subTitleClick = function () {
-            $scope.applyStyleToAll = false;
-            $scope.mainTitleControllers = false;
-            $scope.subTitleControllers = true;
-            $scope.textBodyControllers = false;
-        };
-
-        $scope.textBodyClick = function () {
-            $scope.applyStyleToAll = false;
-            $scope.mainTitleControllers = false;
-            $scope.subTitleControllers = false;
-            $scope.textBodyControllers = true;
-        };
-        
-        // view behaviour change left side
-        $scope.behaviourChangeLeft = function () {
-            if ($scope.unifiedLeft) {
-                $scope.unifiedLeft = false;
-            } else {
-                $scope.unifiedLeft = true;
-            }
-        };
-
-        // view behaviour change right side
-        $scope.behaviourChangeRight = function () {
-            if ($scope.unifiedRight) {
-                $scope.unifiedRight = false;
-            } else {
-                $scope.unifiedRight = true;
-            }
-        };
-
-        // get bucket status
-        var getBucketStatus = function () {
-            $http.get("http://127.0.0.1:5000/fonts/status/chosen")
-                .then(function onSuccess(response) {
-                    $scope.isFilledBucket = response.data;
-                })
-                .catch(function onError(response) {
-                    alert("FMS connection failed")
-                });
-        };
-
-        // get font bucket list
-        var setFontBucket = function () {
-            if ($scope.isFilledBucket) {
-                $http.get("http://127.0.0.1:5000/fonts/?" + "is_chosen=true")
-                    .then(function onSuccess(response) {
-                        $scope.fontBucket = response.data;
-                    })
-                    .catch(function onError(response) {
-                        return {"error": "FMS connection failed"}
-                    });
-            } else {
-                $http.get("http://127.0.0.1:5000/fonts")
-                    .then(function onSuccess(response) {
-                        $scope.fontBucket = response.data;
-                    })
-                    .catch(function onError(response) {
-                        return {"error": "FMS connection failed"}
-                    });
-            }
-        };
-
-
-        /* option display on mouse hover */
-        $scope.hoverIn = function () {
-            this.hoverEdit = true;
-        };
-
-        $scope.hoverOut = function () {
-            this.hoverEdit = false;
-        };
-
-        getBucketStatus();
-
-        // load font bucket
-        $timeout(function () {
-            setFontBucket();
-        }, 200);
-
-        // left side view and functions
-        $timeout(function () {
-            $scope.selectedFontLeft = $scope.fontBucket[0];
-            $scope.selectedFontRight = $scope.fontBucket[0];
-
-            $scope.mainTitleFontList = angular.copy($scope.fontBucket);
-            $scope.mainTitleFont = $scope.mainTitleFontList[0];
-
-            $scope.subTitleFontList = angular.copy($scope.fontBucket);
-            $scope.subTitleFont = $scope.subTitleFontList[0];
-
-            $scope.textBodyFontList = angular.copy($scope.fontBucket);
-            $scope.textBodyFont = $scope.textBodyFontList[0];
-
-        }, 300);
 
     });
