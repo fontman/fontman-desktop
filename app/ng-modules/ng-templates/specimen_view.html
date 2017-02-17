@@ -1,0 +1,56 @@
+<md-dialog aria-label="specimen" class="specimen-dialog">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools" >
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog" class="close-dialog-icon">keyboard_backspace</md-icon>
+            </md-button>
+
+            <h1>{{font.name}}</h1>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+
+    <md-content class="specimen-view" layout="row">
+
+        <div class="specimen-left-column" layout="column" flex="70">
+
+            <ul>
+
+                <li ng-repeat="fontface in font.fontfaces">
+
+                    <style scoped>
+                        @font-face {font-family:"{{font.name}}-{{fontface.fontface}}"; src: url({{fontface.resource_path}}) format("truetype");}
+                    </style>
+
+                    <div class="specimen-text" style="font-family: {{font.name}}-{{fontface.fontface}}">
+                        {{font.displayText}}
+                    </div>
+
+                    <div class="specimen-tiny-text">
+                        {{fontface.fontface}}
+                    </div>
+
+
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="specimen-right-column" layout="column" flex="30">
+
+            <h5>About</h5>
+
+            <p>
+
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+            </p>
+
+        </div>
+
+
+    </md-content>
+
+</md-dialog>

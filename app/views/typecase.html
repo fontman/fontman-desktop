@@ -1,91 +1,78 @@
-<div class="wrapper" ng-controller="typecasesController">
+<div class="wrapper" ng-controller="typecaseController">
 
-    <div class="header">
+    <div  layout="row" >
 
-        <div class="options-panel" layout="row">
+        <div layout="column">
 
-            <div class="search-area">
-                <md-input-container flex="80">
-                    <input ng-model="searchText" placeholder="Search">
-                </md-input-container>
+            <div class="header">
+
+                <h3>Favorites</h3>
+
+                <ul>
+
+                    <li ng-repeat="font in favoriteFonts">
+
+                        {{font.name}}
+
+                    </li>
+
+                </ul>
+
             </div>
 
-            <div class="font-view-options">
-                <md-input-container>
-                    <md-select aria-label="a" ng-model="viewId.id" placeholder="Custom">
-                        <md-option ng-value="view.id" ng-repeat="view in viewMethods">
-                            {{view.value}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
+            <div>
+
+                <div class="header" layout="row">
+
+                    <h3>Collections</h3>
+
+                    <div flex></div>
+
+                    <div>Add new collection</div>
+
+                </div>
+
+                <div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="typecase-system-fonts" layout="column" flex="30">
+
+            <div class="header">
+
+                <h3>Active fonts</h3>
+
+            </div>
+
+            <div class="content">
+                <br>
+
+                <ul>
+
+                    <li class="system-font" ng-repeat="font in systemFonts">
+
+                        <style scoped>
+                            @font-face {font-family:"{{font.fontface}}"; src: url({{font.resource_path}}) format("opentype");}
+                        </style>
+
+                        <span style="font-family: {{font.fontface}}">
+                            {{font.name}}
+                        </span>
+                    </li>
+
+                </ul>
+
             </div>
 
         </div>
 
     </div>
 
-    <div class="content">
 
-        <ul>
-
-            <li class="font-box" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontsList | filter:searchText">
-
-                <div class="top-indicator">
-
-                    <div layout="row">
-                        <div class="font-name">{{font.name}}</div>
-                    </div>
-
-                </div>
-
-                <div>
-
-                    <div>
-
-                        <div ng-repeat="fontface in font.fontfaces">
-
-                            <style scoped>
-                                @font-face {font-family:"{{font.name}}-{{fontface.fontface}}"; src: url({{fontface.resource_path}}) format("truetype");}
-                            </style>
-
-                        </div>
-
-                        <p contentEditable style="font-size: {{textSize}}px; font-family: {{font.name}}-{{font.selectedFontface}}">
-                            {{font.displayText}}
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div layout="row">
-                    <div flex></div>
-
-                    <md-select aria-label="a" ng-model="font.selectedFontface" ng-show="hoverEdit">
-                        <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
-                            {{fontface.fontface}}
-                        </md-option>
-                    </md-select>
-                </div>
-
-                <hr class="divider" ng-show="hoverEdit">
-
-                <div layout="row" ng-show="hoverEdit">
-
-                    <div class="box-button" ng-click="showFontSpecimen($event, font)">
-                        SEE
-                    </div>
-
-                    <div class="box-button" ng-click="showFontTester($event, font)">
-                        TEST
-                    </div>
-
-                </div>
-
-            </li>
-
-        </ul>
-
-    </div>
 
 </div>

@@ -73,44 +73,35 @@ fontsModule
                 })
         };
 
-        // add font to temp choices
+        // add font to favorites
         $scope.addToFavorites = function (font) {
             $scope.json_data = {is_chosen: true};
 
-            $http.post("http://127.0.0.1:5000/fonts/" + font.font_id + "/update", $scope.json_data)
+            $http.post("http://127.0.0.1:5000/fonts/" + font.fontId + "/update", $scope.json_data)
                 .then(function onSuccess(response) {
                     if (response.data) {
-                        font.chosen = true;
+                        font.isChosen = true;
                     }
                 })
                 .catch(function onError(response) {
                     alert("FMS connection failed");
                 });
-            
-            $timeout(function () {
-                getFontsList();
-            }, 300);
-
 
         };
 
-        // remove from temp choices
+        // remove from favorites
         $scope.removeFromFavorites = function (font) {
             $scope.json_data = {is_chosen: false};
 
-            $http.post("http://127.0.0.1:5000/fonts/" + font.font_id + "/update", $scope.json_data)
+            $http.post("http://127.0.0.1:5000/fonts/" + font.fontId + "/update", $scope.json_data)
                 .then(function onSuccess(response) {
                     if (response.data) {
-                        font.chosen = false;
+                        font.isChosen = false;
                     }
                 })
                 .catch(function onError(response) {
                     alert("FMS connection failed");
                 });
-
-            $timeout(function () {
-                getFontsList();
-            }, 300);
         };
 
         /* option display on mouse hover */
@@ -136,6 +127,38 @@ fontsModule
             fontSelectorService.selectFont($scope.fontsList[0]);
             $scope.selectedFont = fontSelectorService.getSelectedFont();
 
-        }, 1000);
+        }, 500);
+
+
+        /*** specimen view controllers ***/
+        // show font specimen view
+        $scope.showSpecimenView = function (ev, font) {
+            $mdDialog.show({
+                controller: specimenController,
+                templateUrl: "ng-modules/ng-templates/specimen_view.html",
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: $scope.customFullscreen,
+                locals: {
+                    "font": font
+                }
+            })
+
+                .then(function () {
+                    getFontsList();  // refresh fonts list
+                })
+        };
+        
+        
+        var specimenController = function ($http, $mdDialog, $scope, font) {
+            $scope.font = font;
+
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+            
+            
+        }
 
     });

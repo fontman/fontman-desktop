@@ -39,11 +39,11 @@
                             <div class="font-name">
                                 {{font.name}}
 
-                                <md-icon class="bucket-button" ng-click="addToFavorites(font)" ng-if="!font.chosen" ng-show="hoverEdit">
+                                <md-icon class="bucket-button" ng-click="addToFavorites(font)" ng-if="!font.isChosen" ng-show="hoverEdit">
                                     add_circle
                                 </md-icon>
 
-                                <md-icon class="bucket-button" ng-click="removeFromFavorites(font)" ng-if="font.chosen" ng-show="hoverEdit">
+                                <md-icon class="bucket-button" ng-click="removeFromFavorites(font)" ng-if="font.isChosen" ng-show="hoverEdit">
                                     remove_circle
                                 </md-icon>
 
@@ -55,7 +55,7 @@
 
                         <div layout="row" ng-show="hoverEdit">
 
-                            <md-select aria-label="a" ng-model="font.selectedFontface">
+                            <md-select aria-label="a" ng-model="font.defaultFontface">
                                 <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
                                     {{fontface.fontface}}
                                 </md-option>
@@ -87,7 +87,7 @@
 
                         </div>
 
-                        <p class="box-body" contentEditable style="font-size: {{textSize}}px; font-family: {{font.name}}-{{font.selectedFontface}}">
+                        <p class="box-body" contentEditable style="font-size: {{textSize}}px; font-family: {{font.name}}-{{font.defaultFontface}}">
                             {{font.displayText}}
                         </p>
 
@@ -101,7 +101,7 @@
 
                 <div class="box-footer" layout="row" ng-show="hoverEdit">
 
-                    <div class="box-button" ng-click="">
+                    <div class="box-button" ng-click="showSpecimenView($event, font)">
                         SEE
                     </div>
 

@@ -13,7 +13,7 @@ var fontmanApp = angular.module("fontmanApp", [
     "ngMessages",
     "ngRoute",
     "ngSanitize",
-    "typecasesModule",
+    "typecaseModule",
     "ui.validate"
 ]);
 
@@ -26,9 +26,9 @@ fontmanApp
                 templateUrl: "views/fonts.html",
                 controller: "fontsController"
             })
-            .when("/typecases", {
+            .when("/typecase", {
                 templateUrl: "views/typecase.html",
-                controller: "typecasesController"
+                controller: "typecaseController"
             })
             .otherwise("/");
     });
