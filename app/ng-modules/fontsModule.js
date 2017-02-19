@@ -55,7 +55,7 @@ fontsModule
 
             } else if($scope.viewId.id === 4) {
                 angular.forEach($scope.fontsList, function (font) {
-                    font.displayText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus ex, maximus vel dignissim et, auctor et lectus. Integer aliquet quam augue, eget venenatis ante fermentum in. Integer semper cursus nisi, non mattis ipsum pellentesque id. Donec auctor eros eu nunc vehicula posuere.";
+                    font.displayText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus ex, maximus vel dignissim et, auctor et lectus. Integer aliquet quam augue, eget venenatis ante fermentum in. Integer semper cursus nisi, non mattis ipsum pellentesque id.";
                 });
 
                 $scope.textSize = 16;
@@ -157,8 +157,57 @@ fontsModule
             $scope.cancel = function() {
                 $mdDialog.cancel();
             };
-            
-            
-        }
+
+        };
+
+
+        /*** Font installation controllers ***/
+        // show installation window
+        $scope.openFontInstaller = function (ev, font) {
+            $mdDialog.show({
+                controller: installerController,
+                templateUrl: "ng-modules/ng-templates/font_installer_dialog.html",
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:false,
+                fullscreen: $scope.customFullscreen,
+                locals: {
+                    "font": font
+                }
+            })
+
+                .then(function () {
+                    getFontsList();  // refresh fonts list
+                })
+        };
+
+        var installerController = function ($http, $mdDialog, $scope, font) {
+            $scope.font = font;
+
+            $http.get("http://127.0.0.1:5000/fonts/" + font.fontId + "/install")
+                .then(function onSuccess(response) {
+                    if (response.data) {
+                        $mdDialog.hide();
+                    }
+                })
+                .catch(function onError() {
+                    
+                })
+        };
+
+
+        /*** Remove Font ***/
+        // uninstall a font
+        $scope.removeFont = function (font) {
+            $http.get("http://127.0.0.1:5000/fonts/" + font.fontId + "/remove")
+                .then(function onSuccess(response) {
+                    if (response.data) {
+                        getFontsList();
+                    }
+                })
+                .catch(function onError() {
+
+                })
+        };
 
     });

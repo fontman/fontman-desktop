@@ -162,7 +162,7 @@ span.offcurve { color: orangered; }
 
 .font-box {
     float: left;
-    min-height: 300px;
+    min-height: 340px;
     width: 300px;
     padding: 20px 20px 20px 20px;
 }
@@ -193,7 +193,7 @@ span.offcurve { color: orangered; }
 }
 
 .font-box .box-footer {
-    height: 18px;
+    height: 20px;
 }
 
 .font-box .input-container {
@@ -323,6 +323,33 @@ span.offcurve { color: orangered; }
 .specimen-view {
     background-color: white;
     padding: 40px 40px 40px 40px;
+}
+
+.typecase-body {
+    padding-left: 40px;
+}
+
+.typecase-body .divider {
+    padding-left: 40px;
+}
+
+.typecase-body .new-button {
+    padding-top: 5px;
+}
+
+.typecase-favorites {
+    font-size: 20px;
+    height: 150px;
+    padding-top: 20px;
+}
+
+.typecase-favorites .favorite-item {
+    float: left;
+    padding: 10px 10px 10px 10px;
+}
+
+.typecase-header {
+    font-size: 24px;
 }
 
 .typecase-system-fonts {

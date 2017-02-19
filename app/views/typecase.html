@@ -1,34 +1,44 @@
 <div class="wrapper" ng-controller="typecaseController">
 
-    <div  layout="row" >
+    <div class="typecase-body" layout="row">
 
         <div layout="column">
 
-            <div class="header">
+            <div class="header typecase-favorites">
 
-                <h3>Favorites</h3>
+                <div class="typecase-header">Favorites</div>
+                <br>
 
-                <ul>
+                <ul class="content">
+                    <li class="favorite-item" ng-repeat="font in favoriteFonts">
 
-                    <li ng-repeat="font in favoriteFonts">
+                        <style scoped>
+                            @font-face {font-family:"{{font.defaultFontface}}"; src: url({{font.defaultResource}}) format("opentype");}
+                        </style>
 
-                        {{font.name}}
+                        <span style="font-family: {{font.defaultFontface}}">
+                            {{font.name}}
+                        </span>
 
                     </li>
 
                 </ul>
+                <br>
 
             </div>
 
+            <hr class="divider">
+
             <div>
+                <br>
 
                 <div class="header" layout="row">
 
-                    <h3>Collections</h3>
+                    <div class="typecase-header">Collections</div>
 
                     <div flex></div>
 
-                    <div>Add new collection</div>
+                    <div class="new-button">Add new collection</div>
 
                 </div>
 
@@ -45,7 +55,7 @@
 
             <div class="header">
 
-                <h3>Active fonts</h3>
+                <div class="typecase-header">Active fonts</div>
 
             </div>
 
@@ -72,7 +82,5 @@
         </div>
 
     </div>
-
-
 
 </div>

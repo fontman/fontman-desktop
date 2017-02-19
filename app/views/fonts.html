@@ -95,8 +95,6 @@
 
                 </div>
 
-                <div flex></div>
-
                 <hr class="divider" ng-show="hoverEdit">
 
                 <div class="box-footer" layout="row" ng-show="hoverEdit">
@@ -109,11 +107,11 @@
                         TEST
                     </div>
 
-                    <div class="box-button" ng-click="" ng-show="font.is_installed">
+                    <div class="box-button" ng-click="removeFont(font)" ng-show="font.isInstalled">
                         REMOVE
                     </div>
 
-                    <div class="box-button" ng-click="" ng-show="!font.is_installed">
+                    <div class="box-button" ng-click="openFontInstaller($event, font)" ng-show="!font.isInstalled">
                         INSTALL
                     </div>
 
