@@ -46,7 +46,6 @@ typecaseModule
                         $scope.errorMsg.error = "FMS connection failed";
                     })
             }, 200);
-
         };
         
         getCollections();

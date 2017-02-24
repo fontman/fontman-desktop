@@ -9,58 +9,16 @@ var fontsModule = angular.module("fontsModule", []);
 
 fontsModule
     .controller("fontsController", function ($http, $mdDialog, $scope, $timeout, fontSelectorService) {
+        $scope.displayTexts = [
+            "Nymphs blitz quick vex dwarf jog.",
+            "DJs flock by when MTV ax quiz prog.",
+            "Big fjords vex quick waltz nymph.",
+            "Junk MTV quiz graced by fox whelps.",
+            "Vamp fox held quartz duck just by wing."
+        ];
+        $scope.fontBoxStyle = {"min-height": "250px", "width": "300px"};
         $scope.fontsList = null;
         $scope.selectedFont = {};
-        $scope.textSize = 50;
-        $scope.viewId = {id: 2};
-        $scope.viewMethods = [
-            {id: 1, value: "Numerals"},
-            {id: 2, value: "Font name"},
-            {id: 3, value: "Phrase"},
-            {id: 4, value: "Paragraph"}
-        ];
-
-        // change font view
-        $scope.$watch('viewId.id', function () {
-            if ($scope.viewId.id === 1) {
-                angular.forEach($scope.fontsList, function (font) {
-                    font.displayText = "1 2 3 4 5 6 7 8 9 0";
-                });
-
-                $scope.textSize = 60;
-
-            } else if ($scope.viewId.id === 2) {
-                angular.forEach($scope.fontsList, function (font) {
-                    font.displayText = font.name;
-                });
-
-                $scope.textSize = 60;
-
-            } else if ($scope.viewId.id === 3) {
-                $scope.displayTexts = [
-                    "Nymphs blitz quick vex dwarf jog.",
-                    "DJs flock by when MTV ax quiz prog.",
-                    "Big fjords vex quick waltz nymph.",
-                    "Junk MTV quiz graced by fox whelps.",
-                    "Vamp fox held quartz duck just by wing."
-                ];
-                $scope.phraseIndex = 0;
-
-                angular.forEach($scope.fontsList, function (font) {
-                    font.displayText = $scope.displayTexts[$scope.phraseIndex%5];
-                    $scope.phraseIndex++;
-                });
-
-                $scope.textSize = 30;
-
-            } else if($scope.viewId.id === 4) {
-                angular.forEach($scope.fontsList, function (font) {
-                    font.displayText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus ex, maximus vel dignissim et, auctor et lectus. Integer aliquet quam augue, eget venenatis ante fermentum in. Integer semper cursus nisi, non mattis ipsum pellentesque id.";
-                });
-
-                $scope.textSize = 16;
-            }
-        });
 
         // get fonts list
         var getFontsList = function () {
@@ -73,6 +31,46 @@ fontsModule
                 })
         };
 
+        // load fonts list from FMS database
+        getFontsList();
+
+
+        /* font view options */
+        // set view options and controllers
+        $scope.viewMethods = [
+            {id: 1, value: "Numerals"},
+            {id: 2, value: "Phrase"},
+            {id: 3, value: "Paragraph"}
+        ];
+
+        $scope.changeView = function (font) {
+            if (font.viewId.id === 1) {
+                font.displayText = "0 1 2 3 4 5 6 7 8 9";
+                $scope.fontBoxStyle = {"min-height": "250px", "width": "300px"};
+                font.textSize = 25;
+
+            } else if (font.viewId.id === 2) {
+                font.displayText = $scope.displayTexts[font.fontId%5];
+                $scope.fontBoxStyle = {"min-height": "300px", "width": "300px"};
+                font.textSize = 25;
+
+            } else if (font.viewId.id == 3) {
+                font.displayText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris risus ex, maximus vel dignissim et, auctor et lectus. Integer aliquet quam augue, eget venenatis ante fermentum in. Integer semper cursus nisi, non mattis ipsum pellentesque id."
+                $scope.fontBoxStyle = {"min-height": "350px", "width": "500px"};
+                font.textSize = 18;
+            }
+        };
+
+        // apply current view to all the fonts
+        $scope.applyToAll = function (_font) {
+            angular.forEach($scope.fontsList, function (font) {
+                font.displayText = _font.displayText;
+                font.textSize = _font.textSize;
+            })
+        };
+
+
+        /* favorite collection operations */
         // add font to favorites
         $scope.addToFavorites = function (font) {
             $scope.json_data = {is_chosen: true};
@@ -86,7 +84,6 @@ fontsModule
                 .catch(function onError(response) {
                     alert("FMS connection failed");
                 });
-
         };
 
         // remove from favorites
@@ -104,6 +101,7 @@ fontsModule
                 });
         };
 
+
         /* option display on mouse hover */
         $scope.hoverIn = function () {
             this.hoverEdit = true;
@@ -119,14 +117,10 @@ fontsModule
             $scope.selectedFont = fontSelectorService.getSelectedFont();
         };
 
-        // load fonts list from FMS database
-        getFontsList();
-
         // set first font of the fonts list as the selected font
         $timeout(function () {
             fontSelectorService.selectFont($scope.fontsList[0]);
             $scope.selectedFont = fontSelectorService.getSelectedFont();
-
         }, 500);
 
 
@@ -157,7 +151,6 @@ fontsModule
             $scope.cancel = function() {
                 $mdDialog.cancel();
             };
-
         };
 
 
@@ -175,7 +168,6 @@ fontsModule
                     "font": font
                 }
             })
-
                 .then(function () {
                     getFontsList();  // refresh fonts list
                 })
@@ -191,7 +183,6 @@ fontsModule
                     }
                 })
                 .catch(function onError() {
-                    
                 })
         };
 
@@ -206,8 +197,6 @@ fontsModule
                     }
                 })
                 .catch(function onError() {
-
                 })
         };
-
     });

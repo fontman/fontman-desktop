@@ -10,16 +10,6 @@
                 </md-input-container>
             </div>
 
-            <div class="font-view-options">
-                <md-input-container>
-                    <md-select aria-label="a" ng-model="viewId.id" placeholder="Custom">
-                        <md-option ng-value="view.id" ng-repeat="view in viewMethods">
-                            {{view.value}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-            </div>
-
         </div>
 
     </div>
@@ -28,9 +18,9 @@
 
         <ul class="font-list">
 
-            <li class="font-box" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontsList | filter:searchText">
+            <li class="font-box" ng-mouseleave="hoverOut()" ng-mouseover="hoverIn()" ng-repeat="font in fontsList | filter:searchText" ng-style="fontBoxStyle">
 
-                <div class="top-indicator" layout="row">
+                <div class="top-indicator" layout="row" flex="85">
 
                     <div layout="column">
 
@@ -55,13 +45,19 @@
 
                         <div layout="row" ng-show="hoverEdit">
 
+                            <md-select aria-label="viewMode" ng-model="font.viewId.id" ng-change="changeView(font)" placeholder="Custom">
+                                <md-option ng-repeat="view in viewMethods" ng-value="view.id">
+                                    {{view.value}}
+                                </md-option>
+                            </md-select>
+
                             <md-select aria-label="a" ng-model="font.defaultFontface">
                                 <md-option ng-repeat="fontface in font.fontfaces" ng-value="fontface.fontface">
                                     {{fontface.fontface}}
                                 </md-option>
                             </md-select>
 
-                            <md-slider min="0" max="120" ng-model="textSize" aria-label="fSizer" id="red-slider"></md-slider>
+                            <md-slider min="0" max="120" ng-model="font.textSize" aria-label="fSizer" id="red-slider"></md-slider>
 
                         </div>
 
@@ -69,7 +65,7 @@
 
                     </div>
 
-                    <div class="box-button" layout="column" flex="15" ng-show="hoverEdit">
+                    <div class="box-button" layout="column" flex="15" ng-click="applyToAll(font)" ng-show="hoverEdit">
                         apply to all →
                     </div>
 
@@ -87,7 +83,7 @@
 
                         </div>
 
-                        <p class="box-body" contentEditable style="font-size: {{textSize}}px; font-family: {{font.name}}-{{font.defaultFontface}}">
+                        <p class="box-body" contentEditable style="font-size: {{font.textSize}}px; font-family: {{font.name}}-{{font.defaultFontface}}">
                             {{font.displayText}}
                         </p>
 

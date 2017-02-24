@@ -162,14 +162,12 @@ span.offcurve { color: orangered; }
 
 .font-box {
     float: left;
-    min-height: 340px;
-    width: 300px;
-    padding: 20px 20px 20px 20px;
+    padding: 10px 20px 10px 10px;
 }
 
 .font-box .box-body {
-    min-height: 200px;
-    padding-top: 10px;
+    min-height: 90px;
+    padding-bottom: 10px;
 }
 
 .font-box .box-button {
@@ -207,7 +205,8 @@ span.offcurve { color: orangered; }
 }
 
 .font-box .top-indicator {
-    height:70px;
+    height:80px;
+    width: 100%;
 }
 
 .font-form {
@@ -431,6 +430,7 @@ md-select-menu md-content {
 
 md-slider {
     height: 30px !important;
+    min-width: 80px !important;
 }
 
 md-slider .md-track-container {
