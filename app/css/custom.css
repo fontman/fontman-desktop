@@ -168,6 +168,7 @@ span.offcurve { color: orangered; }
 .font-box .box-body {
     min-height: 90px;
     padding-bottom: 10px;
+    padding-right: 10px;
 }
 
 .font-box .box-button {
